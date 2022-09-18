@@ -1,28 +1,31 @@
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
+  <input type="text" v-model="username" />
+  <input type="password" v-model="password" />
+  <button @click="authenticate()">click</button>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <h1>User : {{ name }}</h1>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <!-- <RouterView /> -->
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { useUserStore } from "./stores/user";
+import { Ref, ref } from "vue";
+import { storeToRefs } from "pinia";
+
+const userStore = useUserStore();
+
+const { currentUser } = storeToRefs(userStore);
+
+const username: Ref<string> = ref("");
+const password: Ref<string> = ref("");
+const name: Ref<string> = ref("");
+
+const authenticate = async (): Promise<void> => {
+  await userStore.logIn(username.value, password.value);
+
+  name.value = currentUser.value.username;
+};
 </script>
 
 <style scoped></style>
