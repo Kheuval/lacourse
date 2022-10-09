@@ -135,7 +135,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 
 const login = ref("");
@@ -145,4 +145,3 @@ const emailRegister = ref("");
 const pwdRegister1 = ref("");
 const pwdRegister2 = ref("");
 </script>
-

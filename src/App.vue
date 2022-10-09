@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from "./stores/user";
-import { Ref, ref } from "vue";
+import { ref, type Ref } from "vue";
 import { storeToRefs } from "pinia";
 
 const userStore = useUserStore();
