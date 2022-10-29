@@ -2,6 +2,7 @@
   <input type="text" v-model="username" />
   <input type="password" v-model="password" />
   <button @click="authenticate()">click</button>
+  <button @click="deleteUser()">delete</button>
 
   <h1>User : {{ name }}</h1>
   <h1>Fetching : {{ isFetching }}</h1>
@@ -11,29 +12,25 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from "./stores/user";
-import { ref, type Ref } from "vue";
 import { storeToRefs } from "pinia";
-import { useApiStore } from "./stores/api";
-import { useErrorStore } from "./stores/error";
-import { databaseAuthService } from "./services/auth/DatabaseAuthService";
+import { useErrorStore } from "@/Core/Services/Error/Store/ErrorStore";
+import { useApiStore } from "./Core/Services/Api/Store/ApiStore";
+import { databaseAuthService } from "./Core/Services/Auth/DatabaseAuthService";
+import { databaseUserRepository } from "./Domain/User/Repository/DatabaseUserRepository";
+import { ref, type Ref } from "vue";
 
-const userStore = useUserStore();
-const apiStore = useApiStore();
-const errorStore = useErrorStore();
-
-const { currentUser } = storeToRefs(userStore);
-const { isFetching } = storeToRefs(apiStore);
-const { error } = storeToRefs(errorStore);
+const { error } = storeToRefs(useErrorStore());
+const { isFetching } = storeToRefs(useApiStore());
 
 const username: Ref<string> = ref("");
 const password: Ref<string> = ref("");
-const name: Ref<string | undefined> = ref("");
-
-const authenticate = async (): Promise<void> => {
+const authenticate = async () => {
   await databaseAuthService.login(username.value, password.value);
+};
 
-  name.value = currentUser.value?.username;
+const name: Ref<string | undefined> = ref("");
+const deleteUser = async () => {
+  await databaseUserRepository.deleteOneByIri("/users/2");
 };
 </script>
 
