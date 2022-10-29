@@ -38,7 +38,7 @@ export const useErrorStore = defineStore("error", () => {
   const handleForbiddenError = (appError: { errorType: ErrorType }): void => {
     setError({
       title: "Erreur",
-      errorMessage: "Vous n'avez pas le droit d'effecture cette action",
+      errorMessage: "Vous n'avez pas le droit d'effectuer cette action",
       errorType: appError.errorType,
     });
   };
