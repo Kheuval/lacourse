@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+      font-family: Lexend Deca, system-ui, sans-serif;
+      font-weight: 300;
+      color: #427898;
+    }
+  }

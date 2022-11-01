@@ -54,5 +54,7 @@ export const useApiStore = defineStore("api", () => {
     };
   };
 
-  return { useFetch, isFetching, token };
+  const invalidateToken = () => (token.value = "");
+
+  return { useFetch, isFetching, invalidateToken };
 });

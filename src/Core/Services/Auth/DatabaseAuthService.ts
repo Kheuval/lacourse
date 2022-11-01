@@ -46,6 +46,7 @@ export const databaseAuthService: AuthServiceInterface = {
       useUserStore()
     );
 
+    useApiStore().invalidateToken();
     isAuthenticated.value = false;
     isLoggedOut.value = true;
     currentUser.value = null;

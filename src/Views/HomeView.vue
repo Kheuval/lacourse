@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header class="headerMini">
-      <img class="headerLogo" src="../assets/img/logo.svg" alt="Logo" />
+      <img class="headerLogo" src="../assets/images/logo.svg" alt="Logo" />
       <h1 class="headerTitle">La Course</h1>
     </header>
 
