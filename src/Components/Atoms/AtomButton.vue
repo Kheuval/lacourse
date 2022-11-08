@@ -1,12 +1,10 @@
 <template>
-  <button @click="$emit('click')">{{ content }}</button>
+  <button @click="$emit('click')">
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts" setup>
-defineProps<{
-  content: string;
-}>();
-
 defineEmits(["click"]);
 </script>
 

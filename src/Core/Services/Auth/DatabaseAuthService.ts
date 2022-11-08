@@ -1,4 +1,4 @@
-import { useApiStore } from "@/Core/Services/Api/Store/ApiStore";
+import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { useErrorStore } from "@/Core/Services/Error/Store/ErrorStore";
 import type { User } from "@/Domain/User/UserInterface";

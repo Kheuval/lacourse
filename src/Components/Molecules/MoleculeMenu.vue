@@ -2,9 +2,10 @@
   <nav class="inline-block">
     <AtomButton
       class="text-[3.438rem] left-0 z-[1] m-0 cursor-pointer"
-      content="-"
-      @click="toggleMenu"
-    />
+      @click="toggleMenu()"
+    >
+      <font-awesome-icon icon="fa-solid fa-bars" />
+    </AtomButton>
     <Transition name="menuToggle">
       <ul
         class="flex mt-4 flex-col justify-center items-center list-none absolute w-[90%] h-[28.75rem] right-0 p-0 text-center bg-primary z-10 rounded-tl-[10px] rounded-bl-[10px]"

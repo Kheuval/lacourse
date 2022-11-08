@@ -1,4 +1,4 @@
-import { useApiStore } from "@/Core/Services/Api/Store/ApiStore";
+import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { UserRepository } from "./UserRepositoryInterface";
 import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
 

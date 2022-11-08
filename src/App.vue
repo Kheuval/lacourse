@@ -1,11 +1,20 @@
 <template>
-  <MoleculeMenu :links="links" />
+  <!-- <OrganismRegisterForm /> -->
+  <AtomInput id="test" type="text" :validationRules="validationRules" />
   <!-- <RouterView /> -->
 </template>
 
 <script setup lang="ts">
-import MoleculeMenu from "./Components/Molecules/MoleculeMenu.vue";
 import { databaseAuthService } from "./Core/Services/Auth/DatabaseAuthService";
+import OrganismRegisterForm from "./Components/Organisms/OrganismRegisterForm/OrganismRegisterForm.vue";
+import AtomInput from "./Components/Atoms/AtomInput.vue";
+import { useRuleStore } from "./Core/Services/Validation/RuleStore";
+import { ref } from "vue";
+
+const rules = useRuleStore();
+const validationRules = ref([]);
+
+rules.checkPasswords.rule('toto')
 
 const links = [
   {

@@ -2,8 +2,8 @@ import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
 import type { ApiResponse } from "@/Core/Services/Api/ApiResponseType";
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
-import { ErrorType } from "../../Error/AppErrorsEnum";
-import { useErrorStore } from "../../Error/Store/ErrorStore";
+import { ErrorType } from "../Error/AppErrorsEnum";
+import { useErrorStore } from "../Error/Store/ErrorStore";
 
 export const useApiStore = defineStore("api", () => {
   const token: Ref<string> = ref("");
