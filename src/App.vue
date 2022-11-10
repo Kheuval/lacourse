@@ -1,5 +1,5 @@
 <template>
-  <OrganismHeader />
+  <OrganismRegisterForm />
   <MoleculeLoader :show="isFetching" />
   <MoleculeDialog
     :title="error.title"
@@ -15,7 +15,7 @@
 import { storeToRefs } from "pinia";
 import MoleculeDialog from "./Components/Molecules/MoleculeDialog.vue";
 import MoleculeLoader from "./Components/Molecules/MoleculeLoader.vue";
-import OrganismHeader from "./Components/Organisms/OrganismHeader.vue";
+import OrganismRegisterForm from "./Components/Organisms/OrganismRegisterForm/OrganismRegisterForm.vue";
 import { useApiStore } from "./Core/Services/Api/ApiStore";
 import { useErrorStore } from "./Core/Services/Error/Store/ErrorStore";
 

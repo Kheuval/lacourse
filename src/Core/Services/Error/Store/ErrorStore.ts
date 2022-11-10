@@ -18,8 +18,14 @@ export const useErrorStore = defineStore("error", () => {
       handleResourceNotFoundError(appError);
     } else if (appError.errorType === ErrorType.loginError) {
       handleLoginError(appError);
-    } else if (appError.errorType == ErrorType.unprocessableEntity) {
+    } else if (appError.errorType === ErrorType.unprocessableEntity) {
       handleUnprocessableEntity(appError);
+    } else if (appError.errorType === ErrorType.emailAlreadyInUse) {
+      handleEmailAlreadyInUse(appError);
+    } else if (appError.errorType === ErrorType.usernameAlreadyInUse) {
+      handleUsernameAlreadyInUse(appError);
+    } else if (appError.errorType === ErrorType.passwordsNotMatching) {
+      handlePasswordsNotMatchingError(appError);
     } else {
       handleGenericError(appError);
     }
@@ -66,7 +72,37 @@ export const useErrorStore = defineStore("error", () => {
   }): void => {
     setError({
       title: "Erreur",
-      errorMessage: "L'entité est malformée",
+      errorMessage: "Certains champs sont manquants",
+      errorType: appError.errorType,
+    });
+  };
+
+  const handleEmailAlreadyInUse = (appError: {
+    errorType: ErrorType;
+  }): void => {
+    setError({
+      title: "Erreur",
+      errorMessage: "Cet email est déjà utilisé",
+      errorType: appError.errorType,
+    });
+  };
+
+  const handleUsernameAlreadyInUse = (appError: {
+    errorType: ErrorType;
+  }): void => {
+    setError({
+      title: "Erreur",
+      errorMessage: "Ce nom d'utilisateur est déjà utilisé",
+      errorType: appError.errorType,
+    });
+  };
+
+  const handlePasswordsNotMatchingError = (appError: {
+    errorType: ErrorType;
+  }): void => {
+    setError({
+      title: "Erreur",
+      errorMessage: "Les mots de passe sont différents",
       errorType: appError.errorType,
     });
   };

@@ -5,4 +5,7 @@ export enum ErrorType {
   resourceNotFoundError,
   loginError,
   unprocessableEntity,
+  usernameAlreadyInUse,
+  emailAlreadyInUse,
+  passwordsNotMatching,
 }

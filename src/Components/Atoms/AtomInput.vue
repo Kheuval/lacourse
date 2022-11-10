@@ -25,6 +25,9 @@ import { ref } from "vue";
 import { useDebounce } from "@/Core/Composables/useDebounce";
 import { validationService } from "@/Core/Services/Validation/ValidationService";
 import type { Rule } from "@/Core/Services/Validation/RuleType";
+import { useEventBus } from "@/Core/Services/EventBus";
+
+const eventBus = useEventBus();
 
 const props = defineProps<{
   id: string;
@@ -54,6 +57,10 @@ const validate = (): void => {
 
 const update = useDebounce(() => {
   emits("update", content.value);
+});
+
+eventBus.on("validate", () => {
+  validate();
 });
 </script>
 
