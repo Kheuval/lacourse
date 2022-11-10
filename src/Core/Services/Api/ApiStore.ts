@@ -1,15 +1,15 @@
 import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
 import type { ApiResponse } from "@/Core/Services/Api/ApiResponseType";
 import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 import { ErrorType } from "../Error/AppErrorsEnum";
 import { useErrorStore } from "../Error/Store/ErrorStore";
 
 export const useApiStore = defineStore("api", () => {
-  const token: Ref<string> = ref("");
+  const token = ref("");
   const publicUrl: string = import.meta.env.APP_PUBLIC_API_URL;
   const apiUrl: string = import.meta.env.APP_API_URL;
-  const isFetching: Ref<boolean> = ref(false);
+  const isFetching = ref(false);
 
   const useFetch = async (
     init: ApiRequest,
@@ -28,19 +28,22 @@ export const useApiStore = defineStore("api", () => {
       body: init.body,
     };
 
-    const response = await fetch(request.url, { ...request });
+    const response = await fetch(request.url, { ...request }).catch(() => {
+      handleErrors({ errorType: ErrorType.genericError });
+      isFetching.value = false;
+    });
 
     isFetching.value = false;
 
-    const data = await response.json();
+    const data = await response!.json();
 
-    if (response.status === 401) {
+    if (response!.status === 401) {
       handleErrors({ errorType: ErrorType.unauthorizedError });
-    } else if (response.status === 403) {
+    } else if (response!.status === 403) {
       handleErrors({ errorType: ErrorType.forbiddenError });
-    } else if (response.status === 404) {
+    } else if (response!.status === 404) {
       handleErrors({ errorType: ErrorType.resourceNotFoundError });
-    } else if (response.status === 422) {
+    } else if (response!.status === 422) {
       handleErrors({ errorType: ErrorType.unprocessableEntity });
     }
 
@@ -49,7 +52,7 @@ export const useApiStore = defineStore("api", () => {
     }
 
     return {
-      status: response.status,
+      status: response!.status,
       content: init.method === "DELETE" ? null : data,
     };
   };

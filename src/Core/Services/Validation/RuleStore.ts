@@ -14,16 +14,5 @@ export const useRuleStore = defineStore("rule", () => {
     };
   };
 
-  const checkPasswords = {
-    rule: (data) => {
-      if (data !== checkPasswords.options.data) {
-        console.log('failed');
-      } else {
-        console.log('success');
-      }
-    },
-    options: { data: "toto" },
-  };
-
-  return { notNull, checkPasswords };
+  return { notNull };
 });

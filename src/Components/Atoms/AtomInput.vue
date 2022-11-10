@@ -10,6 +10,7 @@
     "
     :id="id"
     @focus="validationMessage = ''"
+    @change="validate"
     @blur="validate"
     v-model="content"
   />
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 import { useDebounce } from "@/Core/Composables/useDebounce";
 import { validationService } from "@/Core/Services/Validation/ValidationService";
 import type { Rule } from "@/Core/Services/Validation/RuleType";
@@ -33,8 +34,8 @@ const props = defineProps<{
 
 const emits = defineEmits(["update"]);
 
-const content: Ref<string> = ref("");
-const validationMessage: Ref<string> = ref("");
+const content = ref("");
+const validationMessage = ref("");
 
 const validate = (): void => {
   if (!props.validationRules) {

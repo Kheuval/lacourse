@@ -12,12 +12,12 @@
         v-if="showMenu"
       >
         <li
-          class="flex flex-col items-center justify-evenly h-[5.313rem] after:content-['%20'] after:block after:h-[0.313rem] after:bg-secondary after:w-3/4"
+          class="flex flex-col items-center justify-evenly h-[5.313rem] w-full after:content-['%20'] after:block after:h-[0.313rem] after:bg-secondary after:w-3/4"
           v-for="(link, index) in links"
           :key="index"
         >
           <AtomLink
-            class="font-lexend inline-block text-2xl w-full text-white"
+            class="inline-block text-2xl w-full text-white"
             :to="link.to"
             @click="
               toggleMenu();
@@ -33,20 +33,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, type Ref } from "vue";
-import AtomButton from "../Atoms/AtomButton.vue";
-import AtomLink from "../Atoms/AtomLink.vue";
-import AtomOverlay from "../Atoms/AtomOverlay.vue";
+import { ref } from "vue";
+import AtomButton from "../../Atoms/AtomButton.vue";
+import AtomLink from "../../Atoms/AtomLink.vue";
+import AtomOverlay from "../../Atoms/AtomOverlay.vue";
+import type { Link } from "./LinkInterface";
 
 defineProps<{
-  links: {
-    to: string;
-    content: string;
-    click?: Function;
-  }[];
+  links: Link[];
 }>();
 
-const showMenu: Ref<boolean> = ref(false);
+const showMenu = ref(false);
 const toggleMenu = () => (showMenu.value = !showMenu.value);
 </script>
 

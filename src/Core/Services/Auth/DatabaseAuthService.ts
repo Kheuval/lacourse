@@ -28,7 +28,7 @@ export const databaseAuthService: AuthServiceInterface = {
 
     await useFetch(init, true)
       .then((response) => {
-        if (response.status > 200) {
+        if (response.status === 401) {
           return Promise.reject();
         }
         isAuthenticated.value = true;
@@ -39,6 +39,7 @@ export const databaseAuthService: AuthServiceInterface = {
         handleErrors({
           errorType: ErrorType.loginError,
         });
+        return Promise.reject();
       });
   },
   logout: (): void => {

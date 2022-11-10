@@ -48,7 +48,7 @@ export const useErrorStore = defineStore("error", () => {
   }): void => {
     setError({
       title: "Erreur",
-      errorMessage: `La resource est introuvable`,
+      errorMessage: "La resource est introuvable",
       errorType: appError.errorType,
     });
   };

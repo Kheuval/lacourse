@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent>
     <MoleculeInputLabelVue
       id="username"
       type="text"
@@ -28,13 +28,13 @@
       :validationRules="[rules.notNull]"
       @update="(content) => (form.password2 = content)"
     />
-    <AtomButtonVue>Créer un compte</AtomButtonVue>
+    <AtomButtonVue @click="checkPasswords">Créer un compte</AtomButtonVue>
   </form>
 </template>
 
 <script lang="ts" setup>
 import AtomButtonVue from "../../Atoms/AtomButton.vue";
-import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel/MoleculeInputLabel.vue";
+import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
 import { useRuleStore } from "@/Core/Services/Validation/RuleStore";
 import { reactive } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
@@ -47,6 +47,12 @@ const form: RegisterForm = reactive({
   password1: "",
   password2: "",
 });
+
+const checkPasswords = () => {
+  if (form.password1 !== form.password2) {
+    console.log("heehee");
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

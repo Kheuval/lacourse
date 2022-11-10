@@ -1,7 +1,7 @@
 <template>
   <Transition name="overlay">
     <div
-      class="fixed bg-opacity-90 bg-black w-full h-full top-0 cursor-pointer"
+      class="fixed bg-opacity-90 bg-black w-full h-full top-0 left-0 cursor-pointer"
       v-if="show"
       @click="$emit('click')"
     ></div>
