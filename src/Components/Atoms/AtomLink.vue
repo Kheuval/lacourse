@@ -1,7 +1,9 @@
 <template>
-  <RouterLink :to="to" @click="$emit('click')">
-    <slot></slot>
-  </RouterLink>
+  <div>
+    <RouterLink :to="to" @click="$emit('click')">
+      <slot></slot>
+    </RouterLink>
+  </div>
 </template>
 
 <script lang="ts" setup>

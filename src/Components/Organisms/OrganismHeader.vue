@@ -11,11 +11,11 @@
       />
     </AtomLink>
     <AtomLink to="/">
-      <AtomTitleVue
+      <AtomTitle
         tag="h1"
-        content="La Course"
         class="text-center text-secondary text-3xl font-exo mt-2"
-      />
+        >La Course</AtomTitle
+      >
     </AtomLink>
     <MoleculeMenu :links="links" v-if="!home" />
   </header>
@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
-import AtomTitleVue from "../Atoms/AtomTitle.vue";
+import AtomTitle from "../Atoms/AtomTitle.vue";
 import MoleculeMenu from "../Molecules/MoleculeMenu/MoleculeMenu.vue";
 import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
 

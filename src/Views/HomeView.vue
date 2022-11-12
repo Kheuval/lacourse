@@ -1,148 +1,78 @@
 <template>
-  <div class="container">
-    <header class="headerMini">
-      <img class="headerLogo" src="../assets/images/logo.svg" alt="Logo" />
-      <h1 class="headerTitle">La Course</h1>
-    </header>
+  <OrganismHeader :home="true" />
 
-    <main>
-      <div class="wrapperHeight">
-        <h2 class="subTitle19">
-          Connectez-vous pour commencer à faire vos courses !
-        </h2>
-        <div class="formAccount">
-          <form id="loginForm">
-            <input
-              class="inputText"
-              type="text"
-              name="log"
-              placeholder="Identifiant"
-              v-model="username"
-            />
-            <input
-              class="inputText"
-              type="password"
-              name="pwd"
-              placeholder="Mot de passe"
-              v-model="password"
-              v-on:keyup.enter="authenticate()"
-            />
-            <input
-              class="submitButton"
-              type="button"
-              value="Connexion"
-              @click="authenticate()"
-            />
-          </form>
-          <router-link class="forgottenPwd" to="/forgotten-pwd"
-            >Mot de passe oublié ?</router-link
-          >
-        </div>
-        <h2 class="subTitle19">
-          Pas encore de compte ? Inscrivez-vous pour simplifier la gestion de
-          vos courses au quotidien
-        </h2>
-        <a class="arrowDown" href="#homePage2">
-          <i class="fas fa-arrow-circle-down"></i>
-        </a>
-      </div>
-      <div class="wrapperHeight">
-        <div id="homePage2" class="headerMini">
-          <img class="headerLogo" src="../assets/img/logo.svg" alt="Logo" />
-          <h1 class="headerTitle">La Course</h1>
-        </div>
-        <div id="registerForm" class="formAccount">
-          <form id="registerForm">
-            <input
-              class="inputText"
-              type="text"
-              name="logRegister"
-              placeholder="Identifiant"
-              v-model="loginRegister"
-            />
-            <input
-              class="inputText"
-              type="email"
-              name="emailRegister"
-              placeholder="Adresse email"
-              v-model="emailRegister"
-            />
-            <input
-              class="inputText"
-              type="password"
-              name="pwdRegister"
-              placeholder="Mot de passe"
-              v-model="pwdRegister1"
-            />
-            <input
-              class="inputText"
-              type="password"
-              name="pwdRegister2"
-              placeholder="Répéter le mot de passe"
-              v-model="pwdRegister2"
-            />
-            <input
-              class="submitButton"
-              type="button"
-              value="Créer un compte"
-              @click="register()"
-            />
-          </form>
-        </div>
-        <h2 class="subTitle25">Découvrez <strong>La Course</strong> !</h2>
-        <a class="arrowDown" href="#homePage3">
-          <i class="fas fa-arrow-circle-down"></i>
-        </a>
-      </div>
-      <div id="homePage3" class="wrapperHeight">
-        <div class="headerMini">
-          <img class="headerLogo" src="../assets/img/logo.svg" alt="Logo" />
-        </div>
-        <div class="contentWrapper">
-          <h3 class="subTitle28">
-            <strong>La Course</strong> est faite pour vous simplifier la vie !
-          </h3>
-          <p class="content19">
-            Recherchez parmi de <strong>nombreuses</strong> recettes pour
-            composer vos menus selon vos goûts.
-          </p>
-          <p class="content19">
-            Préparez vos menus à l'avance pour ne plus avoir à vous poser la
-            question "<strong>On mange quoi ce soir ?</strong>".
-          </p>
-          <p class="content19">
-            Grâce à <strong>La Course</strong> vous pouvez composer vos menus
-            directement et <strong>une liste de courses</strong> personnalisable
-            sera générée automatiquement pour vous.
-          </p>
-          <p class="content19">
-            Avec <strong>La Course</strong> vous pourrez aussi enregistrer vos
-            <strong>propres recettes</strong>, qu'elles viennent du livre de
-            mamie ou de votre incroyable savoir-faire !
-          </p>
-          <p class="content19">
-            Enfin, si vous souhaitez conserver vos habitudes vous pouvez très
-            bien n'utiliser <strong>La Course</strong> que pour écrire votre
-            liste de courses et ainsi vous passer du papier et du stylo qu'on
-            oublie tout le temps une fois en magasin !
-          </p>
-          <div class="register">
-            <h1>Alors n'attendez plus et <strong>inscrivez-vous</strong> !</h1>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
+  <main>
+    <AtomTitle tag="h2" class="text-center text-xl mt-6">
+      Connectez-vous pour commencer à faire vos courses !</AtomTitle
+    >
+    <OrganismLoginForm class="mt-10" />
+    <AtomLink to="/" class="text-center text-secondary mt-8"
+      >Mot de passe oublié ?</AtomLink
+    >
+    <AtomTitle tag="h2" class="text-center text-xl mt-6"
+      >Pas encore de compte ? Inscrivez-vous pour simplifier la gestion de vos
+      courses au quotidien</AtomTitle
+    >
+    <AtomIcon
+      icon="fa-solid fa-circle-down"
+      class="block mx-auto mt-10 text-[4rem] text-secondary"
+    />
+    <OrganismHeader :home="true" class="mt-10" id="registerForm" />
+    <OrganismRegisterForm class="mt-10" />
+    <AtomTitle
+      tag="h2"
+      content="Découvrez La Course !"
+      class="text-2xl text-center mt-10"
+    >
+      Découvrez <strong class="text-secondary">La Course</strong> !</AtomTitle
+    >
+    <OrganismHeader :home="true" class="mt-10" />
+    <AtomTitle tag="h3" class="text-2xl text-center mt-10">
+      <strong class="text-secondary">La Course</strong> est faite pour vous
+      simplifier la vie !
+    </AtomTitle>
+    <AtomText class="text-lg mt-8">
+      Recherchez parmi de
+      <strong class="text-secondary">nombreuses</strong> recettes pour composer
+      vos menus selon vos goûts.
+    </AtomText>
+    <AtomText class="text-lg mt-6">
+      Préparez vos menus à l'avance pour ne plus avoir à vous poser la question
+      "<strong class="text-secondary">On mange quoi ce soir ?</strong>".
+    </AtomText>
+    <AtomText class="text-lg mt-6">
+      Grâce à <strong class="text-secondary">La Course</strong> vous pouvez
+      composer vos menus directement et
+      <strong class="text-secondary">une liste de courses</strong>
+      personnalisable sera générée automatiquement pour vous.
+    </AtomText>
+    <AtomText class="text-lg mt-6">
+      Avec <strong class="text-secondary">La Course</strong> vous pourrez aussi
+      enregistrer vos <strong class="text-secondary">propres recettes</strong>,
+      qu'elles viennent du livre de mamie ou de votre incroyable savoir-faire !
+    </AtomText>
+    <AtomText class="text-lg mt-6">
+      Enfin, si vous souhaitez conserver vos habitudes vous pouvez très bien
+      n'utiliser <strong class="text-secondary">La Course</strong> que pour
+      écrire votre liste de courses et ainsi vous passer du papier et du stylo
+      qu'on oublie tout le temps une fois en magasin !
+    </AtomText>
+    <AtomTitle
+      tag="h1"
+      class="text-3xl text-center my-10 border rounded-xl py-3 px-2 border-primary"
+    >
+      Alors n'attendez plus et
+      <strong class="text-secondary">inscrivez-vous</strong> !
+    </AtomTitle>
+  </main>
 </template>
 
 <script lang="ts" setup>
-import { ref, type Ref } from "vue";
-import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
-
-const username: Ref<string> = ref("");
-const password: Ref<string> = ref("");
-
-const authenticate = async (): Promise<void> => {
-  await databaseAuthService.login(username.value, password.value);
-};
+import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
+import AtomLink from "@/Components/Atoms/AtomLink.vue";
+import AtomText from "@/Components/Atoms/AtomText.vue";
+import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
+import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
+import OrganismLoginForm from "@/Components/Organisms/OrganismLoginForm/OrganismLoginForm.vue";
+import OrganismRegisterForm from "@/Components/Organisms/OrganismRegisterForm/OrganismRegisterForm.vue";
 </script>

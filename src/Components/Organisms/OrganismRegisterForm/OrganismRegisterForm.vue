@@ -59,7 +59,7 @@ const form: RegisterForm = reactive({
 });
 
 const register = () => {
-  eventBus.emit("validate");
+  eventBus.emit("validate", form);
 
   if (!form.username || !form.email || !form.password1 || !form.password2) {
     handleErrors({ errorType: ErrorType.unprocessableEntity });

@@ -2,7 +2,7 @@
   <input
     :type="type"
     placeholder=""
-    class="px-2.5 pb-2.5 pt-4 text-sm rounded-full border-2 focus:outline-none bg-white peer"
+    class="px-8 pb-3 pt-4 text-sm rounded-full border-2 focus:outline-none bg-white peer"
     :class="
       validationMessage
         ? 'border-red-500'
@@ -59,8 +59,12 @@ const update = useDebounce(() => {
   emits("update", content.value);
 });
 
-eventBus.on("validate", () => {
-  validate();
+eventBus.on("validate", (form) => {
+  for (const [key] of Object.entries(form)) {
+    if (props.id === key) {
+      validate();
+    }
+  }
 });
 </script>
 

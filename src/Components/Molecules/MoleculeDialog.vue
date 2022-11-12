@@ -1,12 +1,15 @@
 <template>
   <Transition name="dialog">
     <div
-      class="absolute p-3 top-1/4 left-[12.75%] flex flex-col justify-evenly items-center w-3/4 h-2/5 bg-primary mx-auto rounded-xl text-white z-10"
+      class="absolute p-3 left-[12.75%] flex flex-col justify-evenly items-center w-3/4 h-2/5 bg-primary mx-auto rounded-xl text-white z-10"
       v-if="show"
+      ref="dialog"
     >
       <AtomIcon icon="fa-solid fa-circle-exclamation" class="text-[3rem]" />
-      <AtomTitle tag="h1" :content="title" class="text-3xl" />
-      <AtomText :content="content" class="text-center" />
+      <AtomTitle tag="h1" class="text-3xl">{{ title }}</AtomTitle>
+      <AtomText class="text-center">
+        {{ content }}
+      </AtomText>
 
       <div class="flex justify-evenly w-full">
         <AtomButton
@@ -69,8 +72,13 @@ const onCancel = () => {
   }, 300);
 };
 
+const dialog = ref<HTMLDivElement | null>(null);
+
 onMounted(() => {
   show.value = true;
+  setTimeout(() => {
+    dialog.value!.style.top = window.scrollY + window.innerHeight / 4 + "px";
+  }, 1);
 });
 </script>
 

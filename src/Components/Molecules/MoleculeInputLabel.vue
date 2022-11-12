@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mb-4 inline-block">
+  <div class="relative mb-5 inline-block">
     <AtomInput
       :id="id"
       :type="type"

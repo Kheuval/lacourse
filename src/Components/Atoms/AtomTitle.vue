@@ -1,11 +1,12 @@
 <template>
-  <component :is="tag">{{ content }}</component>
+  <component :is="tag">
+    <slot></slot>
+  </component>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
   tag: string;
-  content: string;
 }>();
 </script>
 
