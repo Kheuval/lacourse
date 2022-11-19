@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent class="text-center">
+  <form @submit.prevent class="flex flex-col items-center">
     <MoleculeInputLabelVue
       id="username"
       type="text"
@@ -49,7 +49,7 @@ import { useEventBus } from "@/Core/Services/EventBus";
 
 const rules = useRuleStore();
 const { handleErrors } = useErrorStore();
-const eventBus = useEventBus();
+const { emitter } = useEventBus();
 
 const form: RegisterForm = reactive({
   username: "",
@@ -59,7 +59,7 @@ const form: RegisterForm = reactive({
 });
 
 const register = () => {
-  eventBus.emit("validate", form);
+  emitter.emit("validate", form);
 
   if (!form.username || !form.email || !form.password1 || !form.password2) {
     handleErrors({ errorType: ErrorType.unprocessableEntity });

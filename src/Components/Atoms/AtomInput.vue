@@ -27,7 +27,7 @@ import { validationService } from "@/Core/Services/Validation/ValidationService"
 import type { Rule } from "@/Core/Services/Validation/RuleType";
 import { useEventBus } from "@/Core/Services/EventBus";
 
-const eventBus = useEventBus();
+const { emitter } = useEventBus();
 
 const props = defineProps<{
   id: string;
@@ -59,7 +59,7 @@ const update = useDebounce(() => {
   emits("update", content.value);
 });
 
-eventBus.on("validate", (form) => {
+emitter.on("validate", (form) => {
   for (const [key] of Object.entries(form)) {
     if (props.id === key) {
       validate();

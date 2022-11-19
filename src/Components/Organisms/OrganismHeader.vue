@@ -4,11 +4,7 @@
     :class="home ? 'flex-col' : ''"
   >
     <AtomLink to="/">
-      <AtomImage
-        src="./images/logo.svg"
-        alt="logo"
-        :class="home ? 'w-24' : 'w-16'"
-      />
+      <AtomImage :src="logoUrl" alt="logo" :class="home ? 'w-24' : 'w-16'" />
     </AtomLink>
     <AtomLink to="/">
       <AtomTitle
@@ -27,6 +23,7 @@ import AtomLink from "../Atoms/AtomLink.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 import MoleculeMenu from "../Molecules/MoleculeMenu/MoleculeMenu.vue";
 import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
+import logoUrl from "@/assets/images/logo.svg";
 
 withDefaults(
   defineProps<{

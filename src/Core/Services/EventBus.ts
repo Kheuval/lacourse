@@ -1,10 +1,13 @@
-import mitt, { type Emitter, type EventType } from "mitt";
+import type { RegisterForm } from "@/Components/Organisms/OrganismRegisterForm/RegisterFormInterface";
+import mitt from "mitt";
 import { defineStore } from "pinia";
 
 type Events = {
-  validate: string;
+  validate: RegisterForm;
 };
 
-export const useEventBus = defineStore("event", {
-  state: (): Emitter<Record<EventType, unknown>> => mitt(),
+export const useEventBus = defineStore("event", () => {
+  const emitter = mitt<Events>();
+
+  return { emitter };
 });
