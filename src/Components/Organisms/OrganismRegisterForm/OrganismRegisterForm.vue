@@ -4,28 +4,28 @@
       id="username"
       type="text"
       placeholder="Identifiant"
-      :validationRules="[rules.notNull]"
+      :validationRules="[new NotNullRule()]"
       @update="(content) => (form.username = content)"
     />
     <MoleculeInputLabelVue
       id="email"
       type="email"
       placeholder="Adresse email"
-      :validationRules="[rules.notNull]"
+      :validationRules="[new NotNullRule()]"
       @update="(content) => (form.email = content)"
     />
     <MoleculeInputLabelVue
       id="password1"
       type="password"
       placeholder="Mot de passe"
-      :validationRules="[rules.notNull]"
+      :validationRules="[new NotNullRule()]"
       @update="(content) => (form.password1 = content)"
     />
     <MoleculeInputLabelVue
       id="password2"
       type="password"
       placeholder="Répétez le mot de passe"
-      :validationRules="[rules.notNull]"
+      :validationRules="[new NotNullRule()]"
       @update="(content) => (form.password2 = content)"
     />
     <AtomButtonVue
@@ -39,15 +39,14 @@
 <script lang="ts" setup>
 import AtomButtonVue from "../../Atoms/AtomButton.vue";
 import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
-import { useRuleStore } from "@/Core/Services/Validation/RuleStore";
 import { reactive } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
 import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
 import { useErrorStore } from "@/Core/Services/Error/Store/ErrorStore";
 import { ErrorType } from "@/Core/Services/Error/AppErrorsEnum";
 import { useEventBus } from "@/Core/Services/EventBus";
+import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 
-const rules = useRuleStore();
 const { handleErrors } = useErrorStore();
 const { emitter } = useEventBus();
 

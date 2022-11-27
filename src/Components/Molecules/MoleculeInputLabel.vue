@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Rule } from "@/Core/Services/Validation/RuleType";
+import type { Rule } from "@/Core/Services/Validation/RuleInterface";
 import AtomInput from "../Atoms/AtomInput.vue";
 import AtomLabel from "../Atoms/AtomLabel.vue";
 

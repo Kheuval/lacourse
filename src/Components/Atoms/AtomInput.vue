@@ -24,7 +24,7 @@
 import { ref } from "vue";
 import { useDebounce } from "@/Core/Composables/useDebounce";
 import { validationService } from "@/Core/Services/Validation/ValidationService";
-import type { Rule } from "@/Core/Services/Validation/RuleType";
+import type { Rule } from "@/Core/Services/Validation/RuleInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
 
 const { emitter } = useEventBus();

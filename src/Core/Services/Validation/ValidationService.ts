@@ -1,5 +1,5 @@
 import type { ValidationInterface } from "./ValidationInterface";
-import type { Rule } from "./RuleType";
+import type { Rule } from "./RuleInterface";
 
 export const validationService = {
   validate: (rules: Rule[], data: string): ValidationInterface => {
@@ -8,7 +8,7 @@ export const validationService = {
       message: "",
     };
     rules.every((rule) => {
-      const test: ValidationInterface = rule(data);
+      const test: ValidationInterface = rule.test(data);
       if (!test.valid) {
         result.valid = false;
         result.message = test.message;
