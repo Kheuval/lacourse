@@ -32,6 +32,7 @@ export const useApiStore = defineStore("api", () => {
     const response = await fetch(request.url, { ...request }).catch(() => {
       handleErrors({ errorType: ErrorType.genericError });
       isFetching.value = false;
+      return Promise.reject(ErrorType.genericError);
     });
 
     isFetching.value = false;

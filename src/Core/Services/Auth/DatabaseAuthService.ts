@@ -28,15 +28,15 @@ export const databaseAuthService: AuthServiceInterface = {
     await useFetch(init, true)
       .then((response) => {
         if (response.status === 401) {
-          return Promise.reject();
+          return Promise.reject(ErrorType.loginError);
         }
         isAuthenticated.value = true;
         isLoggedOut.value = false;
         currentUser.value = databaseAuthService.getUser(response.content.token);
       })
-      .catch(() => {
+      .catch((errorType) => {
         handleErrors({
-          errorType: ErrorType.loginError,
+          errorType: errorType,
         });
         return Promise.reject();
       });
