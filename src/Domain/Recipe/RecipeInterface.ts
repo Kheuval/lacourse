@@ -2,9 +2,9 @@ import type { RecipeIngredient } from "../RecipeIngredient/RecipeIngredientInter
 import type { Step } from "../Step/StepInterface";
 
 export interface Recipe {
-  id: number;
+  id?: number;
   name: string;
-  imageUri: string;
+  image: string;
   servings: number;
   totalTime: number;
   prepTime: number;

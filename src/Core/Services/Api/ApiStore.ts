@@ -23,6 +23,7 @@ export const useApiStore = defineStore("api", () => {
       method: init.method,
       headers: {
         "Content-type": init.contentType,
+        Accept: "application/json",
         Authorization: publicAccess ? "" : `Bearer ${token.value}`,
       },
       body: init.body,
