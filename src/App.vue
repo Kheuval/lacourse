@@ -1,6 +1,6 @@
 <template>
   <RouterView />
-  <MoleculeLoader :show="isFetching" />
+  <MoleculeLoader v-if="isFetching" />
   <MoleculeDialog
     :title="error.title"
     :content="error.errorMessage"

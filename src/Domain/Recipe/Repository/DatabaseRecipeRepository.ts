@@ -3,8 +3,6 @@ import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { Recipe } from "../RecipeInterface";
 import type { RecipeRepository } from "./RecipeRepositoryInterface";
 
-// TODO : Créer la route getSample côté API
-
 export const databaseRecipeRepository: RecipeRepository = {
   getSample: async (): Promise<Recipe[] | null> => {
     const { useFetch } = useApiStore();

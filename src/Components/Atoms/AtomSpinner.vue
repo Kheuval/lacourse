@@ -4,7 +4,6 @@
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    v-if="show"
   >
     <circle
       class="opacity-25"
@@ -22,10 +21,6 @@
   </svg>
 </template>
 
-<script lang="ts" setup>
-defineProps<{
-  show: boolean;
-}>();
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped></style>
