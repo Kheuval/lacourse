@@ -7,8 +7,18 @@
       font-family: Lexend Deca, system-ui, sans-serif;
       font-weight: 300;
       color: #427898;
+      -webkit-tap-highlight-color: transparent;
     }
   }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

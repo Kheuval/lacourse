@@ -8,7 +8,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
-      url: "/recipes",
+      url: "/recipes/sample",
       method: "GET",
       contentType: "application/json",
       body: null,
