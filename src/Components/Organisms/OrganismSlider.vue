@@ -1,13 +1,13 @@
 <template>
   <div
-    class="snap-x snap-mandatory flex overflow-x-auto rounded-3xl scrollbar-hide"
+    class="snap-x snap-mandatory flex overflow-x-auto rounded-3xl scrollbar-hide bg-black"
   >
     <MoleculeSlide
       v-for="recipe in recipes"
       :key="recipe.id"
       :imageIri="recipe.image"
       :alt="recipe.name"
-      class="snap-center max-h-80"
+      class="snap-center"
     />
   </div>
 </template>
