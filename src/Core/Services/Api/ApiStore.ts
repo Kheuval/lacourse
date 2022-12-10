@@ -1,5 +1,4 @@
-import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
-import type { ApiResponse } from "@/Core/Services/Api/ApiResponseType";
+import type { ApiRequest, ApiResponse } from "@/Core/Services/Api/ApiInterface";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { ErrorType } from "../Error/AppErrorsEnum";

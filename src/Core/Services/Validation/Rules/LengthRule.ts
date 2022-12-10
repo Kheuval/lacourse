@@ -1,4 +1,4 @@
-import type { Rule } from "../RuleInterface";
+import type { Rule } from "../ValidationInterface";
 
 export class LengthRule implements Rule {
   options:

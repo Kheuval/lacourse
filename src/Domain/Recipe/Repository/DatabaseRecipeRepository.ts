@@ -1,4 +1,4 @@
-import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
+import type { ApiRequest } from "@/Core/Services/Api/ApiInterface";
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { Recipe } from "../RecipeInterface";
 import type { RecipeRepository } from "./RecipeRepositoryInterface";

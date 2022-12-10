@@ -1,5 +1,4 @@
-import type { ValidationInterface } from "./ValidationInterface";
-import type { Rule } from "./RuleInterface";
+import type { ValidationInterface, Rule } from "./ValidationInterface";
 
 export const validationService = {
   validate: (rules: Rule[], data: string): ValidationInterface => {

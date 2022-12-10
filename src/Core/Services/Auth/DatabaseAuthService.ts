@@ -1,7 +1,7 @@
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { useErrorStore } from "@/Core/Services/Error/Store/ErrorStore";
-import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
+import type { ApiRequest } from "@/Core/Services/Api/ApiInterface";
 import { ErrorType } from "@/Core/Services/Error/AppErrorsEnum";
 import { storeToRefs } from "pinia";
 import type { AuthServiceInterface } from "@/Core/Services/Auth/AuthServiceInterface";

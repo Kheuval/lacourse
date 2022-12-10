@@ -1,5 +1,5 @@
 import { ErrorType } from "@/Core/Services/Error/AppErrorsEnum";
-import type { AppError } from "@/Core/Services/Error/AppErrorType";
+import type { AppError } from "@/Core/Services/Error/AppErrorInterface";
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
 

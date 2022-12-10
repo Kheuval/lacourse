@@ -1,6 +1,6 @@
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { UserRepository } from "./UserRepositoryInterface";
-import type { ApiRequest } from "@/Core/Services/Api/ApiRequestType";
+import type { ApiRequest } from "@/Core/Services/Api/ApiInterface";
 
 export const databaseUserRepository: UserRepository = {
   findOneByIri: async (iri: string) => {
