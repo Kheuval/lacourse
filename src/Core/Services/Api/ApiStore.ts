@@ -1,8 +1,11 @@
 import type { ApiRequest, ApiResponse } from "@/Core/Services/Api/ApiInterface";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { ErrorType } from "../Error/AppErrorsEnum";
-import { useErrorStore } from "../Error/Store/ErrorStore";
+import { ForbiddenError } from "../Error/Errors/ForbiddenError";
+import { GenericError } from "../Error/Errors/GenericError";
+import { ResourceNotFoundError } from "../Error/Errors/ResourceNotFoundError";
+import { UnauthorizedError } from "../Error/Errors/UnauthorizedError";
+import { UnprocessableEntityError } from "../Error/Errors/UnprocessableEntityError";
 
 export const useApiStore = defineStore("api", () => {
   const token = ref("");
@@ -14,7 +17,6 @@ export const useApiStore = defineStore("api", () => {
     init: ApiRequest,
     publicAccess: boolean = false
   ): Promise<ApiResponse> => {
-    const { handleErrors } = useErrorStore();
     isFetching.value = true;
 
     const request = {
@@ -29,9 +31,8 @@ export const useApiStore = defineStore("api", () => {
     };
 
     const response = await fetch(request.url, { ...request }).catch(() => {
-      handleErrors({ errorType: ErrorType.genericError });
       isFetching.value = false;
-      return Promise.reject(ErrorType.genericError);
+      return Promise.reject(new GenericError());
     });
 
     isFetching.value = false;
@@ -39,13 +40,13 @@ export const useApiStore = defineStore("api", () => {
     const data = await response!.json();
 
     if (response!.status === 401) {
-      handleErrors({ errorType: ErrorType.unauthorizedError });
+      new UnauthorizedError();
     } else if (response!.status === 403) {
-      handleErrors({ errorType: ErrorType.forbiddenError });
+      new ForbiddenError();
     } else if (response!.status === 404) {
-      handleErrors({ errorType: ErrorType.resourceNotFoundError });
+      new ResourceNotFoundError();
     } else if (response!.status === 422) {
-      handleErrors({ errorType: ErrorType.unprocessableEntity });
+      new UnprocessableEntityError();
     }
 
     if (data.token) {

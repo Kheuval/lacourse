@@ -42,12 +42,11 @@ import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
 import { reactive } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
 import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
-import { useErrorStore } from "@/Core/Services/Error/Store/ErrorStore";
-import { ErrorType } from "@/Core/Services/Error/AppErrorsEnum";
 import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
+import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/UnprocessableEntityError";
+import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
 
-const { handleErrors } = useErrorStore();
 const { emitter } = useEventBus();
 
 const form: RegisterForm = reactive({
@@ -61,13 +60,13 @@ const register = () => {
   emitter.emit("validate", form);
 
   if (!form.username || !form.email || !form.password1 || !form.password2) {
-    handleErrors({ errorType: ErrorType.unprocessableEntity });
+    new UnprocessableEntityError();
     return;
   }
 
   checkPasswords()
     ? databaseAuthService.register(form.username, form.email, form.password1)
-    : handleErrors({ errorType: ErrorType.passwordsNotMatching });
+    : new PasswordsNotMatchingError();
 };
 
 const checkPasswords = (): boolean => {

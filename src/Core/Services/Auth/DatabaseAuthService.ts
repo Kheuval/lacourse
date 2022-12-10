@@ -1,11 +1,13 @@
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
-import { useErrorStore } from "@/Core/Services/Error/Store/ErrorStore";
 import type { ApiRequest } from "@/Core/Services/Api/ApiInterface";
-import { ErrorType } from "@/Core/Services/Error/AppErrorsEnum";
 import { storeToRefs } from "pinia";
 import type { AuthServiceInterface } from "@/Core/Services/Auth/AuthServiceInterface";
 import { useJwtDecode } from "@/Core/Composables/useJwtDecode";
+import { LoginError } from "../Error/Errors/LoginError";
+import { EmailAlreadyInUseError } from "../Error/Errors/EmailAlreadyInUseError";
+import { UsernameAlreadyInUseError } from "../Error/Errors/UsernameAlreadyInUseError";
+import { GenericError } from "../Error/Errors/GenericError";
 
 export const databaseAuthService: AuthServiceInterface = {
   login: async (username, password) => {
@@ -13,7 +15,6 @@ export const databaseAuthService: AuthServiceInterface = {
     const { isAuthenticated, currentUser, isLoggedOut } = storeToRefs(
       useUserStore()
     );
-    const { handleErrors } = useErrorStore();
 
     const init: ApiRequest = {
       url: "/login",
@@ -28,17 +29,14 @@ export const databaseAuthService: AuthServiceInterface = {
     await useFetch(init, true)
       .then((response) => {
         if (response.status === 401) {
-          return Promise.reject(ErrorType.loginError);
+          return Promise.reject(new LoginError());
         }
         isAuthenticated.value = true;
         isLoggedOut.value = false;
         currentUser.value = databaseAuthService.getUser(response.content.token);
       })
-      .catch((errorType) => {
-        handleErrors({
-          errorType: errorType,
-        });
-        return Promise.reject();
+      .catch(() => {
+        return Promise.reject(new GenericError());
       });
   },
   logout: () => {
@@ -56,7 +54,6 @@ export const databaseAuthService: AuthServiceInterface = {
   },
   register: async (username, email, password) => {
     const { useFetch } = useApiStore();
-    const { handleErrors } = useErrorStore();
 
     const init: ApiRequest = {
       url: "/api/users",
@@ -77,9 +74,9 @@ export const databaseAuthService: AuthServiceInterface = {
       })
       .catch((response) => {
         if (response.content.violations[0].propertyPath === "email") {
-          handleErrors({ errorType: ErrorType.emailAlreadyInUse });
+          new EmailAlreadyInUseError();
         } else if (response.content.violations[0].propertyPath === "username") {
-          handleErrors({ errorType: ErrorType.usernameAlreadyInUse });
+          new UsernameAlreadyInUseError();
         }
 
         return Promise.reject();
