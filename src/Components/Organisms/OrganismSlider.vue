@@ -4,10 +4,10 @@
     ref="container"
   >
     <MoleculeSlide
-      v-for="recipe in recipes"
-      :key="recipe.id"
-      :imageIri="recipe.image"
-      :alt="recipe.name"
+      v-for="item in data"
+      :key="item.id"
+      :imageIri="item.image"
+      :alt="item.name"
       class="snap-center"
     />
   </div>
@@ -15,13 +15,12 @@
 
 <script lang="ts" setup>
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import { onMounted, ref } from "vue";
 import MoleculeSlide from "../Molecules/MoleculeSlide.vue";
 
-const recipes = ref<Recipe[] | null>(null);
-
-databaseRecipeRepository.getSample().then((data) => (recipes.value = data));
+const props = defineProps<{
+  data: Recipe[] | null;
+}>();
 
 const container = ref<HTMLDivElement | null>(null);
 
@@ -29,10 +28,11 @@ onMounted(() => {
   const slideWidth = container.value!.clientWidth;
 
   setInterval(() => {
-    if (
-      container.value!.scrollLeft ===
-      slideWidth * (recipes.value!.length - 1)
-    ) {
+    if (null === props.data) {
+      return;
+    }
+
+    if (container.value!.scrollLeft === slideWidth * (props.data.length - 1)) {
       container.value!.scrollLeft = 0;
     } else {
       container.value!.scrollLeft += slideWidth;
