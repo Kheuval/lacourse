@@ -7,6 +7,7 @@
       @update="(content) => $emit('update', content)"
     />
     <AtomLabel :id="id" :placeholder="placeholder" />
+    <slot></slot>
   </div>
 </template>
 
