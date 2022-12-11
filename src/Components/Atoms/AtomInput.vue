@@ -22,9 +22,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useDebounce } from "@/Core/Composables/useDebounce";
 import { validationService } from "@/Core/Services/Validation/ValidationService";
-import type { Rule } from "@/Core/Services/Validation/RuleInterface";
+import type { Rule } from "@/Core/Services/Validation/ValidationInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
 
 const { emitter } = useEventBus();
@@ -55,9 +54,9 @@ const validate = (): void => {
   validation.valid ? update() : "";
 };
 
-const update = useDebounce(() => {
+const update = () => {
   emits("update", content.value);
-});
+};
 
 emitter.on("validate", (form) => {
   for (const [key] of Object.entries(form)) {

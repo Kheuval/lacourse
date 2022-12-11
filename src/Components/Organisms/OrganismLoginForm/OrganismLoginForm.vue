@@ -40,6 +40,8 @@ const form: LoginForm = reactive({
 });
 
 const login = () => {
+  console.log(form.password);
+  
   databaseAuthService
     .login(form.login, form.password)
     .then(() => router.push("/user/home"));
