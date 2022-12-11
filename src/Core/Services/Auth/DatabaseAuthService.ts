@@ -7,7 +7,6 @@ import { useJwtDecode } from "@/Core/Composables/useJwtDecode";
 import { LoginError } from "../Error/Errors/LoginError";
 import { EmailAlreadyInUseError } from "../Error/Errors/EmailAlreadyInUseError";
 import { UsernameAlreadyInUseError } from "../Error/Errors/UsernameAlreadyInUseError";
-import { GenericError } from "../Error/Errors/GenericError";
 
 export const databaseAuthService: AuthServiceInterface = {
   login: async (username, password) => {
@@ -35,8 +34,8 @@ export const databaseAuthService: AuthServiceInterface = {
         isLoggedOut.value = false;
         currentUser.value = databaseAuthService.getUser(response.content.token);
       })
-      .catch(() => {
-        return Promise.reject(new GenericError());
+      .catch((error) => {
+        return Promise.reject(error);
       });
   },
   logout: () => {
