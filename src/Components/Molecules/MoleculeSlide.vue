@@ -24,13 +24,17 @@ import AtomLink from "../Atoms/AtomLink.vue";
 const props = defineProps<{
   imageIri: string;
   alt: string;
+  resourceId: number;
 }>();
 
-const src = ref(import.meta.env.APP_PUBLIC_API_URL);
+const src = ref("");
 
 databaseMediaObjectRepository
   .findOneByIri(props.imageIri)
-  .then((mediaObject) => (src.value += mediaObject!.contentUrl));
+  .then(
+    (mediaObject) =>
+      (src.value = import.meta.env.APP_PUBLIC_API_URL + mediaObject!.contentUrl)
+  );
 </script>
 
 <style lang="scss" scoped></style>

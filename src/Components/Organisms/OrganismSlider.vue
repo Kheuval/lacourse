@@ -5,9 +5,10 @@
   >
     <MoleculeSlide
       v-for="item in data"
-      :key="item.id"
+      :key="item.id!"
       :imageIri="item.image"
       :alt="item.name"
+      :resourceId="item.id!"
       class="snap-center"
     />
   </div>
