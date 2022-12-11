@@ -10,8 +10,9 @@
     "
     :id="id"
     @focus="validationMessage = ''"
-    @change="validate"
-    @blur="validate"
+    @change="validate()"
+    @keypress="validate(true)"
+    @blur="validate()"
     v-model="content"
   />
   <p class="text-red-500 text-xs text-center" v-if="validationMessage">
@@ -22,6 +23,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useDebounce } from "@/Core/Composables/useDebounce";
 import { validationService } from "@/Core/Services/Validation/ValidationService";
 import type { Rule } from "@/Core/Services/Validation/ValidationInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
@@ -39,9 +41,9 @@ const emits = defineEmits(["update"]);
 const content = ref("");
 const validationMessage = ref("");
 
-const validate = (): void => {
+const validate = (debounce = false): void => {
   if (!props.validationRules) {
-    update();
+    debounce ? updateLater() : updateNow();
     return;
   }
 
@@ -51,12 +53,16 @@ const validate = (): void => {
   );
   validationMessage.value = validation.message;
 
-  validation.valid ? update() : "";
+  validation.valid ? (debounce ? updateLater() : updateNow()) : "";
 };
 
-const update = () => {
+const updateNow = () => {
   emits("update", content.value);
 };
+
+const updateLater = useDebounce(() => {
+  emits("update", content.value);
+});
 
 emitter.on("validate", (form) => {
   for (const [key] of Object.entries(form)) {
