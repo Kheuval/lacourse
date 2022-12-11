@@ -1,5 +1,5 @@
 <template>
-  <div class="min-w-full inline-block h-60 relative">
+  <div class="min-w-full inline-block min-h-[15rem] relative">
     <AtomImage
       :src="src"
       :alt="alt"
