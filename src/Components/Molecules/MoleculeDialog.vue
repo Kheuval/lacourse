@@ -1,7 +1,7 @@
 <template>
   <Transition name="dialog">
     <div
-      class="absolute p-3 left-[12.75%] flex flex-col justify-evenly items-center w-3/4 h-2/5 bg-primary mx-auto rounded-xl text-white z-10"
+      class="absolute p-3 left-[12.75%] flex flex-col justify-evenly items-center w-3/4 h-2/5 bg-primary mx-auto rounded-xl text-white z-50"
       v-if="show"
       ref="dialog"
     >
