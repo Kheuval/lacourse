@@ -6,21 +6,10 @@
     >, voici quelques idées de recettes
   </AtomTitle>
   <OrganismSlider class="mt-8" :data="recipes" />
-  <div class="flex flex-col items-center mt-6">
-    <MoleculeInputLabel
-      id="searchbar"
-      type="text"
-      placeholder="Rechercher une recette"
-      class="-mb-2"
-      @update=""
-    >
-      <AtomIcon
-        class="absolute top-4 right-5 text-xl text-secondary peer-focus:hidden"
-        icon="fa-solid fa-magnifying-glass"
-      />
-    </MoleculeInputLabel>
+  <div class="relative flex flex-col items-center mt-6">
+    <OrganismSearchDialog />
     <span class="text-lg">ou</span>
-    <AtomButton class="bg-secondary text-white px-6 py-3 rounded-full mt-3">
+    <AtomButton class="bg-secondary text-white px-6 py-3 rounded-full mt-2">
       Commencer une liste de courses
     </AtomButton>
   </div>
@@ -32,10 +21,9 @@ import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRec
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
+import OrganismSearchDialog from "@/Components/Organisms/OrganismSearchDialog.vue";
 import OrganismSlider from "@/Components/Organisms/OrganismSlider.vue";
 import { ref } from "vue";
-import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
-import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
 
 const { currentUser } = useUserStore();
