@@ -2,21 +2,23 @@
   <div
     class="snap-x snap-mandatory flex overflow-x-auto rounded-3xl scrollbar-hide bg-black scroll-smooth"
     ref="container"
+    @touchstart="stopSlider"
+    @touchend="startSlider"
   >
     <MoleculeSlide
+      class="snap-center"
       v-for="item in data"
       :key="item.id!"
       :imageIri="item.image"
       :alt="item.name"
       :resourceId="item.id!"
-      class="snap-center"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import MoleculeSlide from "../Molecules/MoleculeSlide.vue";
 
 const props = defineProps<{
@@ -24,11 +26,12 @@ const props = defineProps<{
 }>();
 
 const container = ref<HTMLDivElement | null>(null);
+const interval = ref<ReturnType<typeof setInterval> | undefined>(undefined);
 
-onMounted(() => {
+const startSlider = () => {
   const slideWidth = container.value!.clientWidth;
 
-  setInterval(() => {
+  interval.value = setInterval(() => {
     if (null === props.data) {
       return;
     }
@@ -39,6 +42,18 @@ onMounted(() => {
       container.value!.scrollLeft += slideWidth;
     }
   }, 3000);
+};
+
+const stopSlider = () => {
+  clearInterval(interval.value);
+};
+
+onMounted(() => {
+  startSlider();
+});
+
+onUnmounted(() => {
+  stopSlider();
 });
 </script>
 
