@@ -1,26 +1,25 @@
 <template>
   <Transition name="dialog">
     <div
-      class="absolute p-3 left-[12.75%] flex flex-col justify-evenly items-center w-3/4 h-2/5 bg-primary mx-auto rounded-xl text-white z-50"
+      class="absolute p-3 left-[12.75%] flex flex-col justify-evenly items-center bg-primary mx-auto rounded-xl text-white z-50"
+      :class="styles"
       v-if="show"
       ref="dialog"
     >
-      <AtomIcon icon="fa-solid fa-circle-exclamation" class="text-[3rem]" />
-      <AtomTitle tag="h1" class="text-3xl">{{ title }}</AtomTitle>
-      <AtomText class="text-center">
-        {{ content }}
-      </AtomText>
+      <slot name="header"></slot>
+      <slot></slot>
 
       <div class="flex justify-evenly w-full">
         <AtomButton
           class="bg-white text-primary uppercase text-xl rounded-2xl py-2 px-4"
+          v-if="buttons.ok"
           @click="onOk"
         >
-          ok
+          Ok
         </AtomButton>
         <AtomButton
-          v-if="!dismiss"
           class="bg-secondary text-white uppercase text-xl rounded-2xl py-2 px-4"
+          v-if="buttons.cancel"
           @click="onCancel"
         >
           Annuler
@@ -28,25 +27,26 @@
       </div>
     </div>
   </Transition>
-  <AtomOverlay :show="show" @click="dismiss ? onCancel() : ''" />
+  <AtomOverlay :show="show" @click="dismissible ? onCancel() : ''" />
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import AtomOverlay from "../Atoms/AtomOverlay.vue";
 import AtomButton from "../Atoms/AtomButton.vue";
-import AtomIcon from "../Atoms/AtomIcon.vue";
-import AtomText from "../Atoms/AtomText.vue";
-import AtomTitle from "../Atoms/AtomTitle.vue";
 
 withDefaults(
   defineProps<{
-    dismiss?: boolean;
-    title: string;
-    content: string;
+    dismissible?: boolean;
+    styles?: string;
+    buttons?: { ok: boolean; cancel: boolean };
   }>(),
   {
-    dismiss: true,
+    dismissible: true,
+    styles: "w-3/4 h-2/5",
+    buttons: () => {
+      return { ok: true, cancel: false };
+    },
   }
 );
 
