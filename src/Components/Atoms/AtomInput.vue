@@ -1,7 +1,7 @@
 <template>
   <input
     :type="type"
-    class="px-8 pb-3 pt-4 text-sm rounded-full border-2 text-primary focus:outline-none bg-white peer overflow-x-hidden"
+    class="px-8 pb-3 pt-4 text-sm rounded-full border-2 text-primary focus:outline-none bg-white peer"
     :class="
       validationMessage
         ? 'border-red-500'
@@ -10,7 +10,7 @@
     :id="id"
     @focus="validationMessage = ''"
     @change="validate()"
-    @keypress="validate(true)"
+    @keyup="validate(true)"
     @blur="validate()"
     v-model="content"
   />

@@ -1,6 +1,6 @@
 <template>
   <dialog
-    class="py-6 flex flex-col justify-between items-center bg-primary mx-auto rounded-xl text-white z-50 backdrop:bg-black backdrop:opacity-90"
+    class="py-6 flex flex-col justify-between items-center bg-primary mx-auto rounded-xl text-white z-50 backdrop:bg-black backdrop:opacity-90 overflow-x-hidden"
     :class="styles"
     ref="dialog"
     @click="onCancel"

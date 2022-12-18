@@ -18,6 +18,20 @@ export const databaseRecipeRepository: RecipeRepository = {
       await useFetch(init)
     ).content;
   },
+  findByQuery: async (query: string): Promise<Recipe[] | []> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: `/recipes?page=1&name=${query}`,
+      method: "GET",
+      contentType: "application/json",
+      body: null,
+    };
+
+    return await (
+      await useFetch(init)
+    ).content;
+  },
   findOneByIri: async (iri: string): Promise<Recipe | null> => {
     const { useFetch } = useApiStore();
 
