@@ -1,4 +1,5 @@
 import { useUserStore } from "@/Domain/User/Store/UserStore";
+import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import { useApiStore } from "../Services/Api/ApiStore";
 import { ExpiredTokenError } from "../Services/Error/Errors/ExpiredTokenError";
@@ -21,22 +22,23 @@ export const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const { isAuthenticated } = useUserStore();
+  const { isAuthenticated } = storeToRefs(useUserStore());
   const { checkTokenExpiration } = useApiStore();
 
-  if (!isAuthenticated && to.path !== "/") {
+  if (!isAuthenticated.value && to.path !== "/") {
     next({ path: "/" });
     new UnauthorizedError();
     return;
   }
 
-  if (isAuthenticated && !checkTokenExpiration()) {
+  if (isAuthenticated.value && !checkTokenExpiration()) {
+    isAuthenticated.value = false;
     next({ path: "/" });
     new ExpiredTokenError();
     return;
   }
 
-  if (isAuthenticated && to.path === "/") {
+  if (isAuthenticated.value && to.path === "/") {
     next({ path: "/user/home" });
     return;
   }

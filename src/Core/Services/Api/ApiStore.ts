@@ -1,7 +1,7 @@
 import { useJwtDecode } from "@/Core/Composables/useJwtDecode";
 import type { ApiRequest, ApiResponse } from "@/Core/Services/Api/ApiInterface";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
-import { defineStore } from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { ExpiredTokenError } from "../Error/Errors/ExpiredTokenError";
@@ -12,7 +12,8 @@ import { UnauthorizedError } from "../Error/Errors/UnauthorizedError";
 import { UnprocessableEntityError } from "../Error/Errors/UnprocessableEntityError";
 
 export const useApiStore = defineStore("api", () => {
-  const { isAuthenticated } = useUserStore();
+  const { isAuthenticated } = storeToRefs(useUserStore());
+  const router = useRouter();
 
   const token = ref("");
   const publicUrl: string = import.meta.env.APP_PUBLIC_API_URL;
@@ -23,8 +24,8 @@ export const useApiStore = defineStore("api", () => {
     init: ApiRequest,
     publicAccess: boolean = false
   ): Promise<ApiResponse> => {
-    if (isAuthenticated && !checkTokenExpiration()) {
-      useRouter().push("/");
+    if (isAuthenticated.value && !checkTokenExpiration()) {
+      router.push("/");
       return Promise.reject(new ExpiredTokenError());
     }
 
