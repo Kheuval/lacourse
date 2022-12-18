@@ -9,7 +9,7 @@
     "
     :id="id"
     @focus="validationMessage = ''"
-    @change="validate()"
+    @change="updateNow"
     @keyup="validate(true)"
     @blur="validate()"
     v-model="content"
