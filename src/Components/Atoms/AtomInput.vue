@@ -1,8 +1,7 @@
 <template>
   <input
     :type="type"
-    placeholder=""
-    class="px-8 pb-3 pt-4 text-sm rounded-full border-2 focus:outline-none bg-white peer"
+    class="px-8 pb-3 pt-4 text-sm rounded-full border-2 text-primary focus:outline-none bg-white peer overflow-x-hidden"
     :class="
       validationMessage
         ? 'border-red-500'

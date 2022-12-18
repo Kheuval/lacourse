@@ -1,41 +1,37 @@
 <template>
-  <Transition name="dialog">
-    <div
-      class="absolute p-3 left-[12.75%] flex flex-col justify-evenly items-center bg-primary mx-auto rounded-xl text-white z-50"
-      :class="styles"
-      v-if="show"
-      ref="dialog"
-    >
-      <slot name="header"></slot>
-      <slot></slot>
+  <dialog
+    class="py-6 flex flex-col justify-between items-center bg-primary mx-auto rounded-xl text-white z-50 backdrop:bg-black backdrop:opacity-90"
+    :class="styles"
+    ref="dialog"
+    @click="onCancel"
+  >
+    <slot name="header"></slot>
+    <slot></slot>
 
-      <div class="flex justify-evenly w-full">
-        <AtomButton
-          class="bg-white text-primary uppercase text-xl rounded-2xl py-2 px-4"
-          v-if="buttons.ok"
-          @click="onOk"
-        >
-          Ok
-        </AtomButton>
-        <AtomButton
-          class="bg-secondary text-white uppercase text-xl rounded-2xl py-2 px-4"
-          v-if="buttons.cancel"
-          @click="onCancel"
-        >
-          Annuler
-        </AtomButton>
-      </div>
+    <div class="flex justify-evenly w-full">
+      <AtomButton
+        class="bg-white text-primary uppercase text-xl rounded-2xl py-2 px-4"
+        v-if="buttons.ok"
+        @click="onOk"
+      >
+        Ok
+      </AtomButton>
+      <AtomButton
+        class="bg-secondary text-white uppercase text-xl rounded-2xl py-2 px-4"
+        v-if="buttons.cancel"
+        @click="onCancel()"
+      >
+        Annuler
+      </AtomButton>
     </div>
-  </Transition>
-  <AtomOverlay :show="show" @click="dismissible ? onCancel() : ''" />
+  </dialog>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
-import AtomOverlay from "../Atoms/AtomOverlay.vue";
 import AtomButton from "../Atoms/AtomButton.vue";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     dismissible?: boolean;
     styles?: string;
@@ -52,10 +48,11 @@ withDefaults(
 
 const emits = defineEmits(["ok", "cancel"]);
 
-const show = ref(false);
-
 const dismissDialog = () => {
-  show.value = false;
+  dialog.value!.classList.add("hide");
+  dialog.value!.addEventListener("animationend", () => {
+    dialog.value!.close();
+  });
 };
 
 const onOk = () => {
@@ -65,31 +62,56 @@ const onOk = () => {
   }, 300);
 };
 
-const onCancel = () => {
-  dismissDialog();
-  setTimeout(() => {
-    emits("cancel");
-  }, 300);
+const onCancel = (event?: MouseEvent) => {
+  if (!event) {
+    dismissDialog();
+    setTimeout(() => {
+      emits("cancel");
+    }, 300);
+  } else if (
+    props.dismissible &&
+    (dialogRect.value!.left > event.clientX ||
+      dialogRect.value!.right < event.clientX ||
+      dialogRect.value!.top > event.clientY ||
+      dialogRect.value!.bottom < event.clientY)
+  ) {
+    dismissDialog();
+    setTimeout(() => {
+      emits("cancel");
+    }, 300);
+  }
 };
 
-const dialog = ref<HTMLDivElement | null>(null);
+const dialog = ref<HTMLDialogElement | null>(null);
+const dialogRect = ref<DOMRect | undefined>();
 
 onMounted(() => {
-  show.value = true;
-  setTimeout(() => {
-    dialog.value!.style.top = window.scrollY + window.innerHeight / 4 + "px";
-  }, 1);
+  dialog.value!.showModal();
+  dialogRect.value = dialog.value!.getBoundingClientRect();
 });
 </script>
 
 <style lang="scss" scoped>
-.dialog-enter-active,
-.dialog-leave-active {
-  transition: opacity 0.3s ease-in-out;
+dialog[open] {
+  animation: show 0.3s ease-in-out;
 }
 
-.dialog-enter-from,
-.dialog-leave-to {
-  opacity: 0;
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+dialog.hide {
+  animation: hide 0.3s ease-in-out;
+}
+
+@keyframes hide {
+  to {
+    opacity: 0;
+  }
 }
 </style>

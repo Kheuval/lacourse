@@ -13,7 +13,7 @@
         >La Course</AtomTitle
       >
     </AtomLink>
-    <MoleculeMenu :links="links" v-if="!home" />
+    <MoleculeMenu v-once :links="links" v-if="!home" />
   </header>
 </template>
 
