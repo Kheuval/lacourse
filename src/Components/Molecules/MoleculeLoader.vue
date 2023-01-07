@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-[40%]" v-if="show" ref="spinner">
+  <div class="absolute left-[40%]" ref="spinner">
     <AtomSpinner class="absolute z-10 text-white top-[40%] left-[40%]" />
   </div>
   <AtomOverlay :show="show" />
@@ -16,9 +16,7 @@ const show = ref(false);
 
 onMounted(() => {
   show.value = true;
-  setTimeout(() => {
-    spinner.value!.style.top = window.scrollY + window.innerHeight / 2 + "px";
-  }, 1);
+  spinner.value!.style.top = window.scrollY + window.innerHeight / 2 + "px";
 });
 </script>
 
