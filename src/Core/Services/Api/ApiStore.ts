@@ -24,11 +24,6 @@ export const useApiStore = defineStore("api", () => {
     init: ApiRequest,
     publicAccess: boolean = false
   ): Promise<ApiResponse> => {
-    if (isAuthenticated.value && !checkTokenExpiration()) {
-      router.push("/");
-      return Promise.reject(new ExpiredTokenError());
-    }
-
     isFetching.value = true;
 
     const request = {
@@ -52,7 +47,12 @@ export const useApiStore = defineStore("api", () => {
     const data = await response.json();
 
     if (response.status === 401) {
-      new UnauthorizedError();
+      if (isAuthenticated.value && !checkTokenExpiration()) {
+        router.push("/");
+        new ExpiredTokenError();
+      } else {
+        new UnauthorizedError();
+      }
     } else if (response.status === 403) {
       new ForbiddenError();
     } else if (response.status === 404) {
