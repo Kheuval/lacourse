@@ -9,10 +9,9 @@
     "
     :id="id"
     @focus="validationMessage = ''"
-    @change="updateNow"
-    @keyup="validate(true)"
-    @blur="validate()"
-    v-model="content"
+    @change="setContentAndValidate"
+    @blur="setContentAndValidate"
+    @keyup="setContentAndValidate($event, true)"
   />
   <p class="text-red-500 text-xs text-center" v-if="validationMessage">
     {{ validationMessage }}
@@ -40,7 +39,12 @@ const emits = defineEmits(["update"]);
 const content = ref("");
 const validationMessage = ref("");
 
-const validate = (debounce = false): void => {
+const setContentAndValidate = (e: Event, debounce = false) => {
+  content.value = (e.target as HTMLInputElement).value;
+  validate(debounce);
+};
+
+const validate = (debounce: boolean): void => {
   if (!props.validationRules) {
     debounce ? updateLater() : updateNow();
     return;
@@ -66,7 +70,7 @@ const updateLater = useDebounce(() => {
 emitter.on("validate", (form) => {
   for (const [key] of Object.entries(form)) {
     if (props.id === key) {
-      validate();
+      validate(false);
     }
   }
 });
