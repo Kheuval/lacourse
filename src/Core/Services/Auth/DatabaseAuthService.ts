@@ -18,7 +18,7 @@ export const databaseAuthService: AuthServiceInterface = {
     const init: ApiRequest = {
       url: "/login",
       method: "POST",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: JSON.stringify({
         username,
         password,
@@ -57,7 +57,7 @@ export const databaseAuthService: AuthServiceInterface = {
     const init: ApiRequest = {
       url: "/api/users",
       method: "POST",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: JSON.stringify({
         email,
         username,
@@ -72,13 +72,13 @@ export const databaseAuthService: AuthServiceInterface = {
         }
       })
       .catch((response) => {
-        if (response.content.violations[0].propertyPath === "email") {
+        if (response.content["violations"][0].propertyPath === "email") {
           new EmailAlreadyInUseError();
-        } else if (response.content.violations[0].propertyPath === "username") {
+        } else if (
+          response.content["violations"][0].propertyPath === "username"
+        ) {
           new UsernameAlreadyInUseError();
         }
-
-        return Promise.reject();
       });
   },
 };

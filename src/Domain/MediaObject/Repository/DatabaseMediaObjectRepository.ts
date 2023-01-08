@@ -10,7 +10,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "GET",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: null,
     };
 

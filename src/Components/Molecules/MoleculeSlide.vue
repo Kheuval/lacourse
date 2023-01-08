@@ -35,7 +35,8 @@ databaseMediaObjectRepository
   .findOneByIri(props.imageIri)
   .then(
     (mediaObject) =>
-      (src.value = import.meta.env.APP_PUBLIC_API_URL + mediaObject!.contentUrl)
+      (src.value =
+        import.meta.env.APP_PUBLIC_API_URL + mediaObject!["contentUrl"])
   );
 </script>
 
