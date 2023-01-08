@@ -6,6 +6,7 @@
     <AtomTitle tag="h2" class="text-2xl text-center mr-auto p-6">
       {{ title }}
     </AtomTitle>
+    <slot name="rescourceAction"></slot>
   </div>
 </template>
 
@@ -22,5 +23,9 @@ defineProps<{
   title: string;
 }>();
 
-const previousRoute = ref(router.options.history.state.back!.toString());
+const previousRoute = ref("");
+
+if (router.options.history.state.back) {
+  previousRoute.value = router.options.history.state.back.toString();
+}
 </script>

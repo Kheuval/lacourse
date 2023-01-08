@@ -18,6 +18,11 @@ export const router = createRouter({
       name: "UserHome",
       component: () => import("@/Views/HomeView.vue"),
     },
+    {
+      path: "/recipe/show/:id",
+      name: "ShowRecipe",
+      component: () => import("@/Views/Recipe/ShowView.vue"),
+    },
   ],
 });
 

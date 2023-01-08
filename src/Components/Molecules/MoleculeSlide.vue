@@ -5,7 +5,7 @@
       :alt="alt"
       class="h-full w-full aspect-[3/2] object-cover"
     />
-    <AtomLink :to="alt">
+    <AtomLink :to="route">
       <div
         class="h-full w-full absolute top-0 rounded-3xl bg-black bg-opacity-50 flex items-center justify-center"
       >
@@ -28,6 +28,8 @@ const props = defineProps<{
 }>();
 
 const src = ref("");
+
+const route = "/recipe/show/" + props.resourceId;
 
 databaseMediaObjectRepository
   .findOneByIri(props.imageIri)
