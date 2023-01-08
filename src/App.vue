@@ -36,7 +36,7 @@ const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
 
 const doSomething = async () => {
-  await databaseAuthService.login("kheuval", "password");
+  await databaseAuthService.login();
   // databaseAuthService.register("toto", "toto@bobo.com", "password");
   // databaseMediaObjectRepository.findOneByIri("/api/media_objects/1");
   console.log(databaseRecipeRepository.getSample());
