@@ -6,6 +6,5 @@ export interface ApiRequest {
 }
 
 export interface ApiResponse {
-  status: number;
   content: any;
 }

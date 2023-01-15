@@ -10,6 +10,7 @@ import { GenericError } from "../Error/Errors/GenericError";
 import { ResourceNotFoundError } from "../Error/Errors/ResourceNotFoundError";
 import { UnauthorizedError } from "../Error/Errors/UnauthorizedError";
 import { UnprocessableEntityError } from "../Error/Errors/UnprocessableEntityError";
+import { deserializeRecursively } from "../Serializer/ApiResponseSerializer";
 
 export const useApiStore = defineStore("api", () => {
   const { isAuthenticated } = storeToRefs(useUserStore());
@@ -45,10 +46,6 @@ export const useApiStore = defineStore("api", () => {
 
     const data = JSON.parse(await response.text());
 
-    if (!data.token) {
-      console.log(data);
-    }
-
     if (response.status === 401) {
       if (isAuthenticated.value && !checkTokenExpiration()) {
         router.push("/");
@@ -66,11 +63,17 @@ export const useApiStore = defineStore("api", () => {
 
     if (data.token) {
       token.value = data.token;
+    } else {
+      console.log(
+        deserializeRecursively((key: string) => key.replace("@", ""))(data)
+      );
     }
 
     return {
-      status: response.status,
-      content: init.method !== "DELETE" ? data : null,
+      content:
+        init.method !== "DELETE"
+          ? deserializeRecursively((key: string) => key.replace("@", ""))(data)
+          : null,
     };
   };
 
