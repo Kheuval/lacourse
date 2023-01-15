@@ -15,7 +15,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
     };
 
     return await (
-      await useFetch(init, true)
+      await useFetch(init)
     ).content;
   },
   create: async (mediaObject: FormData): Promise<MediaObject> => {

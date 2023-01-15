@@ -36,10 +36,15 @@ const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
 
 const doSomething = async () => {
-  await databaseAuthService.login();
+  await databaseAuthService.login("kheuval", "password");
   // databaseAuthService.register("toto", "toto@bobo.com", "password");
-  // databaseMediaObjectRepository.findOneByIri("/api/media_objects/1");
-  console.log(databaseRecipeRepository.getSample());
+  // const recipe = await databaseMediaObjectRepository.findOneByIri(
+  //   "/api/media_objects/1"
+  // );
+  // console.log(recipe["contentUrl"]);
+  // console.log(await databaseRecipeRepository.getSample());
+  // console.log(await databaseRecipeRepository.findByQuery("bur"));
+  console.log(await databaseRecipeRepository.findOneByIri("/api/recipes/1"));
 };
 </script>
 <style lang="scss" scoped></style>

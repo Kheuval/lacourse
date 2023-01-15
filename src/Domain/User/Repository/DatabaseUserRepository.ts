@@ -9,7 +9,7 @@ export const databaseUserRepository: UserRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "GET",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: null,
     };
 

@@ -16,7 +16,6 @@ export const useApiStore = defineStore("api", () => {
   const router = useRouter();
 
   const token = ref("");
-  const publicUrl: string = import.meta.env.APP_PUBLIC_API_URL;
   const apiUrl: string = import.meta.env.APP_API_URL;
   const isFetching = ref(false);
 
@@ -27,11 +26,11 @@ export const useApiStore = defineStore("api", () => {
     isFetching.value = true;
 
     const request = {
-      url: (publicAccess ? publicUrl : apiUrl) + init.url,
+      url: apiUrl + init.url,
       method: init.method,
       headers: {
         "Content-type": init.contentType,
-        Accept: "application/json",
+        Accept: init.contentType,
         Authorization: publicAccess ? "" : `Bearer ${token.value}`,
       },
       body: init.body,
@@ -46,7 +45,9 @@ export const useApiStore = defineStore("api", () => {
 
     const data = JSON.parse(await response.text());
 
-    console.log(data);
+    if (!data.token) {
+      console.log(data);
+    }
 
     if (response.status === 401) {
       if (isAuthenticated.value && !checkTokenExpiration()) {

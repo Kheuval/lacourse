@@ -10,7 +10,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: "/recipes/sample",
       method: "GET",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: null,
     };
 
@@ -24,7 +24,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: `/recipes?page=1&name=${query}`,
       method: "GET",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: null,
     };
 
@@ -38,7 +38,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "GET",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: null,
     };
 
@@ -52,7 +52,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: "/recipes",
       method: "POST",
-      contentType: "application/json",
+      contentType: "application/ld+json",
       body: JSON.stringify(recipe),
     };
 
