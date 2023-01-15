@@ -1,5 +1,6 @@
 export interface Ingredient {
-  id: number;
+  id: string;
   name: string;
   isEdible: boolean;
+  type: string;
 }

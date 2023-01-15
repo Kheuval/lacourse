@@ -31,6 +31,7 @@ import { useErrorStore } from "./Core/Services/Error/Store/ErrorStore";
 import { databaseMediaObjectRepository } from "./Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
 import type { Recipe } from "./Domain/Recipe/RecipeInterface";
 import { databaseRecipeRepository } from "./Domain/Recipe/Repository/DatabaseRecipeRepository";
+import { databaseUserRepository } from "./Domain/User/Repository/DatabaseUserRepository";
 
 const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
@@ -44,7 +45,7 @@ const doSomething = async () => {
   // console.log(recipe["contentUrl"]);
   // console.log(await databaseRecipeRepository.getSample());
   // console.log(await databaseRecipeRepository.findByQuery("bur"));
-  console.log(await databaseRecipeRepository.findOneByIri("/api/recipes/1"));
+  // console.log(await databaseRecipeRepository.findOneByIri("/api/recipes/1"));
 };
 </script>
 <style lang="scss" scoped></style>

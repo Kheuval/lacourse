@@ -1,4 +1,5 @@
 export interface Step {
-  id: number;
+  id: string;
   stepDescription: string;
+  type: string;
 }
