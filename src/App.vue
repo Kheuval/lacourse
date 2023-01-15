@@ -46,6 +46,7 @@ const doSomething = async () => {
   // console.log(await databaseRecipeRepository.getSample());
   // console.log(await databaseRecipeRepository.findByQuery("bur"));
   // console.log(await databaseRecipeRepository.findOneByIri("/api/recipes/1"));
+  // console.log(await databaseUserRepository.findOneByIri("/api/users/1"));
 };
 </script>
 <style lang="scss" scoped></style>

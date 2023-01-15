@@ -8,7 +8,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
-      url: "/recipes/sample",
+      url: "/api/recipes/sample",
       method: "GET",
       contentType: "application/ld+json",
       body: null,
@@ -16,13 +16,13 @@ export const databaseRecipeRepository: RecipeRepository = {
 
     return await (
       await useFetch(init)
-    ).content;
+    ).content["hydra:member"];
   },
   findByQuery: async (query: string): Promise<Recipe[] | []> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
-      url: `/recipes?page=1&name=${query}`,
+      url: `/api/recipes?page=1&name=${query}`,
       method: "GET",
       contentType: "application/ld+json",
       body: null,
@@ -30,7 +30,7 @@ export const databaseRecipeRepository: RecipeRepository = {
 
     return await (
       await useFetch(init)
-    ).content;
+    ).content["hydra:member"];
   },
   findOneByIri: async (iri: string): Promise<Recipe | null> => {
     const { useFetch } = useApiStore();
