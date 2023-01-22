@@ -1,8 +1,8 @@
 <template>
   <OrganismHeader />
   <MoleculeViewHeader class="mt-2" title="Les Burgers">
-    <template #rescourceAction>
-      <MoleculeResourceAction class="mt-4" :resource="resource2" />
+    <template #resourceAction v-if="isOwner">
+      <MoleculeResourceAction :resource="resource!" />
     </template>
   </MoleculeViewHeader>
 </template>
@@ -11,26 +11,19 @@
 import MoleculeResourceAction from "@/Components/Molecules/MoleculeResourceAction.vue";
 import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
-import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
-import { ref } from "vue";
+import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 
-const resource = ref<Recipe | null>(null);
+const { currentUser } = useUserStore();
 
-databaseRecipeRepository
-  .findOneByIri("/recipes/" + route.params.id)
-  .then((recipe) => (resource.value = recipe));
+const resource = await databaseRecipeRepository.findOneByIri(
+  "/api/recipes/" + route.params.id
+);
 
-const resource2: GroceryList = {
-  id: 0,
-  name: "",
-  isActive: false,
-  listDetails: [],
-};
+const isOwner = currentUser?.username === resource?.user.username;
 </script>
 
 <style lang="scss" scoped></style>

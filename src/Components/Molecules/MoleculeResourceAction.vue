@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-evenly">
-    <AtomLink to="toto">
+  <div class="flex items-center">
+    <AtomLink class="mr-4" to="toto">
       <AtomIcon icon="fa-solid fa-pen" class="text-2xl text-secondary" />
     </AtomLink>
     <AtomButton class="text-3xl text-secondary" @click="show = true">
@@ -18,21 +18,21 @@
         <AtomTitle tag="h1" class="text-3xl">Attention !</AtomTitle>
       </template>
       <AtomText class="text-center">
-        Voulez-vous vraiment supprimer cette recette ?
+        {{ confirmText }}
       </AtomText>
     </MoleculeDialog>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import AtomButton from "../Atoms/AtomButton.vue";
 import AtomIcon from "../Atoms/AtomIcon.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 import MoleculeDialog from "./MoleculeDialog.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 import AtomText from "../Atoms/AtomText.vue";
-// import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
+import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 
@@ -42,17 +42,32 @@ const props = defineProps<{
 
 const show = ref(false);
 
+const confirmText = computed(() => {
+  let resource;
+
+  if (isRecipe(props.resource)) {
+    resource = "recette";
+  } else if (isGroceryList(props.resource)) {
+    resource = "liste";
+  }
+
+  return `Voulez-vous vraiment supprimer cette ${resource} ?`;
+});
+
 const isRecipe = (resource: Recipe | GroceryList): resource is Recipe =>
-  resource.type === "recipe";
+  resource.type === "Recipe";
+
+const isGroceryList = (
+  resource: Recipe | GroceryList
+): resource is GroceryList => resource.type === "GroceryList";
 
 const deleteResource = () => {
   if (isRecipe(props.resource)) {
-    console.log("isRecipe");
-
-    // databaseRecipeRepository.deleteOneByIri("/recipes/" + props.resource.id);
-  } else {
+    databaseRecipeRepository.deleteOneByIri("/recipes/" + props.resource.id);
+  } else if (isGroceryList(props.resource)) {
     console.log("isGroceryList");
   }
+
   show.value = false;
 };
 </script>

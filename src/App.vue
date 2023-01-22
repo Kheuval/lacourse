@@ -1,10 +1,12 @@
 <template>
-  <AtomButton
+  <!-- <AtomButton
     class="uppercase bg-primary text-white rounded-xl px-6 py-2"
     @click="doSomething"
     >Do something
-  </AtomButton>
-  <RouterView />
+  </AtomButton> -->
+  <Suspense>
+    <RouterView />
+  </Suspense>
   <MoleculeLoader v-if="isFetching" />
   <MoleculeDialog v-if="error" @ok="error = null" @cancel="error = null">
     <template #header>

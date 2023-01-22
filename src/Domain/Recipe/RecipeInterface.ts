@@ -13,4 +13,5 @@ export interface Recipe {
   recipeIngredients: RecipeIngredient[];
   steps: Step[];
   type: string;
+  user: { id: string; type: string; username: string };
 }

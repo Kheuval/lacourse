@@ -6,7 +6,7 @@
     <AtomTitle tag="h2" class="text-2xl text-center mr-auto p-6">
       {{ title }}
     </AtomTitle>
-    <slot name="rescourceAction"></slot>
+    <slot name="resourceAction"></slot>
   </div>
 </template>
 
