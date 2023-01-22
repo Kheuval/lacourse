@@ -4,7 +4,7 @@
     @click="doSomething"
     >Do something
   </AtomButton>
-  <!-- <RouterView /> -->
+  <RouterView />
   <MoleculeLoader v-if="isFetching" />
   <MoleculeDialog v-if="error" @ok="error = null" @cancel="error = null">
     <template #header>
@@ -37,7 +37,7 @@ const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
 
 const doSomething = async () => {
-  await databaseAuthService.login("kheuval", "password");
+  // await databaseAuthService.login("kheuval", "password");
   // databaseAuthService.register("toto", "toto@bobo.com", "password");
   // const recipe = await databaseMediaObjectRepository.findOneByIri(
   //   "/api/media_objects/1"

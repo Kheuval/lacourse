@@ -8,10 +8,10 @@
     <MoleculeSlide
       class="snap-center"
       v-for="item in data"
-      :key="item.id!"
+      :key="item.id"
       :imageIri="item.image"
       :alt="item.name"
-      :resourceId="item.id!"
+      :resourceId="item.id"
     />
   </div>
 </template>
@@ -32,14 +32,14 @@ const startSlider = () => {
   const slideWidth = container.value!.clientWidth;
 
   interval.value = setInterval(() => {
-    if (null === props.data) {
+    if (null === props.data || null === container.value) {
       return;
     }
 
-    if (container.value!.scrollLeft === slideWidth * (props.data.length - 1)) {
-      container.value!.scrollLeft = 0;
+    if (container.value.scrollLeft === slideWidth * (props.data.length - 1)) {
+      container.value.scrollLeft = 0;
     } else {
-      container.value!.scrollLeft += slideWidth;
+      container.value.scrollLeft += slideWidth;
     }
   }, 3000);
 };
