@@ -74,6 +74,7 @@ export const useApiStore = defineStore("api", () => {
         init.method !== "DELETE"
           ? deserializeRecursively((key: string) => key.replace("@", ""))(data)
           : null,
+      status: response.status,
     };
   };
 

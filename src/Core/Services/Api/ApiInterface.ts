@@ -7,4 +7,5 @@ export interface ApiRequest {
 
 export interface ApiResponse {
   content: any;
+  status: number;
 }
