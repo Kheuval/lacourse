@@ -21,7 +21,7 @@
             :to="link.to"
             @click="
               toggleMenu();
-              link.click ? link.click() : '';
+              link.click && link.click();
             "
             >{{ link.content }}
           </AtomLink>
