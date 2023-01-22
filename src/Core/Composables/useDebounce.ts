@@ -3,7 +3,7 @@ export const useDebounce = (callback: Function, timeout = 300) => {
   return (...args: any) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      callback.apply(this, args);
+      callback.apply(callback, args);
     }, timeout);
   };
 };
