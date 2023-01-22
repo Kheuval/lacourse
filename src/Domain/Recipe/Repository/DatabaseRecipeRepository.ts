@@ -3,6 +3,8 @@ import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { Recipe } from "../RecipeInterface";
 import type { RecipeRepository } from "./RecipeRepositoryInterface";
 
+const RESOURCE_TYPE = "Recipe";
+
 export const databaseRecipeRepository: RecipeRepository = {
   getSample: async (): Promise<Recipe[] | null> => {
     const { useFetch } = useApiStore();
@@ -12,6 +14,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       method: "GET",
       contentType: "application/ld+json",
       body: null,
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (
@@ -26,6 +29,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       method: "GET",
       contentType: "application/ld+json",
       body: null,
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (
@@ -40,6 +44,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       method: "GET",
       contentType: "application/ld+json",
       body: null,
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (
@@ -54,6 +59,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       method: "POST",
       contentType: "application/ld+json",
       body: JSON.stringify(recipe),
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (
@@ -68,6 +74,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       method: "PATCH",
       contentType: "application/merge-patch+json",
       body: JSON.stringify(recipe),
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (
@@ -82,6 +89,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       method: "DELETE",
       contentType: "application/json",
       body: null,
+      resourceType: RESOURCE_TYPE,
     };
 
     await useFetch(init);

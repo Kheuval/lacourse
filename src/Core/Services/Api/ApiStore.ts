@@ -4,6 +4,7 @@ import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { defineStore, storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useCacheManager } from "../Cache/CacheManager";
 import { ExpiredTokenError } from "../Error/Errors/ExpiredTokenError";
 import { ForbiddenError } from "../Error/Errors/ForbiddenError";
 import { GenericError } from "../Error/Errors/GenericError";
@@ -15,6 +16,7 @@ import { deserializeRecursively } from "../Serializer/ApiResponseSerializer";
 export const useApiStore = defineStore("api", () => {
   const { isAuthenticated } = storeToRefs(useUserStore());
   const router = useRouter();
+  const { writeInCache, getFromCache } = useCacheManager();
 
   const token = ref("");
   const apiUrl: string = import.meta.env.APP_API_URL;
@@ -24,6 +26,16 @@ export const useApiStore = defineStore("api", () => {
     init: ApiRequest,
     publicAccess: boolean = false
   ): Promise<ApiResponse> => {
+    if (init.method === "GET") {
+      const cachedData = getFromCache(init);
+      if (null !== cachedData) {
+        console.log("cache:hit", init.url);
+        return cachedData;
+      }
+    }
+
+    console.log("cache:miss", init.url);
+
     isFetching.value = true;
 
     const request = {
@@ -31,7 +43,7 @@ export const useApiStore = defineStore("api", () => {
       method: init.method,
       headers: {
         "Content-type": init.contentType,
-        Accept: init.contentType,
+        Accept: init.method === "PATCH" ? "application/json" : init.contentType,
         Authorization: publicAccess ? "" : `Bearer ${token.value}`,
       },
       body: init.body,
@@ -69,13 +81,17 @@ export const useApiStore = defineStore("api", () => {
       );
     }
 
-    return {
+    const apiResponse = {
       content:
         init.method !== "DELETE"
           ? deserializeRecursively((key: string) => key.replace("@", ""))(data)
           : null,
       status: response.status,
     };
+
+    writeInCache(init, apiResponse);
+
+    return apiResponse;
   };
 
   const checkTokenExpiration = (): boolean => {

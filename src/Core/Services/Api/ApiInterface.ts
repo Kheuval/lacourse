@@ -3,6 +3,7 @@ export interface ApiRequest {
   method: string;
   contentType: string;
   body: BodyInit | null;
+  resourceType: string;
 }
 
 export interface ApiResponse {
