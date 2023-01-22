@@ -1,8 +1,5 @@
 <template>
-  <header
-    class="flex items-center justify-between"
-    :class="home ? 'flex-col' : ''"
-  >
+  <header class="flex items-center justify-between" :class="home && 'flex-col'">
     <AtomLink to="/">
       <AtomImage :src="logoUrl" alt="logo" :class="home ? 'w-24' : 'w-16'" />
     </AtomLink>
