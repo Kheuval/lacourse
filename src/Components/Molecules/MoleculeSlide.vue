@@ -17,7 +17,6 @@
 
 <script lang="ts" setup>
 import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
-import { ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 
@@ -27,16 +26,11 @@ const props = defineProps<{
   resourceId: string;
 }>();
 
-const src = ref("");
+const src =
+  import.meta.env.APP_API_URL +
+  (await databaseMediaObjectRepository.findOneByIri(props.imageIri));
 
 const route = "/recipe/show/" + props.resourceId.match(/\d+/)![0];
-
-databaseMediaObjectRepository
-  .findOneByIri(props.imageIri)
-  .then(
-    (mediaObject) =>
-      (src.value = import.meta.env.APP_API_URL + mediaObject!["contentUrl"])
-  );
 </script>
 
 <style lang="scss" scoped></style>

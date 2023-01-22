@@ -16,7 +16,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
 
     return await (
       await useFetch(init)
-    ).content;
+    ).content["contentUrl"];
   },
   create: async (mediaObject: FormData): Promise<MediaObject> => {
     const { useFetch } = useApiStore();
