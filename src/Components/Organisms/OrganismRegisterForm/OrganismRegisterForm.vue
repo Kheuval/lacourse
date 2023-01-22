@@ -4,28 +4,28 @@
       id="username"
       type="text"
       placeholder="Identifiant"
-      :validationRules="[new NotNullRule()]"
+      :validationRules="[notNullRule]"
       @update="(content) => (form.username = content)"
     />
     <MoleculeInputLabelVue
       id="email"
       type="email"
       placeholder="Adresse email"
-      :validationRules="[new NotNullRule()]"
+      :validationRules="[notNullRule]"
       @update="(content) => (form.email = content)"
     />
     <MoleculeInputLabelVue
       id="password1"
       type="password"
       placeholder="Mot de passe"
-      :validationRules="[new NotNullRule()]"
+      :validationRules="[notNullRule]"
       @update="(content) => (form.password1 = content)"
     />
     <MoleculeInputLabelVue
       id="password2"
       type="password"
       placeholder="Répétez le mot de passe"
-      :validationRules="[new NotNullRule()]"
+      :validationRules="[notNullRule]"
       @update="(content) => (form.password2 = content)"
     />
     <AtomButtonVue
@@ -48,6 +48,8 @@ import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/Unprocess
 import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
 
 const { emitter } = useEventBus();
+
+const notNullRule = new NotNullRule();
 
 const form: RegisterForm = reactive({
   username: "",

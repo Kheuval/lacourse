@@ -4,14 +4,14 @@
       id="login"
       type="text"
       placeholder="Identifiant"
-      :validationRules="[new NotNullRule()]"
+      :validationRules="[notNullRule]"
       @update="(content) => (form.login = content)"
     />
     <MoleculeInputLabel
       id="password"
       type="password"
       placeholder="Mot de passe"
-      :validationRules="[new NotNullRule()]"
+      :validationRules="[notNullRule]"
       @update="(content) => (form.password = content)"
     />
     <AtomButton
@@ -33,6 +33,8 @@ import { useRouter } from "vue-router";
 import type { LoginForm } from "./LoginFormInterface";
 
 const router = useRouter();
+
+const notNullRule = new NotNullRule();
 
 const form: LoginForm = reactive({
   login: "",
