@@ -5,5 +5,5 @@ export interface GroceryList {
   name: string;
   isActive: boolean;
   listDetails: ListDetail[];
-  type: string;
+  type: "GroceryList";
 }

@@ -8,6 +8,8 @@ import { LoginError } from "../Error/Errors/LoginError";
 import { EmailAlreadyInUseError } from "../Error/Errors/EmailAlreadyInUseError";
 import { UsernameAlreadyInUseError } from "../Error/Errors/UsernameAlreadyInUseError";
 
+const RESOURCE_TYPE = "AuthUser";
+
 export const databaseAuthService: AuthServiceInterface = {
   login: async (username, password) => {
     const { useFetch } = useApiStore();
@@ -23,6 +25,7 @@ export const databaseAuthService: AuthServiceInterface = {
         username,
         password,
       }),
+      resourceType: RESOURCE_TYPE,
     };
 
     await useFetch(init, true)
@@ -63,6 +66,7 @@ export const databaseAuthService: AuthServiceInterface = {
         username,
         password,
       }),
+      resourceType: RESOURCE_TYPE,
     };
 
     await useFetch(init, true)

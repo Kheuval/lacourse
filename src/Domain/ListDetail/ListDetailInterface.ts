@@ -10,5 +10,5 @@ export interface ListDetail {
   groceryList: GroceryList;
   ingredient: Ingredient;
   recipe: Recipe;
-  type: string;
+  type: "ListDetail";
 }

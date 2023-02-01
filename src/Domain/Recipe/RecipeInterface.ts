@@ -1,5 +1,6 @@
 import type { RecipeIngredient } from "../RecipeIngredient/RecipeIngredientInterface";
 import type { Step } from "../Step/StepInterface";
+import type { AuthUser } from "../User/UserInterface";
 
 export interface Recipe {
   id: string;
@@ -12,6 +13,6 @@ export interface Recipe {
   cookingTime: number;
   recipeIngredients: RecipeIngredient[];
   steps: Step[];
-  type: string;
-  user: { id: string; type: string; username: string };
+  type: "Recipe";
+  user: AuthUser;
 }

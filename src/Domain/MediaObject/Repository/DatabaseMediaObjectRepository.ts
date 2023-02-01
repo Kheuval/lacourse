@@ -3,6 +3,8 @@ import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { MediaObject } from "../MediaObjectInterface";
 import type { MediaObjectRepository } from "./MediaObjectRepositoryInterface";
 
+const RESOURCE_TYPE = "MediaObject";
+
 export const databaseMediaObjectRepository: MediaObjectRepository = {
   findOneByIri: async (iri: string): Promise<MediaObject | null> => {
     const { useFetch } = useApiStore();
@@ -12,6 +14,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       method: "GET",
       contentType: "application/ld+json",
       body: null,
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (
@@ -26,6 +29,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       method: "POST",
       contentType: "multipart/form-data",
       body: mediaObject,
+      resourceType: RESOURCE_TYPE,
     };
 
     return await (

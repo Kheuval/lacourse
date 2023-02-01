@@ -7,5 +7,5 @@ export interface RecipeIngredient {
   quantity: number;
   ingredient: Ingredient;
   recipe: Recipe;
-  type: string;
+  type: "RecipeIngredient";
 }

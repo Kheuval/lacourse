@@ -1,12 +1,12 @@
 import type { ApiRequest } from "../Api/ApiInterface";
 
 export const useCacheManager = () => {
-  const storage = window.localStorage;
+  const storage = window.sessionStorage;
 
   const writeInCache = (request: ApiRequest, data: any) => {
     if (request.method !== "GET") {
       invalidateCache(request);
-    } else {
+    } else if (request.resourceType !== "User") {
       if (data.content.type === request.resourceType) {
         const key = `${request.resourceType}:${data.content.id}`;
         storage.setItem(key, JSON.stringify(data));
@@ -31,9 +31,11 @@ export const useCacheManager = () => {
     const key = `${request.resourceType}:${request.url}`;
 
     Object.keys(storage)
-      .filter((x) => !x.match(/\d+/))
+      .filter((storageKey) => !storageKey.match(/\d+/))
       .forEach(
-        (x) => x.startsWith(request.resourceType) && storage.removeItem(x)
+        (storageKey) =>
+          storageKey.startsWith(request.resourceType) &&
+          storage.removeItem(storageKey)
       );
 
     storage.removeItem(key);

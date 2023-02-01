@@ -89,7 +89,7 @@ export const useApiStore = defineStore("api", () => {
       status: response.status,
     };
 
-    writeInCache(init, apiResponse);
+    response.ok && writeInCache(init, apiResponse);
 
     return apiResponse;
   };
