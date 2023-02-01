@@ -1,6 +1,6 @@
 <template>
   <OrganismHeader />
-  <MoleculeViewHeader class="mt-2" title="Les Burgers">
+  <MoleculeViewHeader class="mt-2" :title="resource!.name">
     <template #resourceAction v-if="isOwner">
       <MoleculeResourceAction :resource="resource!" />
     </template>

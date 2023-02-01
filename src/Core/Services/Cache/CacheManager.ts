@@ -15,7 +15,8 @@ export const useCacheManager = () => {
         storage.setItem(key, JSON.stringify(data));
         data.content["hydra:member"].forEach((item: any) => {
           const key = `${item.type}:${item.id}`;
-          storage.setItem(key, JSON.stringify(item));
+          const storageObject = { content: item };
+          storage.setItem(key, JSON.stringify(storageObject));
         });
       }
     }
