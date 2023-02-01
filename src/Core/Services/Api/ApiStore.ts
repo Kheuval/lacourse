@@ -101,11 +101,7 @@ export const useApiStore = defineStore("api", () => {
 
     const decodedToken = useJwtDecode(token.value);
 
-    if (decodedToken.exp * 1000 < Date.now()) {
-      return false;
-    }
-
-    return true;
+    return decodedToken.exp * 1000 < Date.now();
   };
 
   const invalidateToken = () => (token.value = "");
