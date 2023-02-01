@@ -1,9 +1,11 @@
 <template>
-  <div class="flex items-center">
-    <AtomLink class="mr-4" to="toto">
-      <AtomIcon icon="fa-solid fa-pen" class="text-2xl text-secondary" />
+  <div
+    class="absolute right-3 z-30 bg-primary rounded-xl py-2 px-3 flex flex-col"
+  >
+    <AtomLink to="toto">
+      <AtomIcon icon="fa-solid fa-pen" class="text-4xl text-white mb-2" />
     </AtomLink>
-    <AtomButton class="text-3xl text-secondary" @click="show = true">
+    <AtomButton class="text-4xl text-white" @click="show = true">
       <AtomIcon icon="fa-solid fa-circle-xmark" />
     </AtomButton>
     <MoleculeDialog

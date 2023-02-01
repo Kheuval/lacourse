@@ -21,6 +21,7 @@ import {
   faHeart,
   faMinus,
   faPlus,
+  faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 
@@ -40,7 +41,8 @@ library.add(
   faCartShopping,
   faHeart,
   faMinus,
-  faPlus
+  faPlus,
+  faGear
 );
 
 const app = createApp(App);
