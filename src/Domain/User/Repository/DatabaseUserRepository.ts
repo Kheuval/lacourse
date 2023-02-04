@@ -16,9 +16,7 @@ export const databaseUserRepository: UserRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content;
+    return (await useFetch(init)).content;
   },
   updateOneByIri: async (iri: string, data: object) => {
     const { useFetch } = useApiStore();
@@ -31,9 +29,7 @@ export const databaseUserRepository: UserRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content;
+    return (await useFetch(init)).content;
   },
   deleteOneByIri: async (iri: string) => {
     const { useFetch } = useApiStore();

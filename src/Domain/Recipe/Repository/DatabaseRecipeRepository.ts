@@ -17,9 +17,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content["hydra:member"];
+    return (await useFetch(init)).content["hydra:member"];
   },
   findByQuery: async (query: string): Promise<Recipe[] | []> => {
     const { useFetch } = useApiStore();
@@ -32,9 +30,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content["hydra:member"];
+    return (await useFetch(init)).content["hydra:member"];
   },
   findOneByIri: async (iri: string): Promise<Recipe | null> => {
     const { useFetch } = useApiStore();
@@ -47,9 +43,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content;
+    return (await useFetch(init)).content;
   },
   create: async (recipe: Recipe): Promise<Recipe> => {
     const { useFetch } = useApiStore();
@@ -62,9 +56,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content;
+    return (await useFetch(init)).content;
   },
   updateOneByIri: async (iri: string, recipe: Recipe): Promise<Recipe> => {
     const { useFetch } = useApiStore();
@@ -77,9 +69,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content;
+    return (await useFetch(init)).content;
   },
   deleteOneByIri: async (iri: string): Promise<void> => {
     const { useFetch } = useApiStore();

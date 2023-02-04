@@ -4,6 +4,7 @@
     iconClass="text-xl text-white ml-4"
     icon="fa-solid fa-magnifying-glass"
     :content="content"
+    @click="show = true"
   />
   <MoleculeDialog
     :buttons="{ ok: false, cancel: true }"

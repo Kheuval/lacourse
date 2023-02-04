@@ -17,9 +17,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content["contentUrl"];
+    return (await useFetch(init)).content["contentUrl"];
   },
   create: async (mediaObject: FormData): Promise<MediaObject> => {
     const { useFetch } = useApiStore();
@@ -32,8 +30,6 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       resourceType: RESOURCE_TYPE,
     };
 
-    return await (
-      await useFetch(init)
-    ).content;
+    return (await useFetch(init)).content;
   },
 };
