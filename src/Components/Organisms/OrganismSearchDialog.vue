@@ -26,7 +26,7 @@
         icon="fa-solid fa-magnifying-glass"
       />
     </MoleculeInputLabel>
-    <MoleculeList v-if="recipes.length" :list="recipes" />
+    <MoleculeResourceList v-if="recipes.length" :resourceList="recipes" />
     <AtomSpinner v-if="isFetching" />
   </MoleculeDialog>
 </template>
@@ -42,7 +42,7 @@ import AtomSpinner from "../Atoms/AtomSpinner.vue";
 import MoleculeDialog from "../Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "../Molecules/MoleculeIconButton.vue";
 import MoleculeInputLabel from "../Molecules/MoleculeInputLabel.vue";
-import MoleculeList from "../Molecules/MoleculeList.vue";
+import MoleculeResourceList from "../Molecules/MoleculeResourceList.vue";
 
 const { isFetching } = storeToRefs(useApiStore());
 
