@@ -8,7 +8,7 @@
     </AtomButton>
     <Transition name="menuToggle">
       <ul
-        class="flex mt-4 flex-col justify-center items-center list-none absolute w-[90%] h-[28.75rem] right-0 p-0 text-center bg-primary z-40 rounded-tl-[10px] rounded-bl-[10px]"
+        class="flex mt-4 flex-col justify-center items-center list-none absolute w-[90%] top-[10%] right-0 p-0 text-center bg-primary z-40 rounded-tl-[10px] rounded-bl-[10px]"
         v-if="showMenu"
       >
         <li

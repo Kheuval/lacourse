@@ -6,6 +6,19 @@ import type { RecipeRepository } from "./RecipeRepositoryInterface";
 const RESOURCE_TYPE = "Recipe";
 
 export const databaseRecipeRepository: RecipeRepository = {
+  getAll: async (): Promise<Recipe[]> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: "/api/recipes",
+      method: "GET",
+      contentType: "application/ld+json",
+      body: null,
+      resourceType: RESOURCE_TYPE,
+    };
+
+    return (await useFetch(init)).content["hydra:member"];
+  },
   getSample: async (): Promise<Recipe[] | null> => {
     const { useFetch } = useApiStore();
 

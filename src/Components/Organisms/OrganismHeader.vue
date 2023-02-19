@@ -33,6 +33,10 @@ withDefaults(
 
 const links = [
   {
+    to: "/recipe",
+    content: "Liste des recettes",
+  },
+  {
     to: "/user/profile",
     content: "Mon profil",
   },
