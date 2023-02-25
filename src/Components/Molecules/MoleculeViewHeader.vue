@@ -11,21 +11,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouterStore } from "@/Core/Router/RouterStore";
 import AtomIcon from "../Atoms/AtomIcon.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 
-const router = useRouter();
+const { navigationStack } = useRouterStore();
 
 defineProps<{
   title: string;
 }>();
 
-const previousRoute = ref("");
-
-if (router.options.history.state.back) {
-  previousRoute.value = router.options.history.state.back.toString();
-}
+const previousRoute = navigationStack.at(-1)!.fullPath;
 </script>

@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useApiStore } from "../Services/Api/ApiStore";
 import { ExpiredTokenError } from "../Services/Error/Errors/ExpiredTokenError";
 import { UnauthorizedError } from "../Services/Error/Errors/UnauthorizedError";
+import { useRouterStore } from "./RouterStore";
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,7 @@ export const router = createRouter({
 router.beforeEach((to, from, next) => {
   const { isAuthenticated } = storeToRefs(useUserStore());
   const { checkTokenExpiration } = useApiStore();
+  const { navigationStack } = storeToRefs(useRouterStore());
 
   if (!isAuthenticated.value && to.path !== "/") {
     next({ path: "/" });
@@ -51,6 +53,12 @@ router.beforeEach((to, from, next) => {
   if (isAuthenticated.value && to.path === "/") {
     next({ path: "/user/home" });
     return;
+  }
+
+  if (to.fullPath !== navigationStack.value.at(-1)?.fullPath) {
+    navigationStack.value.push(from);
+  } else {
+    navigationStack.value.pop();
   }
 
   next();

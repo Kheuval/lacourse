@@ -29,12 +29,12 @@ export const useApiStore = defineStore("api", () => {
     if (init.method === "GET") {
       const cachedData = getFromCache(init);
       if (null !== cachedData) {
-        console.log("cache:hit", init.url);
+        // console.log("cache:hit", init.url);
         return cachedData;
       }
     }
 
-    console.log("cache:miss", init.url);
+    // console.log("cache:miss", init.url);
 
     isFetching.value = true;
 
@@ -76,9 +76,9 @@ export const useApiStore = defineStore("api", () => {
     if (data.token) {
       token.value = data.token;
     } else {
-      console.log(
-        deserializeRecursively((key: string) => key.replace("@", ""))(data)
-      );
+      // console.log(
+      //   deserializeRecursively((key: string) => key.replace("@", ""))(data)
+      // );
     }
 
     const apiResponse = {

@@ -87,8 +87,6 @@ const recipe = await databaseRecipeRepository.findOneByIri(
   "/api/recipes/" + route.params.id
 );
 
-console.log(recipe);
-
 const isOwner = currentUser?.username === recipe?.user.username;
 
 const showResourceActions = ref(false);
