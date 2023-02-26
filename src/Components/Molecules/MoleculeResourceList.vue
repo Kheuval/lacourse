@@ -38,8 +38,8 @@ import AtomLink from "../Atoms/AtomLink.vue";
 const props = withDefaults(
   defineProps<{
     resourceList: Recipe[] | GroceryList[];
-    withImage: boolean;
-    liClass: string;
+    withImage?: boolean;
+    liClass?: string;
   }>(),
   {
     withImage: false,
