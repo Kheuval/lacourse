@@ -30,7 +30,7 @@ const src =
   import.meta.env.APP_API_URL +
   (await databaseMediaObjectRepository.findOneByIri(props.imageIri));
 
-const route = "/recipe/show/" + props.resourceId.match(/\d+/)![0];
+const route = "/recipes/show/" + props.resourceId.match(/\d+/)![0];
 </script>
 
 <style lang="scss" scoped></style>

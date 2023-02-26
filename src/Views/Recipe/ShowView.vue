@@ -1,17 +1,17 @@
 <template>
   <OrganismHeader />
-  <MoleculeViewHeader class="mt-2" :title="recipe!.name">
+  <MoleculeViewHeader class="mt-2" :title="recipe.name">
     <template #resourceAction v-if="isOwner">
       <AtomButton @click="toggleResourceActions">
         <AtomIcon icon="fa-solid fa-gear" class="text-2xl text-secondary" />
       </AtomButton>
-      <MoleculeResourceAction v-if="showResourceActions" :resource="recipe!" />
+      <MoleculeResourceAction v-if="showResourceActions" :resource="recipe" />
     </template>
   </MoleculeViewHeader>
   <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
   <AtomImage
     :src="src"
-    :alt="recipe!.name"
+    :alt="recipe.name"
     class="rounded-3xl w-full aspect-[3/2] object-cover mt-4"
   />
   <div
@@ -20,25 +20,25 @@
     <AtomText>
       Préparation :
       <span class="text-secondary">
-        {{ humanTime(recipe!.preparationTime) }}
+        {{ humanTime(recipe.preparationTime) }}
       </span>
     </AtomText>
     <AtomText>
       Cuisson :
       <span class="text-secondary">
-        {{ humanTime(recipe!.cookingTime) }}
+        {{ humanTime(recipe.cookingTime) }}
       </span>
     </AtomText>
     <AtomText>
       Repos :
       <span class="text-secondary">
-        {{ humanTime(recipe!.restTime) }}
+        {{ humanTime(recipe.restTime) }}
       </span>
     </AtomText>
     <AtomText>
       Temps total :
       <span class="text-secondary">
-        {{ humanTime(recipe!.totalTime) }}
+        {{ humanTime(recipe.totalTime) }}
       </span>
     </AtomText>
   </div>
@@ -56,9 +56,9 @@
   />
   <MoleculeIngredientList
     class="mt-2"
-    :recipeIngredients="recipe!.recipeIngredients"
+    :recipeIngredients="recipe.recipeIngredients"
   />
-  <MoleculeStepList :steps="recipe!.steps" />
+  <MoleculeStepList :steps="recipe.steps" />
 </template>
 
 <script lang="ts" setup>
@@ -87,7 +87,7 @@ const recipe = await databaseRecipeRepository.findOneByIri(
   "/api/recipes/" + route.params.id
 );
 
-const isOwner = currentUser?.username === recipe?.user.username;
+const isOwner = currentUser?.username === recipe.user.username;
 
 const showResourceActions = ref(false);
 
@@ -96,7 +96,7 @@ const toggleResourceActions = () =>
 
 const src =
   import.meta.env.APP_API_URL +
-  (await databaseMediaObjectRepository.findOneByIri(recipe!.image));
+  (await databaseMediaObjectRepository.findOneByIri(recipe.image));
 
 const humanTime = (time: number): string => {
   if (time === 0) {

@@ -19,7 +19,7 @@ export const databaseRecipeRepository: RecipeRepository = {
 
     return (await useFetch(init)).content["hydra:member"];
   },
-  getSample: async (): Promise<Recipe[] | null> => {
+  getSample: async (): Promise<Recipe[]> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
@@ -45,7 +45,7 @@ export const databaseRecipeRepository: RecipeRepository = {
 
     return (await useFetch(init)).content["hydra:member"];
   },
-  findOneByIri: async (iri: string): Promise<Recipe | null> => {
+  findOneByIri: async (iri: string): Promise<Recipe> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {

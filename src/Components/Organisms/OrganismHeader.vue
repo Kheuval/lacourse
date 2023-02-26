@@ -33,7 +33,7 @@ withDefaults(
 
 const links = [
   {
-    to: "/recipe",
+    to: "/recipes",
     content: "Liste des recettes",
   },
   {

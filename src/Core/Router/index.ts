@@ -20,14 +20,19 @@ export const router = createRouter({
       component: () => import("@/Views/HomeView.vue"),
     },
     {
-      path: "/recipe",
+      path: "/recipes",
       name: "IndexRecipe",
       component: () => import("@/Views/Recipe/IndexView.vue"),
     },
     {
-      path: "/recipe/show/:id",
+      path: "/recipes/show/:id",
       name: "ShowRecipe",
       component: () => import("@/Views/Recipe/ShowView.vue"),
+    },
+    {
+      path: "/recipes/create/",
+      name: "CreateRecipe",
+      component: () => import("@/Views/Recipe/CreateView.vue"),
     },
   ],
 });

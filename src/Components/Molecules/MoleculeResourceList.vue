@@ -55,10 +55,12 @@ const isGroceryList = (
 ): resource is GroceryList => resource.type === "GroceryList";
 
 const getRoute = (resource: Recipe | GroceryList) => {
+  const resourceId = resource.id.match(/\d+/)![0];
+
   if (isRecipe(resource)) {
-    return "/recipe/show/" + resource.id.match(/\d+/)![0];
+    return "/recipes/show/" + resourceId;
   } else if (isGroceryList(resource)) {
-    return "/grocery-list/show/" + resource.id.match(/\d+/)![0];
+    return "/grocery-lists/show/" + resourceId;
   } else {
     return "";
   }
