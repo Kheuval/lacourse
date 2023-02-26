@@ -19,6 +19,19 @@ export const databaseRecipeRepository: RecipeRepository = {
 
     return (await useFetch(init)).content["hydra:member"];
   },
+  getAllForUser: async (userIri: string): Promise<Recipe[]> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: `/api/recipes?user=${userIri.match(/\d+/)![0]}`,
+      method: "GET",
+      contentType: "application/ld+json",
+      body: null,
+      resourceType: RESOURCE_TYPE,
+    };
+
+    return (await useFetch(init)).content["hydra:member"];
+  },
   getSample: async (): Promise<Recipe[]> => {
     const { useFetch } = useApiStore();
 
@@ -36,7 +49,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
-      url: `/api/recipes?page=1&name=${query}`,
+      url: `/api/recipes?name=${query}`,
       method: "GET",
       contentType: "application/ld+json",
       body: null,
