@@ -28,7 +28,7 @@ import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
 import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
-import { reactive } from "vue";
+import { ref, type Ref } from "vue";
 import { useRouter } from "vue-router";
 import type { LoginForm } from "./LoginFormInterface";
 
@@ -36,14 +36,14 @@ const router = useRouter();
 
 const notNullRule = new NotNullRule();
 
-const form: LoginForm = reactive({
+const form: Ref<LoginForm> = ref({
   login: "",
   password: "",
 });
 
 const login = () => {
   databaseAuthService
-    .login(form.login, form.password)
+    .login(form.value.login, form.value.password)
     .then(() => router.push("/user/home"));
 };
 </script>

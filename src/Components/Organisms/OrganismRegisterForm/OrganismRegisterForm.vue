@@ -39,7 +39,7 @@
 <script lang="ts" setup>
 import AtomButtonVue from "../../Atoms/AtomButton.vue";
 import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
-import { reactive } from "vue";
+import { ref, type Ref } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
 import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
 import { useEventBus } from "@/Core/Services/EventBus";
@@ -51,7 +51,7 @@ const { emitter } = useEventBus();
 
 const notNullRule = new NotNullRule();
 
-const form: RegisterForm = reactive({
+const form: Ref<RegisterForm> = ref({
   username: "",
   email: "",
   password1: "",
@@ -59,20 +59,29 @@ const form: RegisterForm = reactive({
 });
 
 const register = () => {
-  emitter.emit("validate", form);
+  emitter.emit("validate", form.value);
 
-  if (!form.username || !form.email || !form.password1 || !form.password2) {
+  if (
+    !form.value.username ||
+    !form.value.email ||
+    !form.value.password1 ||
+    !form.value.password2
+  ) {
     new UnprocessableEntityError();
     return;
   }
 
   checkPasswords()
-    ? databaseAuthService.register(form.username, form.email, form.password1)
+    ? databaseAuthService.register(
+        form.value.username,
+        form.value.email,
+        form.value.password1
+      )
     : new PasswordsNotMatchingError();
 };
 
 const checkPasswords = (): boolean => {
-  return form.password1 === form.password2;
+  return form.value.password1 === form.value.password2;
 };
 </script>
 
