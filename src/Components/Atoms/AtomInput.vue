@@ -1,6 +1,8 @@
 <template>
   <input
     :type="type"
+    :inputmode="typeNumber ? 'numeric' : 'text'"
+    :pattern="typeNumber ? '[0-9]*' : '[a-zA-Z]'"
     class="px-8 pb-3 pt-4 text-sm rounded-full border-2 text-primary focus:outline-none bg-white peer"
     :class="
       validationMessage
@@ -28,11 +30,17 @@ import { useEventBus } from "@/Core/Services/EventBus";
 
 const { emitter } = useEventBus();
 
-const props = defineProps<{
-  id: string;
-  type: string;
-  validationRules?: Rule[];
-}>();
+const props = withDefaults(
+  defineProps<{
+    id: string;
+    type: string;
+    validationRules?: Rule[];
+    typeNumber?: boolean;
+  }>(),
+  {
+    typeNumber: false,
+  }
+);
 
 const emits = defineEmits(["update"]);
 
@@ -41,7 +49,7 @@ const validationMessage = ref("");
 
 const setContentAndValidate = (e: Event, debounce = false) => {
   content.value = (e.target as HTMLInputElement).value;
-  validate(debounce);
+  debounce ? updateLater() : validate(debounce);
 };
 
 const validate = (debounce: boolean): void => {

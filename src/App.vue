@@ -1,13 +1,10 @@
 <template>
-  <!-- <AtomButton
+  <AtomButton
     class="uppercase bg-primary text-white rounded-xl px-6 py-2"
     @click="doSomething"
   >
     Do something
   </AtomButton>
-  <MoleculeIngredientList
-    :recipeIngredients="recipe && recipe.recipeIngredients"
-  /> -->
   <Suspense>
     <RouterView />
   </Suspense>
@@ -25,29 +22,25 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { type Ref, ref } from "vue";
+import { useRouter } from "vue-router";
 import AtomButton from "./Components/Atoms/AtomButton.vue";
 import AtomIcon from "./Components/Atoms/AtomIcon.vue";
 import AtomText from "./Components/Atoms/AtomText.vue";
 import AtomTitle from "./Components/Atoms/AtomTitle.vue";
 import MoleculeDialog from "./Components/Molecules/MoleculeDialog.vue";
-import MoleculeIngredientList from "./Components/Molecules/MoleculeIngredientList.vue";
 import MoleculeLoader from "./Components/Molecules/MoleculeLoader.vue";
 import { useApiStore } from "./Core/Services/Api/ApiStore";
 import { databaseAuthService } from "./Core/Services/Auth/DatabaseAuthService";
 import { useErrorStore } from "./Core/Services/Error/Store/ErrorStore";
-import type { Recipe } from "./Domain/Recipe/RecipeInterface";
-import { databaseRecipeRepository } from "./Domain/Recipe/Repository/DatabaseRecipeRepository";
-import { databaseUserRepository } from "./Domain/User/Repository/DatabaseUserRepository";
 
 const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
 
-const recipe: Ref<Recipe | null> = ref(null);
+const router = useRouter();
 
 const doSomething = async () => {
   await databaseAuthService.login();
-  recipe.value = await databaseRecipeRepository.findOneByIri("/api/recipes/5");
+  router.push("/recipes/create");
 };
 </script>
 <style lang="scss" scoped></style>

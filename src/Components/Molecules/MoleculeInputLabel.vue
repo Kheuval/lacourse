@@ -4,6 +4,7 @@
       :id="id"
       :type="type"
       :validationRules="validationRules"
+      :typeNumber="typeNumber"
       @update="(content) => $emit('update', content)"
     />
     <AtomLabel :id="id" :placeholder="placeholder" />
@@ -16,12 +17,18 @@ import type { Rule } from "@/Core/Services/Validation/ValidationInterface";
 import AtomInput from "../Atoms/AtomInput.vue";
 import AtomLabel from "../Atoms/AtomLabel.vue";
 
-defineProps<{
-  id: string;
-  type: string;
-  placeholder: string;
-  validationRules?: Rule[];
-}>();
+withDefaults(
+  defineProps<{
+    id: string;
+    type: string;
+    placeholder: string;
+    validationRules?: Rule[];
+    typeNumber?: boolean;
+  }>(),
+  {
+    typeNumber: false,
+  }
+);
 
 defineEmits(["update"]);
 </script>
