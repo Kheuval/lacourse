@@ -67,6 +67,9 @@
         class="absolute text-xl text-secondary ml-4 top-4 right-5 peer-focus:hidden"
       />
     </MoleculeInputLabel>
+    <OrganismIngredientForm
+      @addIngredient="(content) => (form.recipeIngredients = content)"
+    />
   </form>
 </template>
 
@@ -79,6 +82,7 @@ import { LengthRule } from "@/Core/Services/Validation/Rules/LengthRule";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import { ref, type Ref } from "vue";
+import OrganismIngredientForm from "../OrganismIngredientForm/OrganismIngredientForm.vue";
 import type { RecipeForm } from "./RecipeFormInterface";
 
 const notNullRule = new NotNullRule();

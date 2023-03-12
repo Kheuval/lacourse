@@ -1,0 +1,37 @@
+<template>
+  <div class="relative">
+    <select
+      class="px-8 pb-3 pt-4 text-sm rounded-full border-2 border-primary text-primary focus:outline-none bg-white appearance-none cursor-pointer"
+      :name="name"
+      :id="id"
+      @change="$emit('change', ($event.target! as HTMLSelectElement).value)"
+    >
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.text }}
+      </option>
+    </select>
+    <span
+      class="absolute inline-block rotate-90 text-secondary text-2xl top-3 right-3"
+    >
+      >
+    </span>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import type { IngredientOption } from "./IngredientOptionInterface";
+
+defineEmits(["change"]);
+
+defineProps<{
+  name: string;
+  id: string;
+  options: IngredientOption[];
+}>();
+</script>
+
+<style lang="scss" scoped></style>

@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="w-full">
     <AtomTitle class="mt-6 text-2xl text-center" tag="h2">
       Ingrédients :
     </AtomTitle>
     <div class="grid grid-cols-3 gap-2 rounded-xl p-4">
       <div
-        class="relative flex border-2 border-gray-400 rounded-md text-center after:pb-[100%]"
+        class="flex border-2 border-gray-400 rounded-md text-center after:pb-[100%]"
         v-for="recipeIngredient in recipeIngredients"
-        :key="recipeIngredient.id"
+        :key="recipeIngredient.ingredient.name"
       >
-        <div class="absolute flex flex-col justify-evenly w-full h-full p-2">
+        <div class="flex flex-col justify-evenly w-full h-full p-2">
           <AtomText class="text-sm break-words">
             {{ recipeIngredient.ingredient.name }}
           </AtomText>
@@ -26,12 +26,13 @@
 import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
 import AtomText from "../Atoms/AtomText.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
+import type { IngredientForm } from "../Organisms/OrganismIngredientForm/IngredientFormInterface";
 
 defineProps<{
-  recipeIngredients: RecipeIngredient[] | null;
+  recipeIngredients: RecipeIngredient[] | IngredientForm[] | null;
 }>();
 
-const quantity = (recipeIngredient: RecipeIngredient) => {
+const quantity = (recipeIngredient: RecipeIngredient | IngredientForm) => {
   return `${recipeIngredient.quantity} ${
     recipeIngredient.unit === "u" ? "" : recipeIngredient.unit
   }`;

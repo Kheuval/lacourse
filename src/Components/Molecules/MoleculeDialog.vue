@@ -63,6 +63,10 @@ const onOk = () => {
 };
 
 const onCancel = (event?: MouseEvent) => {
+  if (event && event.clientX === 0 && event.clientY === 0) {
+    return;
+  }
+
   if (!event) {
     dismissDialog();
     setTimeout(() => {
