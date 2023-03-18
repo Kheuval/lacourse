@@ -70,6 +70,7 @@
     <OrganismIngredientForm
       @addIngredient="(content) => (form.recipeIngredients = content)"
     />
+    <OrganismStepForm @addStep="(content) => (form.steps = content)" />
   </form>
 </template>
 
@@ -83,6 +84,7 @@ import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import { ref, type Ref } from "vue";
 import OrganismIngredientForm from "../OrganismIngredientForm/OrganismIngredientForm.vue";
+import OrganismStepForm from "../OrganismStepForm/OrganismStepForm.vue";
 import type { RecipeForm } from "./RecipeFormInterface";
 
 const notNullRule = new NotNullRule();
