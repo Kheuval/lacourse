@@ -5,6 +5,7 @@
       :name="name"
       :id="id"
       @change="$emit('change', ($event.target! as HTMLSelectElement).value)"
+      :value="defaultValue"
     >
       <option
         v-for="option in options"
@@ -27,11 +28,17 @@ import type { IngredientOption } from "./IngredientOptionInterface";
 
 defineEmits(["change"]);
 
-defineProps<{
-  name: string;
-  id: string;
-  options: IngredientOption[];
-}>();
+withDefaults(
+  defineProps<{
+    name: string;
+    id: string;
+    options: IngredientOption[];
+    defaultValue?: string;
+  }>(),
+  {
+    defaultValue: (props) => props.options[0].value,
+  }
+);
 </script>
 
 <style lang="scss" scoped></style>

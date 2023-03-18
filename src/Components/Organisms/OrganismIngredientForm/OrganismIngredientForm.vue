@@ -11,14 +11,18 @@
       v-if="showDialog"
       styles="w-3/4 h-3/5"
       :buttons="{ ok: true, cancel: true }"
-      @ok="addIngredient"
-      @cancel="showDialog = false"
+      @ok="addOrEditIngredient"
+      @cancel="
+        form = formInitialState();
+        showDialog = false;
+      "
     >
       <MoleculeInputLabel
         type="text"
         id="ingredient:name"
         placeholder="Entrez le nom d'un ingrédient"
         :validationRules="[notNullRule]"
+        :defaultContent="form.ingredient.name"
         @update="(content) => (form.ingredient.name = content)"
       />
       <MoleculeInputLabel
@@ -27,6 +31,7 @@
         placeholder="Sa quantité"
         :typeNumber="true"
         :validationRules="[notNullRule, numberRule]"
+        :defaultContent="form.quantity"
         @update="(content) => (form.quantity = content)"
       />
       <MoleculeSelectLabel
@@ -34,6 +39,7 @@
         placeholder="Une unité"
         name="ingredient:unit"
         :options="options"
+        :defaultValue="form.unit"
         @change="(content) => (form.unit = content)"
       />
     </MoleculeDialog>
@@ -41,6 +47,14 @@
   <MoleculeIngredientList
     v-if="recipeIngredients.length"
     :recipeIngredients="recipeIngredients"
+    :editable="true"
+    @editIngredient="
+      (index, recipeIngredient) => {
+        key = index;
+        form = formInitialState(recipeIngredient);
+        showDialog = true;
+      }
+    "
   />
 </template>
 
@@ -64,18 +78,21 @@ const numberRule = new NumberRule();
 
 const emits = defineEmits(["addIngredient"]);
 
-const formInitialState = () => {
-  return {
-    ingredient: {
-      name: "",
-    },
-    quantity: 0,
-    unit: "u",
-  };
+const formInitialState = (ingredientForm?: IngredientForm) => {
+  return (
+    ingredientForm || {
+      ingredient: {
+        name: "",
+      },
+      quantity: 0,
+      unit: "u",
+    }
+  );
 };
 
 const showDialog = ref(false);
 const recipeIngredients: Ref<IngredientForm[]> = ref([]);
+const key: Ref<number | undefined> = ref();
 
 const form: Ref<IngredientForm> = ref(formInitialState());
 
@@ -127,13 +144,19 @@ const options: IngredientOption[] = [
   },
 ];
 
-const addIngredient = () => {
+const addOrEditIngredient = () => {
   // emitter.emit("validate", form.value);
   if (!form.value.ingredient.name || !form.value.quantity) {
     return;
   }
 
-  recipeIngredients.value.push(form.value);
+  if (undefined !== key.value) {
+    recipeIngredients.value[key.value] = form.value;
+    key.value = undefined;
+  } else {
+    recipeIngredients.value.push(form.value);
+  }
+
   emits("addIngredient", recipeIngredients.value);
 
   form.value = formInitialState();

@@ -5,6 +5,7 @@
       :name="name"
       :options="options"
       @change="(content) => $emit('change', content)"
+      :defaultValue="defaultValue"
     />
     <AtomLabel :id="id" :placeholder="placeholder" />
   </div>
@@ -17,12 +18,18 @@ import type { IngredientOption } from "../Atoms/AtomSelect/IngredientOptionInter
 
 defineEmits(["change"]);
 
-defineProps<{
-  id: string;
-  placeholder: string;
-  name: string;
-  options: IngredientOption[];
-}>();
+withDefaults(
+  defineProps<{
+    id: string;
+    placeholder: string;
+    name: string;
+    options: IngredientOption[];
+    defaultValue?: string;
+  }>(),
+  {
+    defaultValue: "",
+  }
+);
 </script>
 
 <style lang="scss" scoped></style>

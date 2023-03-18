@@ -6,8 +6,9 @@
     <div class="grid grid-cols-3 gap-2 rounded-xl p-4">
       <div
         class="flex border-2 border-gray-400 rounded-md text-center after:pb-[100%]"
-        v-for="recipeIngredient in recipeIngredients"
+        v-for="(recipeIngredient, key) in recipeIngredients"
         :key="recipeIngredient.ingredient.name"
+        @click="editable && $emit('editIngredient', key, recipeIngredient)"
       >
         <div class="flex flex-col justify-evenly w-full h-full p-2">
           <AtomText class="text-sm break-words">
@@ -28,9 +29,17 @@ import AtomText from "../Atoms/AtomText.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 import type { IngredientForm } from "../Organisms/OrganismIngredientForm/IngredientFormInterface";
 
-defineProps<{
-  recipeIngredients: RecipeIngredient[] | IngredientForm[] | null;
-}>();
+defineEmits(["editIngredient"]);
+
+withDefaults(
+  defineProps<{
+    recipeIngredients: RecipeIngredient[] | IngredientForm[] | null;
+    editable?: boolean;
+  }>(),
+  {
+    editable: false,
+  }
+);
 
 const quantity = (recipeIngredient: RecipeIngredient | IngredientForm) => {
   return `${recipeIngredient.quantity} ${

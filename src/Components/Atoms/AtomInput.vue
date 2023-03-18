@@ -14,6 +14,7 @@
     @change="setContentAndValidate"
     @blur="setContentAndValidate"
     @keyup="setContentAndValidate($event, true)"
+    :value="defaultContent"
   />
   <p class="text-red-500 text-xs text-center" v-if="validationMessage">
     {{ validationMessage }}
@@ -36,9 +37,11 @@ const props = withDefaults(
     type: string;
     validationRules?: Rule[];
     typeNumber?: boolean;
+    defaultContent?: string | number;
   }>(),
   {
     typeNumber: false,
+    defaultContent: "",
   }
 );
 

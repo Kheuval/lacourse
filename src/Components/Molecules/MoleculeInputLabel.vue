@@ -5,6 +5,7 @@
       :type="type"
       :validationRules="validationRules"
       :typeNumber="typeNumber"
+      :defaultContent="defaultContent"
       @update="(content) => $emit('update', content)"
     />
     <AtomLabel :id="id" :placeholder="placeholder" />
@@ -24,9 +25,11 @@ withDefaults(
     placeholder: string;
     validationRules?: Rule[];
     typeNumber?: boolean;
+    defaultContent?: string | number;
   }>(),
   {
     typeNumber: false,
+    defaultContent: "",
   }
 );
 
