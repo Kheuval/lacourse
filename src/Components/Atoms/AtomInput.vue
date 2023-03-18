@@ -14,7 +14,7 @@
     @change="setContentAndValidate"
     @blur="setContentAndValidate"
     @keyup="setContentAndValidate($event, true)"
-    :value="defaultContent"
+    :value="content"
   />
   <p class="text-red-500 text-xs text-center" v-if="validationMessage">
     {{ validationMessage }}
@@ -47,7 +47,7 @@ const props = withDefaults(
 
 const emits = defineEmits(["update"]);
 
-const content = ref("");
+const content = ref(props.defaultContent || "");
 const validationMessage = ref("");
 
 const setContentAndValidate = (e: Event, debounce = false) => {
@@ -63,7 +63,7 @@ const validate = (debounce: boolean): void => {
 
   const validation = validationService.validate(
     props.validationRules,
-    content.value
+    content.value.toString()
   );
   validationMessage.value = validation.message;
 
