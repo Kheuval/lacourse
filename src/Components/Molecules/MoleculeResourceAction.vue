@@ -2,7 +2,7 @@
   <div
     class="absolute right-3 z-30 bg-primary rounded-xl py-2 px-3 flex flex-col"
   >
-    <AtomLink to="toto">
+    <AtomLink :to="editLink">
       <AtomIcon icon="fa-solid fa-pen" class="text-4xl text-white mb-2" />
     </AtomLink>
     <AtomButton class="text-4xl text-white" @click="show = true">
@@ -72,6 +72,14 @@ const deleteResource = () => {
 
   show.value = false;
 };
+
+let editLink = "";
+
+if (isRecipe(props.resource)) {
+  editLink = `/recipes/edit/${props.resource.id.match(/\d+/)![0]}`;
+} else if (isGroceryList(props.resource)) {
+  editLink = `/grocery-lists/edit/${props.resource.id.match(/\d+/)![0]}`;
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -4,11 +4,11 @@ import type { Step } from "@/Domain/Step/StepInterface";
 export interface RecipeForm {
   name: string;
   image?: string;
-  servings: number;
-  totalTime: number;
-  preparationTime: number;
-  restTime: number;
-  cookingTime: number;
+  servings: number | undefined;
+  totalTime: number | undefined;
+  preparationTime: number | undefined;
+  restTime: number | undefined;
+  cookingTime: number | undefined;
   recipeIngredients: RecipeIngredient[];
   steps: Step[];
 }

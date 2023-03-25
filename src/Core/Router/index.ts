@@ -39,6 +39,11 @@ export const router = createRouter({
       name: "CreateRecipe",
       component: () => import("@/Views/Recipe/CreateView.vue"),
     },
+    {
+      path: "/recipes/edit/:id",
+      name: "EditRecipe",
+      component: () => import("@/Views/Recipe/EditView.vue"),
+    },
   ],
 });
 

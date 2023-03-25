@@ -42,16 +42,28 @@
 </template>
 
 <script lang="ts" setup>
+import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
 import { ref, type Ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import MoleculeIconButton from "./MoleculeIconButton.vue";
 
 const emits = defineEmits(["imageUploaded"]);
 
+const props = defineProps<{
+  imagePath?: string;
+}>();
+
 const imageInput: Ref<HTMLInputElement | null> = ref(null);
 const isWrongImageFormat = ref(false);
 const isImageUploaded = ref(false);
 const imageSrc = ref("");
+
+if (props.imagePath) {
+  const src = await databaseMediaObjectRepository.findOneByIri(props.imagePath);
+
+  imageSrc.value = import.meta.env.APP_API_URL + src;
+  isImageUploaded.value = true;
+}
 
 const handleUpload = () => {
   imageInput.value!.value = "";

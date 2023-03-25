@@ -8,6 +8,6 @@ export interface RecipeRepository {
   findByQuery(query: string): Promise<Recipe[] | []>;
   findOneByIri(iri: string): Promise<Recipe>;
   create(recipe: RecipeForm): Promise<Recipe>;
-  updateOneByIri(iri: string, recipe: Recipe): Promise<Recipe>;
+  updateOneByIri(iri: string, recipe: RecipeForm): Promise<Recipe>;
   deleteOneByIri(iri: string): Promise<void>;
 }

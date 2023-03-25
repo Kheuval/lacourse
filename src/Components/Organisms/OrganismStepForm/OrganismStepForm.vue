@@ -44,10 +44,15 @@ import MoleculeDialog from "@/Components/Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "@/Components/Molecules/MoleculeIconButton.vue";
 import MoleculeStepList from "@/Components/Molecules/MoleculeStepList.vue";
 import MoleculeTextAreaLabel from "@/Components/Molecules/MoleculeTextAreaLabel.vue";
+import type { Step } from "@/Domain/Step/StepInterface";
 import { ref, type Ref } from "vue";
 import type { StepForm } from "./StepFormInterface";
 
 const emits = defineEmits(["addStep"]);
+
+const props = defineProps<{
+  steps?: Step[];
+}>();
 
 const formInitialState = (stepForm?: StepForm) => {
   return (
@@ -58,7 +63,7 @@ const formInitialState = (stepForm?: StepForm) => {
 };
 
 const showDialog = ref(false);
-const steps: Ref<StepForm[]> = ref([]);
+const steps: Ref<StepForm[]> = ref(props.steps || []);
 const key: Ref<number | undefined> = ref();
 
 const form: Ref<StepForm> = ref(formInitialState());

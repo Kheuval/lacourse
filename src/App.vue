@@ -41,7 +41,7 @@ const router = useRouter();
 const doSomething = async () => {
   await databaseAuthService.login();
 
-  
+  router.push("/recipes/edit/25");
 };
 </script>
 <style lang="scss" scoped></style>

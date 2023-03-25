@@ -4,6 +4,7 @@
       id="name"
       type="text"
       placeholder="Donnez lui un titre... *"
+      :defaultContent="form.name"
       :validationRules="[notNullRule, lengthRule]"
       @update="(content) => (form.name = content)"
     >
@@ -13,6 +14,7 @@
       />
     </MoleculeInputLabel>
     <MoleculeImageUploader
+      :imagePath="recipe?.image"
       @imageUploaded="(uploadedImage) => (image = uploadedImage)"
     />
     <MoleculeInputLabel
@@ -20,6 +22,7 @@
       type="text"
       class="mt-8"
       placeholder="Le nombre de parts *"
+      :defaultContent="form.servings"
       :validationRules="[notNullRule, numberRule]"
       :typeNumber="true"
       @update="(content) => (form.servings = parseInt(content))"
@@ -34,6 +37,7 @@
       id="preparationTime"
       type="text"
       placeholder="Le temps de préparation *"
+      :defaultContent="form.preparationTime"
       :validationRules="[numberRule]"
       :typeNumber="true"
       @update="(content) => (form.preparationTime = parseInt(content))"
@@ -47,6 +51,7 @@
       id="cookingTime"
       type="text"
       placeholder="Le temps de cuisson *"
+      :defaultContent="form.cookingTime"
       :validationRules="[numberRule]"
       :typeNumber="true"
       @update="(content) => (form.cookingTime = parseInt(content))"
@@ -60,6 +65,7 @@
       id="restTime"
       type="text"
       placeholder="Le temps de repos *"
+      :defaultContent="form.restTime"
       :validationRules="[numberRule]"
       :typeNumber="true"
       @update="(content) => (form.restTime = parseInt(content))"
@@ -70,15 +76,19 @@
       />
     </MoleculeInputLabel>
     <OrganismIngredientForm
+      :ingredients="form.recipeIngredients"
       @addIngredient="(content) => (form.recipeIngredients = content)"
     />
-    <OrganismStepForm @addStep="(content) => (form.steps = content)" />
+    <OrganismStepForm
+      :steps="form.steps"
+      @addStep="(content) => (form.steps = content)"
+    />
     <MoleculeIconButton
       buttonClass="flex items-center rounded-full px-6 py-3 bg-secondary text-white my-6"
       iconClass="text-xl text-white ml-4"
       content="Enregistrer"
       icon="fa-solid fa-floppy-disk"
-      @click="createRecipe"
+      @click="createOrEditRecipe"
     />
   </form>
 </template>
@@ -103,6 +113,7 @@ import type { RecipeForm } from "./RecipeFormInterface";
 import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
 import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import { useRouter } from "vue-router";
+import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 
 const notNullRule = new NotNullRule();
 const lengthRule = new LengthRule({ maxLength: 50 });
@@ -111,20 +122,28 @@ const numberRule = new NumberRule();
 const { emitter } = useEventBus();
 const router = useRouter();
 
-const form: Ref<RecipeForm> = ref({
-  name: "",
-  servings: 0,
-  totalTime: 0,
-  preparationTime: 0,
-  restTime: 0,
-  cookingTime: 0,
-  recipeIngredients: [],
-  steps: [],
-});
+const props = defineProps<{
+  recipe?: Recipe;
+}>();
+
+const formInitialState = (recipe?: Recipe): RecipeForm => {
+  return {
+    name: recipe ? recipe.name : "",
+    servings: recipe ? recipe.servings : undefined,
+    totalTime: recipe ? recipe.totalTime : undefined,
+    preparationTime: recipe ? recipe.preparationTime : undefined,
+    restTime: recipe ? recipe.restTime : undefined,
+    cookingTime: recipe ? recipe.cookingTime : undefined,
+    recipeIngredients: recipe ? recipe.recipeIngredients : [],
+    steps: recipe ? recipe.steps : [],
+  };
+};
+
+const form: Ref<RecipeForm> = ref(formInitialState(props.recipe));
 
 const image: Ref<File | undefined> = ref();
 
-const createRecipe = async () => {
+const createOrEditRecipe = async () => {
   emitter.emit("validate", form.value);
 
   if (
@@ -158,7 +177,11 @@ const createRecipe = async () => {
     form.value.image = uploadedImage.id;
   }
 
-  await databaseRecipeRepository.create(form.value);
+  if (props.recipe) {
+    await databaseRecipeRepository.updateOneByIri(props.recipe.id, form.value);
+  } else {
+    await databaseRecipeRepository.create(form.value);
+  }
 
   router.push("/user/recipes");
 };

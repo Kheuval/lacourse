@@ -62,6 +62,7 @@
 // import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
+import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
 import { ref, type Ref } from "vue";
 import type { IngredientOption } from "../../Atoms/AtomSelect/IngredientOptionInterface";
 import MoleculeDialog from "../../Molecules/MoleculeDialog.vue";
@@ -78,6 +79,10 @@ const numberRule = new NumberRule();
 
 const emits = defineEmits(["addIngredient"]);
 
+const props = defineProps<{
+  ingredients?: RecipeIngredient[];
+}>();
+
 const formInitialState = (ingredientForm?: IngredientForm) => {
   return (
     ingredientForm || {
@@ -91,7 +96,7 @@ const formInitialState = (ingredientForm?: IngredientForm) => {
 };
 
 const showDialog = ref(false);
-const recipeIngredients: Ref<IngredientForm[]> = ref([]);
+const recipeIngredients: Ref<IngredientForm[]> = ref(props.ingredients || []);
 const key: Ref<number | undefined> = ref();
 
 const form: Ref<IngredientForm> = ref(formInitialState());
