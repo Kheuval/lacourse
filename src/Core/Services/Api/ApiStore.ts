@@ -29,25 +29,35 @@ export const useApiStore = defineStore("api", () => {
     if (init.method === "GET") {
       const cachedData = getFromCache(init);
       if (null !== cachedData) {
-        // console.log("cache:hit", init.url);
         return cachedData;
       }
     }
 
-    // console.log("cache:miss", init.url);
-
     isFetching.value = true;
 
-    const request = {
+    const request: {
+      url: string;
+      method: string;
+      headers: {
+        "Content-type"?: string;
+        Accept: string;
+        Authorization: string;
+      };
+      body: BodyInit | null;
+    } = {
       url: apiUrl + init.url,
       method: init.method,
       headers: {
         "Content-type": init.contentType,
-        Accept: init.method === "PATCH" ? "application/json" : init.contentType,
+        Accept: init.method === "PATCH" ? "application/json" : init.accept,
         Authorization: publicAccess ? "" : `Bearer ${token.value}`,
       },
       body: init.body,
     };
+
+    if (!init.contentType) {
+      delete request.headers["Content-type"];
+    }
 
     const response = await fetch(request.url, { ...request }).catch(() => {
       isFetching.value = false;
@@ -56,7 +66,8 @@ export const useApiStore = defineStore("api", () => {
 
     isFetching.value = false;
 
-    const data = JSON.parse(await response.text());
+    const data =
+      init.method !== "DELETE" ? JSON.parse(await response.text()) : null;
 
     if (response.status === 401) {
       if (isAuthenticated.value && !checkTokenExpiration()) {
@@ -73,12 +84,8 @@ export const useApiStore = defineStore("api", () => {
       new UnprocessableEntityError();
     }
 
-    if (data.token) {
+    if (data && data.token) {
       token.value = data.token;
-    } else {
-      // console.log(
-      //   deserializeRecursively((key: string) => key.replace("@", ""))(data)
-      // );
     }
 
     const apiResponse = {

@@ -12,7 +12,8 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: "/api/recipes",
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -25,7 +26,8 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: `/api/recipes?user=${userIri.match(/\d+/)![0]}`,
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -38,7 +40,8 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: "/api/recipes/sample",
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -51,7 +54,8 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: `/api/recipes?name=${query}`,
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -64,7 +68,8 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -75,9 +80,10 @@ export const databaseRecipeRepository: RecipeRepository = {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
-      url: "/recipes",
+      url: "/api/recipes",
       method: "POST",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: JSON.stringify(recipe),
       resourceType: RESOURCE_TYPE,
     };
@@ -90,6 +96,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "PATCH",
+      accept: "application/ld+json",
       contentType: "application/merge-patch+json",
       body: JSON.stringify(recipe),
       resourceType: RESOURCE_TYPE,
@@ -103,6 +110,7 @@ export const databaseRecipeRepository: RecipeRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "DELETE",
+      accept: "application/ld+json",
       contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,

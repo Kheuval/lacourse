@@ -11,7 +11,8 @@ export const databaseUserRepository: UserRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -24,6 +25,7 @@ export const databaseUserRepository: UserRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "PATCH",
+      accept: "application/ld+json",
       contentType: "application/merge-patch+json",
       body: JSON.stringify(data),
       resourceType: RESOURCE_TYPE,
@@ -37,6 +39,7 @@ export const databaseUserRepository: UserRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "DELETE",
+      accept: "application/ld+json",
       contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,

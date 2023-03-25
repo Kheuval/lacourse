@@ -5,7 +5,7 @@
       :defaultContent="defaultContent"
       @update="(content) => $emit('update', content)"
     />
-    <AtomLabel :id="id" :placeholder="placeholder" />
+    <AtomLabel class="text-center" :id="id" :placeholder="placeholder" />
   </div>
 </template>
 

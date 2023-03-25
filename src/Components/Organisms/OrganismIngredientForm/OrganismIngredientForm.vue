@@ -19,7 +19,7 @@
     >
       <MoleculeInputLabel
         type="text"
-        id="ingredient:name"
+        id="name"
         placeholder="Entrez le nom d'un ingrédient"
         :validationRules="[notNullRule]"
         :defaultContent="form.ingredient.name"
@@ -27,17 +27,17 @@
       />
       <MoleculeInputLabel
         type="text"
-        id="ingredient:quantity"
+        id="quantity"
         placeholder="Sa quantité"
         :typeNumber="true"
         :validationRules="[notNullRule, numberRule]"
         :defaultContent="form.quantity"
-        @update="(content) => (form.quantity = content)"
+        @update="(content) => (form.quantity = parseInt(content))"
       />
       <MoleculeSelectLabel
-        id="ingredient:unit"
+        id="unit"
         placeholder="Une unité"
-        name="ingredient:unit"
+        name="unit"
         :options="options"
         :defaultValue="form.unit"
         @change="(content) => (form.unit = content)"

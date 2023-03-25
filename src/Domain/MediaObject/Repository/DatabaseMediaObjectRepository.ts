@@ -12,7 +12,8 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
     const init: ApiRequest = {
       url: iri,
       method: "GET",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: null,
       resourceType: RESOURCE_TYPE,
     };
@@ -23,9 +24,10 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
-      url: "/media_objects",
+      url: "/api/media_objects",
       method: "POST",
-      contentType: "multipart/form-data",
+      accept: "application/ld+json",
+      contentType: "",
       body: mediaObject,
       resourceType: RESOURCE_TYPE,
     };

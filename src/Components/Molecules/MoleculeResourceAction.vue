@@ -65,8 +65,7 @@ const isGroceryList = (
 
 const deleteResource = () => {
   if (isRecipe(props.resource)) {
-    // À tester
-    databaseRecipeRepository.deleteOneByIri("/recipes/" + props.resource.id);
+    databaseRecipeRepository.deleteOneByIri(props.resource.id);
   } else if (isGroceryList(props.resource)) {
     console.log("isGroceryList");
   }

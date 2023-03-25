@@ -22,6 +22,7 @@ import {
   faMinus,
   faPlus,
   faGear,
+  faFloppyDisk,
 } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 
@@ -42,7 +43,8 @@ library.add(
   faHeart,
   faMinus,
   faPlus,
-  faGear
+  faGear,
+  faFloppyDisk
 );
 
 const app = createApp(App);

@@ -3,7 +3,7 @@ import type { Step } from "@/Domain/Step/StepInterface";
 
 export interface RecipeForm {
   name: string;
-  image: string;
+  image?: string;
   servings: number;
   totalTime: number;
   preparationTime: number;

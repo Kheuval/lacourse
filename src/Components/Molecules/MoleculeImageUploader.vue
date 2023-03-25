@@ -46,6 +46,8 @@ import { ref, type Ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import MoleculeIconButton from "./MoleculeIconButton.vue";
 
+const emits = defineEmits(["imageUploaded"]);
+
 const imageInput: Ref<HTMLInputElement | null> = ref(null);
 const isWrongImageFormat = ref(false);
 const isImageUploaded = ref(false);
@@ -72,6 +74,8 @@ const previewImage = () => {
   isWrongImageFormat.value = false;
   imageSrc.value = URL.createObjectURL(image);
   isImageUploaded.value = true;
+
+  emits("imageUploaded", image);
 };
 </script>
 

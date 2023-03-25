@@ -40,7 +40,8 @@ const router = useRouter();
 
 const doSomething = async () => {
   await databaseAuthService.login();
-  router.push("/recipes/create");
+
+  
 };
 </script>
 <style lang="scss" scoped></style>

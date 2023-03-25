@@ -32,7 +32,9 @@ export const useCacheManager = () => {
     const key = `${request.resourceType}:${request.url}`;
 
     Object.keys(storage)
-      .filter((storageKey) => !storageKey.match(/\d+/))
+      .filter(
+        (storageKey) => !storageKey.match(/\d+/) || storageKey.includes("?")
+      )
       .forEach(
         (storageKey) =>
           storageKey.startsWith(request.resourceType) &&
