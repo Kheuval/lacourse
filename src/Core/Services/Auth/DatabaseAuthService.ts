@@ -20,7 +20,8 @@ export const databaseAuthService: AuthServiceInterface = {
     const init: ApiRequest = {
       url: "/login",
       method: "POST",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: JSON.stringify({
         username,
         password,
@@ -60,7 +61,8 @@ export const databaseAuthService: AuthServiceInterface = {
     const init: ApiRequest = {
       url: "/api/users",
       method: "POST",
-      contentType: "application/ld+json",
+      accept: "application/ld+json",
+      contentType: "application/json",
       body: JSON.stringify({
         email,
         username,
