@@ -73,17 +73,20 @@ import MoleculeResourceAction from "@/Components/Molecules/MoleculeResourceActio
 import MoleculeStepList from "@/Components/Molecules/MoleculeStepList.vue";
 import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
+import type { DataProvider } from "@/Core/Config/DataProvider";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 
 const { currentUser } = useUserStore();
 
-const recipe = await databaseRecipeRepository.findOneByIri(
+const { mediaObjectProvider, recipeProvider } = inject(
+  "dataProvider"
+) as DataProvider;
+
+const recipe = await recipeProvider.findOneByIri(
   "/api/recipes/" + route.params.id
 );
 
@@ -96,7 +99,7 @@ const toggleResourceActions = () =>
 
 const src =
   import.meta.env.APP_API_URL +
-  (await databaseMediaObjectRepository.findOneByIri(recipe.image));
+  (await mediaObjectProvider.findOneByIri(recipe.image));
 
 const humanTime = (time: number): string => {
   if (time === 0) {

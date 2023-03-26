@@ -39,13 +39,15 @@
 <script lang="ts" setup>
 import AtomButtonVue from "../../Atoms/AtomButton.vue";
 import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
-import { ref, type Ref } from "vue";
+import { inject, ref, type Ref } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
-import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
 import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/UnprocessableEntityError";
 import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+
+const { authProvider } = inject("dataProvider") as DataProvider;
 
 const { emitter } = useEventBus();
 
@@ -72,7 +74,7 @@ const register = () => {
   }
 
   checkPasswords()
-    ? databaseAuthService.register(
+    ? authProvider.register(
         form.value.username,
         form.value.email,
         form.value.password1

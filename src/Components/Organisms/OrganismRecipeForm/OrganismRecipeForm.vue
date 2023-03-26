@@ -106,14 +106,17 @@ import { useEventBus } from "@/Core/Services/EventBus";
 import { LengthRule } from "@/Core/Services/Validation/Rules/LengthRule";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
-import { ref, type Ref } from "vue";
+import { inject, ref, type Ref } from "vue";
 import OrganismIngredientForm from "../OrganismIngredientForm/OrganismIngredientForm.vue";
 import OrganismStepForm from "../OrganismStepForm/OrganismStepForm.vue";
 import type { RecipeForm } from "./RecipeFormInterface";
-import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import { useRouter } from "vue-router";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+
+const { mediaObjectProvider, recipeProvider } = inject(
+  "dataProvider"
+) as DataProvider;
 
 const notNullRule = new NotNullRule();
 const lengthRule = new LengthRule({ maxLength: 50 });
@@ -173,14 +176,14 @@ const createOrEditRecipe = async () => {
   if (image.value) {
     const formData = new FormData();
     formData.append("file", image.value);
-    const uploadedImage = await databaseMediaObjectRepository.create(formData);
+    const uploadedImage = await mediaObjectProvider.create(formData);
     form.value.image = uploadedImage.id;
   }
 
   if (props.recipe) {
-    await databaseRecipeRepository.updateOneByIri(props.recipe.id, form.value);
+    await recipeProvider.updateOneByIri(props.recipe.id, form.value);
   } else {
-    await databaseRecipeRepository.create(form.value);
+    await recipeProvider.create(form.value);
   }
 
   router.push("/user/recipes");

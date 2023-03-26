@@ -13,9 +13,12 @@
 import MoleculeResourceList from "@/Components/Molecules/MoleculeResourceList.vue";
 import MoleculeViewHeaderVue from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+import { inject } from "vue";
 
-const recipes = await databaseRecipeRepository.getAll();
+const { recipeProvider } = inject("dataProvider") as DataProvider;
+
+const recipes = await recipeProvider.getAll();
 </script>
 
 <style lang="scss" scoped></style>

@@ -33,22 +33,24 @@
 
 <script lang="ts" setup>
 import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
+import type { DataProvider } from "@/Core/Config/DataProvider";
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import AtomSpinner from "../Atoms/AtomSpinner.vue";
 import MoleculeDialog from "../Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "../Molecules/MoleculeIconButton.vue";
 import MoleculeInputLabel from "../Molecules/MoleculeInputLabel.vue";
 import MoleculeResourceList from "../Molecules/MoleculeResourceList.vue";
 
-const { isFetching } = storeToRefs(useApiStore());
+const { recipeProvider } = inject("dataProvider") as DataProvider;
 
 defineProps<{
   content: string;
 }>();
+
+const { isFetching } = storeToRefs(useApiStore());
 
 const show = ref(false);
 const queryText = ref("");
@@ -63,6 +65,6 @@ const query = async (value: string) => {
   }
 
   queryText.value = value;
-  recipes.value = await databaseRecipeRepository.findByQuery(value);
+  recipes.value = await recipeProvider.findByQuery(value);
 };
 </script>

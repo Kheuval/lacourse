@@ -16,9 +16,12 @@
 </template>
 
 <script lang="ts" setup>
-import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+import { inject } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
+
+const { mediaObjectProvider } = inject("dataProvider") as DataProvider;
 
 const props = defineProps<{
   imageIri: string;
@@ -28,7 +31,7 @@ const props = defineProps<{
 
 const src =
   import.meta.env.APP_API_URL +
-  (await databaseMediaObjectRepository.findOneByIri(props.imageIri));
+  (await mediaObjectProvider.findOneByIri(props.imageIri));
 
 const route = "/recipes/show/" + props.resourceId.match(/\d+/)![0];
 </script>

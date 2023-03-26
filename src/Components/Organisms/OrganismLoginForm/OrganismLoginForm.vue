@@ -26,11 +26,13 @@
 <script lang="ts" setup>
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
-import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
+import type { DataProvider } from "@/Core/Config/DataProvider";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
-import { ref, type Ref } from "vue";
+import { inject, ref, type Ref } from "vue";
 import { useRouter } from "vue-router";
 import type { LoginForm } from "./LoginFormInterface";
+
+const { authProvider } = inject("dataProvider") as DataProvider;
 
 const router = useRouter();
 
@@ -42,7 +44,7 @@ const form: Ref<LoginForm> = ref({
 });
 
 const login = () => {
-  databaseAuthService
+  authProvider
     .login(form.value.login, form.value.password)
     .then(() => router.push("/user/home"));
 };

@@ -27,16 +27,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { inject, ref, computed } from "vue";
 import AtomButton from "../Atoms/AtomButton.vue";
 import AtomIcon from "../Atoms/AtomIcon.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 import MoleculeDialog from "./MoleculeDialog.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 import AtomText from "../Atoms/AtomText.vue";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+
+const { recipeProvider } = inject("dataProvider") as DataProvider;
 
 const props = defineProps<{
   resource: Recipe | GroceryList;
@@ -65,7 +67,7 @@ const isGroceryList = (
 
 const deleteResource = () => {
   if (isRecipe(props.resource)) {
-    databaseRecipeRepository.deleteOneByIri(props.resource.id);
+    recipeProvider.deleteOneByIri(props.resource.id);
   } else if (isGroceryList(props.resource)) {
     console.log("isGroceryList");
   }

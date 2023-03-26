@@ -17,18 +17,20 @@
 
 <script lang="ts" setup>
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 import OrganismSearchDialog from "@/Components/Organisms/OrganismSearchDialog.vue";
 import OrganismSlider from "@/Components/Organisms/OrganismSlider.vue";
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
+import type { DataProvider } from "@/Core/Config/DataProvider";
 
 const { currentUser } = useUserStore();
 
+const { recipeProvider } = inject("dataProvider") as DataProvider;
+
 const recipes = ref<Recipe[] | null>(null);
 
-databaseRecipeRepository.getSample().then((data) => (recipes.value = data));
+recipeProvider.getSample().then((data) => (recipes.value = data));
 </script>

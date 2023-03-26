@@ -19,8 +19,11 @@ import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 import MoleculeMenu from "../Molecules/MoleculeMenu/MoleculeMenu.vue";
-import { databaseAuthService } from "@/Core/Services/Auth/DatabaseAuthService";
 import logoUrl from "@/assets/images/logo.svg";
+import { inject } from "vue";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+
+const { authProvider } = inject("dataProvider") as DataProvider;
 
 withDefaults(
   defineProps<{
@@ -55,7 +58,7 @@ const links = [
   {
     to: "/",
     content: "Se déconnecter",
-    click: () => databaseAuthService.logout(),
+    click: () => authProvider.logout(),
   },
 ];
 </script>

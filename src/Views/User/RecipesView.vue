@@ -29,12 +29,15 @@ import AtomText from "@/Components/Atoms/AtomText.vue";
 import MoleculeResourceList from "@/Components/Molecules/MoleculeResourceList.vue";
 import MoleculeViewHeaderVue from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRecipeRepository";
+import type { DataProvider } from "@/Core/Config/DataProvider";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
+import { inject } from "vue";
 
 const { currentUser } = useUserStore();
 
-const recipes = await databaseRecipeRepository.getAllForUser(currentUser!.id);
+const { recipeProvider } = inject("dataProvider") as DataProvider;
+
+const recipes = await recipeProvider.getAllForUser(currentUser!.id);
 </script>
 
 <style lang="scss" scoped></style>

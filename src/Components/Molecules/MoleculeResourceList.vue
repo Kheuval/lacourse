@@ -28,12 +28,14 @@
 </template>
 
 <script lang="ts" setup>
+import type { DataProvider } from "@/Core/Config/DataProvider";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
-import { databaseMediaObjectRepository } from "@/Domain/MediaObject/Repository/DatabaseMediaObjectRepository";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import { ref, type Ref } from "vue";
+import { inject, ref, type Ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
+
+const { mediaObjectProvider } = inject("dataProvider") as DataProvider;
 
 const props = withDefaults(
   defineProps<{
@@ -73,7 +75,7 @@ if (props.withImage) {
     if (isRecipe(resource)) {
       imagesSrc.value.push(
         import.meta.env.APP_API_URL +
-          (await databaseMediaObjectRepository.findOneByIri(resource.image))
+          (await mediaObjectProvider.findOneByIri(resource.image))
       );
     }
   });
