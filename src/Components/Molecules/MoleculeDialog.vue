@@ -36,6 +36,7 @@ const props = withDefaults(
     dismissible?: boolean;
     styles?: string;
     buttons?: { ok: boolean; cancel: boolean };
+    prevent?: Function;
   }>(),
   {
     dismissible: true,
@@ -56,6 +57,10 @@ const dismissDialog = () => {
 };
 
 const onOk = () => {
+  if (props.prevent && !props.prevent()) {
+    return;
+  }
+
   dismissDialog();
   setTimeout(() => {
     emits("ok");

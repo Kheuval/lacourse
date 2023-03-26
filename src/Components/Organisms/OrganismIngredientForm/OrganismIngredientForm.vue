@@ -11,6 +11,7 @@
       v-if="showDialog"
       styles="w-3/4 h-3/5"
       :buttons="{ ok: true, cancel: true }"
+      :prevent="() => validateForm(form)"
       @ok="addOrEditIngredient"
       @cancel="
         form = formInitialState();
@@ -59,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-// import { useEventBus } from "@/Core/Services/EventBus";
+import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
@@ -75,7 +76,7 @@ import type { IngredientForm } from "./IngredientFormInterface";
 const notNullRule = new NotNullRule();
 const numberRule = new NumberRule();
 
-// const { emitter } = useEventBus();
+const { emitter } = useEventBus();
 
 const emits = defineEmits(["addIngredient"]);
 
@@ -149,9 +150,13 @@ const options: IngredientOption[] = [
   },
 ];
 
+const validateForm = (form: IngredientForm): boolean => {
+  emitter.emit("validate", form);
+  return !!form.ingredient.name && !!form.quantity;
+};
+
 const addOrEditIngredient = () => {
-  // emitter.emit("validate", form.value);
-  if (!form.value.ingredient.name || !form.value.quantity) {
+  if (!validateForm(form.value)) {
     return;
   }
 
