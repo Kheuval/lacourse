@@ -37,13 +37,20 @@ import { useErrorStore } from "./Core/Services/Error/Store/ErrorStore";
 const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
 
-const { authProvider } = inject("dataProvider") as DataProvider;
+const { authProvider, groceryListProvider } = inject(
+  "dataProvider"
+) as DataProvider;
 
 const router = useRouter();
 
 const doSomething = async () => {
   await authProvider.login();
-  router.push("/recipes/create");
+  // const groceryList = await groceryListProvider.findOneByIri(
+  //   "/api/grocery_lists/1"
+  // );
+
+  // console.log(groceryList);
+  router.push("/grocery-lists/show/1");
 };
 </script>
 <style lang="scss" scoped></style>

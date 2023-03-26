@@ -78,13 +78,13 @@ import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { inject, ref } from "vue";
 import { useRoute } from "vue-router";
 
-const route = useRoute();
-
-const { currentUser } = useUserStore();
-
 const { mediaObjectProvider, recipeProvider } = inject(
   "dataProvider"
 ) as DataProvider;
+
+const route = useRoute();
+
+const { currentUser } = useUserStore();
 
 const recipe = await recipeProvider.findOneByIri(
   "/api/recipes/" + route.params.id

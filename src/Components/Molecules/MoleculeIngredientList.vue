@@ -15,7 +15,7 @@
             {{ recipeIngredient.ingredient.name }}
           </AtomText>
           <AtomText class="text-sm text-secondary">
-            {{ quantity(recipeIngredient) }}
+            {{ useQuantity(recipeIngredient.quantity, recipeIngredient.unit) }}
           </AtomText>
         </div>
       </div>
@@ -28,6 +28,7 @@ import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredien
 import AtomText from "../Atoms/AtomText.vue";
 import AtomTitle from "../Atoms/AtomTitle.vue";
 import type { IngredientForm } from "../Organisms/OrganismIngredientForm/IngredientFormInterface";
+import { useQuantity } from "@/Core/Composables/useQuantity";
 
 defineEmits(["editIngredient"]);
 
@@ -40,12 +41,6 @@ withDefaults(
     editable: false,
   }
 );
-
-const quantity = (recipeIngredient: RecipeIngredient | IngredientForm) => {
-  return `${recipeIngredient.quantity} ${
-    recipeIngredient.unit === "u" ? "" : recipeIngredient.unit
-  }`;
-};
 </script>
 
 <style lang="scss" scoped></style>

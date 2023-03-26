@@ -49,7 +49,7 @@ export const useApiStore = defineStore("api", () => {
       method: init.method,
       headers: {
         "Content-type": init.contentType,
-        Accept: init.method === "PATCH" ? "application/json" : init.accept,
+        Accept: init.accept,
         Authorization: publicAccess ? "" : `Bearer ${token.value}`,
       },
       body: init.body,

@@ -3,10 +3,19 @@
     class="absolute right-3 z-30 bg-primary rounded-xl py-2 px-3 flex flex-col"
   >
     <AtomLink :to="editLink">
-      <AtomIcon icon="fa-solid fa-pen" class="text-4xl text-white mb-2" />
+      <AtomIcon icon="fa-solid fa-pen" class="text-4xl text-white" />
     </AtomLink>
-    <AtomButton class="text-4xl text-white" @click="show = true">
+    <AtomButton class="text-4xl text-white mt-2" @click="show = true">
       <AtomIcon icon="fa-solid fa-circle-xmark" />
+    </AtomButton>
+    <AtomButton
+      v-if="isGroceryList(resource)"
+      class="text-4xl text-white mt-2"
+      @click="$emit('toggleResourceVisibility')"
+    >
+      <AtomIcon
+        :icon="`fa-solid ${resource.isActive ? 'fa-eye' : 'fa-eye-slash'}`"
+      />
     </AtomButton>
     <MoleculeDialog
       :buttons="{ ok: true, cancel: true }"
@@ -39,6 +48,8 @@ import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 
 const { recipeProvider } = inject("dataProvider") as DataProvider;
+
+defineEmits(["toggleResourceVisibility"]);
 
 const props = defineProps<{
   resource: Recipe | GroceryList;
