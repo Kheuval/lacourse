@@ -22,12 +22,14 @@ export const router = createRouter({
     {
       path: "/user/recipes",
       name: "UserRecipes",
-      component: () => import("@/Views/User/RecipesView.vue"),
+      component: () => import("@/Views/Recipe/IndexView.vue"),
+      meta: { forUser: true },
     },
     {
       path: "/recipes",
       name: "IndexRecipe",
       component: () => import("@/Views/Recipe/IndexView.vue"),
+      meta: { forUser: false },
     },
     {
       path: "/recipes/show/:id",
