@@ -1,6 +1,6 @@
 <template>
   <OrganismHeader />
-  <MoleculeViewHeaderVue :title="title" />
+  <MoleculeViewHeader :title="title" />
   <div class="text-center mt-4" v-if="forUser">
     <AtomText class="text-lg" v-if="!recipes.length">
       Vous n'avez pas encore de recette, vous pouvez en créer une grâce au
@@ -27,7 +27,7 @@ import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import AtomLink from "@/Components/Atoms/AtomLink.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
 import MoleculeResourceList from "@/Components/Molecules/MoleculeResourceList.vue";
-import MoleculeViewHeaderVue from "@/Components/Molecules/MoleculeViewHeader.vue";
+import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import { useUserStore } from "@/Domain/User/Store/UserStore";

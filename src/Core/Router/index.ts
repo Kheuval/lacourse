@@ -26,6 +26,12 @@ export const router = createRouter({
       meta: { forUser: true },
     },
     {
+      path: "/user/grocery-lists",
+      name: "UserGroceryLists",
+      component: () => import("@/Views/GroceryList/IndexView.vue"),
+      meta: { forUser: true },
+    },
+    {
       path: "/recipes",
       name: "IndexRecipe",
       component: () => import("@/Views/Recipe/IndexView.vue"),

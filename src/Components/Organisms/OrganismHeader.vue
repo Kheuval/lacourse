@@ -44,7 +44,7 @@ const links = [
     content: "Mon profil",
   },
   {
-    to: "/user/lists",
+    to: "/user/grocery-lists",
     content: "Mes listes de courses",
   },
   {

@@ -1,29 +1,33 @@
 <template>
   <ul class="-mt-4">
-    <li
-      :class="liClass"
+    <AtomLink
       v-for="(resource, index) in resourceList"
       :key="resource.id"
+      :to="getRoute(resource)"
     >
-      <AtomImage
-        :src="imagesSrc[index] || ''"
-        :alt="resource.name"
-        class="rounded-3xl w-full aspect-[3/2] object-cover mt-4"
-        v-if="withImage"
-      />
-      <AtomLink :to="getRoute(resource)" v-if="withImage">
+      <li :class="liClass">
+        <AtomImage
+          :src="imagesSrc[index] || ''"
+          :alt="resource.name"
+          class="rounded-3xl w-full aspect-[3/2] object-cover mt-4"
+          v-if="withImage"
+        />
         <div
           class="h-full w-full absolute top-0 rounded-3xl bg-black bg-opacity-50 flex items-center justify-center"
+          v-if="withImage"
         >
           <span class="text-white text-3xl text-center">
             {{ resource.name }}
           </span>
         </div>
-      </AtomLink>
-      <AtomLink :to="getRoute(resource)" v-else>
-        {{ resource.name }}
-      </AtomLink>
-    </li>
+        <div
+          :class="linkClass ? linkClass + getLinkClass(resource) : ''"
+          v-else
+        >
+          {{ resource.name }}
+        </div>
+      </li>
+    </AtomLink>
   </ul>
 </template>
 
@@ -42,6 +46,7 @@ const props = withDefaults(
     resourceList: Recipe[] | GroceryList[];
     withImage?: boolean;
     liClass?: string;
+    linkClass?: string;
   }>(),
   {
     withImage: false,
@@ -65,6 +70,12 @@ const getRoute = (resource: Recipe | GroceryList) => {
     return "/grocery-lists/show/" + resourceId;
   } else {
     return "";
+  }
+};
+
+const getLinkClass = (resource: Recipe | GroceryList) => {
+  if (isGroceryList(resource) && !resource.isActive) {
+    return " bg-opacity-50";
   }
 };
 

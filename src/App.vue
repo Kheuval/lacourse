@@ -50,7 +50,7 @@ const doSomething = async () => {
   // );
 
   // console.log(groceryList);
-  router.push("/grocery-lists/show/1");
+  router.push("/user/grocery-lists");
 };
 </script>
 <style lang="scss" scoped></style>
