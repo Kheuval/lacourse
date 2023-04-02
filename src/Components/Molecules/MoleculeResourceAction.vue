@@ -46,10 +46,13 @@ import AtomText from "../Atoms/AtomText.vue";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import type { DataProvider } from "@/Core/Config/DataProvider";
+import { useRouter } from "vue-router";
 
 const { groceryListProvider, recipeProvider } = inject(
   "dataProvider"
 ) as DataProvider;
+
+const router = useRouter();
 
 const emits = defineEmits(["toggleListVisibility"]);
 
@@ -78,11 +81,13 @@ const isGroceryList = (
   resource: Recipe | GroceryList
 ): resource is GroceryList => resource.type === "GroceryList";
 
-const deleteResource = () => {
+const deleteResource = async () => {
   if (isRecipe(props.resource)) {
-    recipeProvider.deleteOneByIri(props.resource.id);
+    await recipeProvider.deleteOneByIri(props.resource.id);
+    router.push("/user/recipes");
   } else if (isGroceryList(props.resource)) {
-    console.log("isGroceryList");
+    await groceryListProvider.deleteOneByIri(props.resource.id);
+    router.push("/user/grocery-lists");
   }
 
   show.value = false;

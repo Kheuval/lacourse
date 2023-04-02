@@ -6,4 +6,5 @@ export interface GroceryListRepository {
   updateOneByIri(iri: string, data: object): Promise<GroceryList>;
   getAllForUser(): Promise<GroceryList[]>;
   create(groceryList: GroceryListForm): Promise<GroceryList>;
+  deleteOneByIri(iri: string): Promise<void>;
 }

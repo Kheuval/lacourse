@@ -62,4 +62,18 @@ export const databaseGroceryListRepository: GroceryListRepository = {
 
     return (await useFetch(init)).content;
   },
+  deleteOneByIri: async (iri: string): Promise<void> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: iri,
+      method: "DELETE",
+      accept: "application/ld+json",
+      contentType: "application/json",
+      body: null,
+      resourceType: RESOURCE_TYPE,
+    };
+
+    await useFetch(init);
+  },
 };
