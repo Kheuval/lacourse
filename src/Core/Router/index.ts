@@ -59,8 +59,13 @@ export const router = createRouter({
     },
     {
       path: "/grocery-lists/create",
-      name: "CreateRecipe",
+      name: "CreateGroceryList",
       component: () => import("@/Views/GroceryList/CreateView.vue"),
+    },
+    {
+      path: "/grocery-lists/edit/:id",
+      name: "EditGroceryList",
+      component: () => import("@/Views/GroceryList/EditView.vue"),
     },
   ],
 });
