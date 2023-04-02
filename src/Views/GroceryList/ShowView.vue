@@ -8,7 +8,7 @@
       <MoleculeResourceAction
         v-if="showResourceActions"
         :resource="groceryList"
-        @toggleResourceVisibility="toggleListVisibility"
+        @toggleListVisibility="(content) => (groceryList = content)"
       />
     </template>
   </MoleculeViewHeader>
@@ -47,13 +47,6 @@ const showResourceActions = ref(false);
 
 const toggleResourceActions = () =>
   (showResourceActions.value = !showResourceActions.value);
-
-const toggleListVisibility = async () => {
-  groceryList.value = await groceryListProvider.updateOneByIri(
-    groceryList.value.id,
-    { isActive: !groceryList.value.isActive }
-  );
-};
 </script>
 
 <style lang="scss" scoped></style>

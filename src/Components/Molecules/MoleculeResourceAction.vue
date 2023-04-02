@@ -11,7 +11,7 @@
     <AtomButton
       v-if="isGroceryList(resource)"
       class="text-4xl text-white mt-2"
-      @click="$emit('toggleResourceVisibility')"
+      @click="toggleListVisibility"
     >
       <AtomIcon
         :icon="`fa-solid ${resource.isActive ? 'fa-eye' : 'fa-eye-slash'}`"
@@ -47,9 +47,11 @@ import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 
-const { recipeProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider, recipeProvider } = inject(
+  "dataProvider"
+) as DataProvider;
 
-defineEmits(["toggleResourceVisibility"]);
+const emits = defineEmits(["toggleListVisibility"]);
 
 const props = defineProps<{
   resource: Recipe | GroceryList;
@@ -93,6 +95,17 @@ if (isRecipe(props.resource)) {
 } else if (isGroceryList(props.resource)) {
   editLink = `/grocery-lists/edit/${props.resource.id.match(/\d+/)![0]}`;
 }
+
+const toggleListVisibility = async () => {
+  const groceryList = await groceryListProvider.updateOneByIri(
+    props.resource.id,
+    {
+      isActive: !(props.resource as GroceryList).isActive,
+    }
+  );
+
+  emits("toggleListVisibility", groceryList);
+};
 </script>
 
 <style lang="scss" scoped></style>
