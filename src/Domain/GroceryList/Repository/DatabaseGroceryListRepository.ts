@@ -48,4 +48,18 @@ export const databaseGroceryListRepository: GroceryListRepository = {
 
     return (await useFetch(init)).content["hydra:member"];
   },
+  create: async (groceryList: GroceryList): Promise<GroceryList> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: "/api/grocery_lists",
+      method: "POST",
+      accept: "application/ld+json",
+      contentType: "application/json",
+      body: JSON.stringify(groceryList),
+      resourceType: RESOURCE_TYPE,
+    };
+
+    return (await useFetch(init)).content;
+  },
 };

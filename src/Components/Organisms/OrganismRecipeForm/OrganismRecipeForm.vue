@@ -76,6 +76,7 @@
       />
     </MoleculeInputLabel>
     <OrganismIngredientForm
+      type="recipe"
       :ingredients="form.recipeIngredients"
       @addIngredient="(content) => (form.recipeIngredients = content)"
     />

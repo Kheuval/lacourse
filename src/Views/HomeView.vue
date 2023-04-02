@@ -9,9 +9,11 @@
   <div class="flex flex-col items-center mt-6">
     <OrganismSearchDialog content="Rechercher une recette" />
     <span class="text-lg">ou</span>
-    <AtomButton class="bg-secondary text-white px-6 py-3 rounded-full mt-2">
-      Commencer une liste de courses
-    </AtomButton>
+    <AtomLink to="/user/grocery-lists">
+      <AtomButton class="bg-secondary text-white px-6 py-3 rounded-full mt-2">
+        Commencer une liste de courses
+      </AtomButton>
+    </AtomLink>
   </div>
 </template>
 
@@ -25,6 +27,7 @@ import OrganismSlider from "@/Components/Organisms/OrganismSlider.vue";
 import { inject, ref } from "vue";
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
+import AtomLink from "@/Components/Atoms/AtomLink.vue";
 
 const { currentUser } = useUserStore();
 

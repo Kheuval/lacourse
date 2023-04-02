@@ -9,7 +9,7 @@
     />
     <MoleculeDialog
       v-if="showDialog"
-      styles="w-3/4 h-3/5"
+      :styles="`w-3/4 ${type === 'groceryList' ? 'h-4/5' : 'h-3/5'}`"
       :buttons="{ ok: true, cancel: true }"
       :prevent="() => validateForm(form)"
       @ok="addOrEditIngredient"
@@ -43,16 +43,51 @@
         :defaultValue="form.unit"
         @change="(content) => (form.unit = content)"
       />
+      <div class="text-center" v-if="type === 'groceryList'">
+        <AtomText class="text-xl mb-2">Commestible ?</AtomText>
+        <div class="flex gap-4 justify-center">
+          <AtomRadio
+            class="flex gap-2 text-2xl"
+            :value="true"
+            id="edible"
+            name="isEdible"
+            :checked="form.ingredient.isEdible"
+            label="Oui"
+            @update="(value) => (form.ingredient.isEdible = value)"
+          />
+          <AtomRadio
+            class="flex gap-2 text-2xl"
+            :value="false"
+            id="notEdible"
+            name="isEdible"
+            :checked="!form.ingredient.isEdible"
+            label="Non"
+            @update="(value) => (form.ingredient.isEdible = value)"
+          />
+        </div>
+      </div>
     </MoleculeDialog>
   </form>
   <MoleculeIngredientList
-    v-if="recipeIngredients.length"
-    :recipeIngredients="recipeIngredients"
+    v-if="type === 'recipe' && ingredientsList.length"
+    :recipeIngredients="ingredientsList"
     :editable="true"
     @editIngredient="
       (index, recipeIngredient) => {
         key = index;
         form = formInitialState(recipeIngredient);
+        showDialog = true;
+      }
+    "
+  />
+  <MoleculeListIngredientList
+    v-if="type === 'groceryList' && ingredientsList.length"
+    :listDetails="ingredientsList"
+    :editable="true"
+    @editIngredient="
+      (index, listDetail) => {
+        key = index;
+        form = formInitialState(listDetail);
         showDialog = true;
       }
     "
@@ -72,6 +107,10 @@ import MoleculeIngredientList from "../../Molecules/MoleculeIngredientList.vue";
 import MoleculeInputLabel from "../../Molecules/MoleculeInputLabel.vue";
 import MoleculeSelectLabel from "../../Molecules/MoleculeSelectLabel.vue";
 import type { IngredientForm } from "./IngredientFormInterface";
+import type { ListDetail } from "@/Domain/ListDetail/ListDetailInterface";
+import MoleculeListIngredientList from "@/Components/Molecules/MoleculeListIngredientList.vue";
+import AtomRadio from "@/Components/Atoms/AtomRadio.vue";
+import AtomText from "@/Components/Atoms/AtomText.vue";
 
 const notNullRule = new NotNullRule();
 const numberRule = new NumberRule();
@@ -81,7 +120,8 @@ const { emitter } = useEventBus();
 const emits = defineEmits(["addIngredient"]);
 
 const props = defineProps<{
-  ingredients?: RecipeIngredient[];
+  type: "recipe" | "groceryList";
+  ingredients?: RecipeIngredient[] | ListDetail[];
 }>();
 
 const formInitialState = (ingredientForm?: IngredientForm) => {
@@ -89,15 +129,17 @@ const formInitialState = (ingredientForm?: IngredientForm) => {
     ingredientForm || {
       ingredient: {
         name: "",
+        isEdible: true,
       },
       quantity: 0,
       unit: "u",
+      isActive: true,
     }
   );
 };
 
 const showDialog = ref(false);
-const recipeIngredients: Ref<IngredientForm[]> = ref(props.ingredients || []);
+const ingredientsList: Ref<IngredientForm[]> = ref(props.ingredients || []);
 const key: Ref<number | undefined> = ref();
 
 const form: Ref<IngredientForm> = ref(formInitialState());
@@ -160,14 +202,18 @@ const addOrEditIngredient = () => {
     return;
   }
 
-  if (undefined !== key.value) {
-    recipeIngredients.value[key.value] = form.value;
-    key.value = undefined;
-  } else {
-    recipeIngredients.value.push(form.value);
+  if (props.type === "recipe") {
+    delete form.value.isActive;
   }
 
-  emits("addIngredient", recipeIngredients.value);
+  if (undefined !== key.value) {
+    ingredientsList.value[key.value] = form.value;
+    key.value = undefined;
+  } else {
+    ingredientsList.value.push(form.value);
+  }
+
+  emits("addIngredient", ingredientsList.value);
 
   form.value = formInitialState();
   showDialog.value = false;

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mb-5 inline-block">
+  <div class="relative inline-block">
     <AtomSelect
       :id="id"
       :name="name"

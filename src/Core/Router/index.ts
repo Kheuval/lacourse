@@ -43,7 +43,7 @@ export const router = createRouter({
       component: () => import("@/Views/Recipe/ShowView.vue"),
     },
     {
-      path: "/recipes/create/",
+      path: "/recipes/create",
       name: "CreateRecipe",
       component: () => import("@/Views/Recipe/CreateView.vue"),
     },
@@ -56,6 +56,11 @@ export const router = createRouter({
       path: "/grocery-lists/show/:id",
       name: "ShowGrocerylist",
       component: () => import("@/Views/GroceryList/ShowView.vue"),
+    },
+    {
+      path: "/grocery-lists/create",
+      name: "CreateRecipe",
+      component: () => import("@/Views/GroceryList/CreateView.vue"),
     },
   ],
 });
