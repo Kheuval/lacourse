@@ -43,12 +43,7 @@ const router = useRouter();
 
 const doSomething = async () => {
   await authProvider.login();
-  // const groceryList = await groceryListProvider.findOneByIri(
-  //   "/api/grocery_lists/1"
-  // );
-
-  // console.log(groceryList);
-  // router.push("/grocery-lists/create");
+  router.push("/recipes/edit/1");
 };
 </script>
 <style lang="scss" scoped></style>

@@ -23,6 +23,12 @@
         :defaultContent="form.stepDescription"
         @update="(content) => (form.stepDescription = content)"
       />
+      <MoleculeIconButton
+        class="bg-red-500 py-2 px-4 rounded-full mb-4"
+        icon="fa-solid fa-trash-can"
+        content="Supprimer"
+        @click="removeStep"
+      />
     </MoleculeDialog>
   </form>
   <MoleculeStepList
@@ -84,6 +90,17 @@ const addOrEditStep = () => {
 
   form.value = formInitialState();
   showDialog.value = false;
+};
+
+const removeStep = () => {
+  if (undefined === key.value) {
+    return;
+  }
+
+  steps.value = steps.value.filter((step) => step !== steps.value[key.value!]);
+  showDialog.value = false;
+
+  emits("addStep", steps.value);
 };
 </script>
 

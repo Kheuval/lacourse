@@ -82,6 +82,12 @@
           />
         </div>
       </div>
+      <MoleculeIconButton
+        class="bg-red-500 py-2 px-4 rounded-full my-4"
+        icon="fa-solid fa-trash-can"
+        content="Supprimer"
+        @click="removeIngredient"
+      />
     </MoleculeDialog>
   </form>
   <MoleculeIngredientList
@@ -115,7 +121,7 @@ import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref, type Ref, watch } from "vue";
 import type { IngredientOption } from "../../Atoms/AtomSelect/IngredientOptionInterface";
 import MoleculeDialog from "../../Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "../../Molecules/MoleculeIconButton.vue";
@@ -214,6 +220,12 @@ const options: IngredientOption[] = [
   },
 ];
 
+watch(showDialog, (value) => {
+  if (false === value) {
+    searchIngredients.value = [];
+  }
+});
+
 const validateForm = (form: IngredientForm): boolean => {
   emitter.emit("validate", form);
   return !!form.ingredient.name && !!form.quantity;
@@ -241,19 +253,26 @@ const addOrEditIngredient = () => {
   showDialog.value = false;
 };
 
-const query = async (value: string) => {
-  if (
-    !value ||
-    (queryText.value === value && searchIngredients.value.length > 0)
-  ) {
-    if (!value) {
-      searchIngredients.value = [];
+const query = (value: string) => {
+  // Hack to wait for showDialog to change because the update event fires before the cancel event
+  setTimeout(async () => {
+    if (false === showDialog.value) {
+      return;
     }
-    return;
-  }
 
-  queryText.value = value;
-  searchIngredients.value = await ingredientProvider.findByQuery(value);
+    if (
+      !value ||
+      (queryText.value === value && searchIngredients.value.length > 0)
+    ) {
+      if (!value) {
+        searchIngredients.value = [];
+      }
+      return;
+    }
+
+    queryText.value = value;
+    searchIngredients.value = await ingredientProvider.findByQuery(value);
+  }, 400);
 };
 
 const setIngredient = (ingredient: Ingredient) => {
@@ -266,6 +285,19 @@ const setIngredient = (ingredient: Ingredient) => {
   });
 
   searchIngredients.value = [];
+};
+
+const removeIngredient = () => {
+  if (undefined === key.value) {
+    return;
+  }
+
+  ingredientsList.value = ingredientsList.value.filter(
+    (ingredient) => ingredient !== ingredientsList.value[key.value!]
+  );
+  showDialog.value = false;
+
+  emits("addIngredient", ingredientsList.value);
 };
 </script>
 
