@@ -26,19 +26,21 @@
         :defaultContent="form.ingredient.name"
         @update="query"
       >
-        <div
-          class="bg-primary bg-opacity-90 text-white border-secondary border-b-2 border-l-2 border-r-2 rounded-b-xl py-2 px-4 w-5/6 absolute z-10 left-6 top-12"
-          v-if="searchIngredients.length"
-        >
+        <Transition name="searchResults">
           <div
-            class="text-xl mt-2 cursor-pointer"
-            v-for="ingredient in searchIngredients"
-            :key="ingredient.id"
-            @click="setIngredient(ingredient)"
+            class="bg-primary bg-opacity-90 text-white border-secondary border-b-2 border-l-2 border-r-2 rounded-b-xl py-2 px-4 w-5/6 absolute z-10 left-6 top-12"
+            v-if="searchIngredients.length"
           >
-            {{ ingredient.name }}
+            <div
+              class="text-xl mt-2 cursor-pointer"
+              v-for="ingredient in searchIngredients"
+              :key="ingredient.id"
+              @click="setIngredient(ingredient)"
+            >
+              {{ ingredient.name }}
+            </div>
           </div>
-        </div>
+        </Transition>
       </MoleculeInputLabel>
       <MoleculeInputLabel
         type="text"
@@ -267,4 +269,14 @@ const setIngredient = (ingredient: Ingredient) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.searchResults-enter-active,
+.searchResults-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.searchResults-enter-from,
+.searchResults-leave-to {
+  opacity: 0;
+}
+</style>
