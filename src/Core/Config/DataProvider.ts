@@ -3,6 +3,7 @@ import type { MediaObjectRepository } from "@/Domain/MediaObject/Repository/Medi
 import type { RecipeRepository } from "@/Domain/Recipe/Repository/RecipeRepositoryInterface";
 import type { UserRepository } from "@/Domain/User/Repository/UserRepositoryInterface";
 import type { AuthServiceInterface } from "../Services/Auth/AuthServiceInterface";
+import type { IngredientRepository } from "@/Domain/Ingredient/Repository/IngredientRepositoryInterface";
 
 export interface DataProvider {
   authProvider: AuthServiceInterface;
@@ -10,6 +11,7 @@ export interface DataProvider {
   recipeProvider: RecipeRepository;
   userProvider: UserRepository;
   groceryListProvider: GroceryListRepository;
+  ingredientProvider: IngredientRepository;
 }
 
 export const provide = (dataProvider: DataProvider) => {

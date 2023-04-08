@@ -4,6 +4,7 @@ import { databaseRecipeRepository } from "@/Domain/Recipe/Repository/DatabaseRec
 import { databaseUserRepository } from "@/Domain/User/Repository/DatabaseUserRepository";
 import type { DataProvider } from "../Config/DataProvider";
 import { databaseAuthService } from "../Services/Auth/DatabaseAuthService";
+import { databaseIngredientRepository } from "@/Domain/Ingredient/Repository/DatabaseIngredientRepository";
 
 export const databaseDataProvider: DataProvider = {
   authProvider: databaseAuthService,
@@ -11,4 +12,5 @@ export const databaseDataProvider: DataProvider = {
   recipeProvider: databaseRecipeRepository,
   userProvider: databaseUserRepository,
   groceryListProvider: databaseGroceryListRepository,
+  ingredientProvider: databaseIngredientRepository,
 };

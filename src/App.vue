@@ -37,9 +37,7 @@ import { useErrorStore } from "./Core/Services/Error/Store/ErrorStore";
 const { error } = storeToRefs(useErrorStore());
 const { isFetching } = storeToRefs(useApiStore());
 
-const { authProvider, groceryListProvider } = inject(
-  "dataProvider"
-) as DataProvider;
+const { authProvider } = inject("dataProvider") as DataProvider;
 
 const router = useRouter();
 
@@ -50,7 +48,7 @@ const doSomething = async () => {
   // );
 
   // console.log(groceryList);
-  router.push("/grocery-lists/create");
+  // router.push("/grocery-lists/create");
 };
 </script>
 <style lang="scss" scoped></style>

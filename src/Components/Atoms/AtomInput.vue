@@ -85,6 +85,12 @@ emitter.on("validate", (form) => {
     }
   }
 });
+
+emitter.on("setInputContent", (input) => {
+  if (input.id === props.id) {
+    content.value = input.inputValue;
+  }
+});
 </script>
 
 <style lang="scss" scoped></style>

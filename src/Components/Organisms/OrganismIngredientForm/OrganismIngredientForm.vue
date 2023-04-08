@@ -24,8 +24,22 @@
         placeholder="Entrez le nom d'un ingrédient"
         :validationRules="[notNullRule]"
         :defaultContent="form.ingredient.name"
-        @update="(content) => (form.ingredient.name = content)"
-      />
+        @update="query"
+      >
+        <div
+          class="bg-primary bg-opacity-90 text-white border-secondary border-b-2 border-l-2 border-r-2 rounded-b-xl py-2 px-4 w-5/6 absolute z-10 left-6 top-12"
+          v-if="searchIngredients.length"
+        >
+          <div
+            class="text-xl mt-2 cursor-pointer"
+            v-for="ingredient in searchIngredients"
+            :key="ingredient.id"
+            @click="setIngredient(ingredient)"
+          >
+            {{ ingredient.name }}
+          </div>
+        </div>
+      </MoleculeInputLabel>
       <MoleculeInputLabel
         type="text"
         id="quantity"
@@ -99,7 +113,7 @@ import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
-import { ref, type Ref } from "vue";
+import { inject, ref, type Ref } from "vue";
 import type { IngredientOption } from "../../Atoms/AtomSelect/IngredientOptionInterface";
 import MoleculeDialog from "../../Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "../../Molecules/MoleculeIconButton.vue";
@@ -111,6 +125,10 @@ import type { ListDetail } from "@/Domain/ListDetail/ListDetailInterface";
 import MoleculeListIngredientList from "@/Components/Molecules/MoleculeListIngredientList.vue";
 import AtomRadio from "@/Components/Atoms/AtomRadio.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
+import type { DataProvider } from "@/Core/Config/DataProvider";
+import type { Ingredient } from "@/Domain/Ingredient/IngredientInterface";
+
+const { ingredientProvider } = inject("dataProvider") as DataProvider;
 
 const notNullRule = new NotNullRule();
 const numberRule = new NumberRule();
@@ -129,7 +147,7 @@ const formInitialState = (ingredientForm?: IngredientForm) => {
     ingredientForm || {
       ingredient: {
         name: "",
-        isEdible: true,
+        isEdible: false,
       },
       quantity: 0,
       unit: "u",
@@ -141,6 +159,8 @@ const formInitialState = (ingredientForm?: IngredientForm) => {
 const showDialog = ref(false);
 const ingredientsList: Ref<IngredientForm[]> = ref(props.ingredients || []);
 const key: Ref<number | undefined> = ref();
+const queryText = ref("");
+const searchIngredients = ref<Ingredient[] | []>([]);
 
 const form: Ref<IngredientForm> = ref(formInitialState());
 
@@ -217,6 +237,33 @@ const addOrEditIngredient = () => {
 
   form.value = formInitialState();
   showDialog.value = false;
+};
+
+const query = async (value: string) => {
+  if (
+    !value ||
+    (queryText.value === value && searchIngredients.value.length > 0)
+  ) {
+    if (!value) {
+      searchIngredients.value = [];
+    }
+    return;
+  }
+
+  queryText.value = value;
+  searchIngredients.value = await ingredientProvider.findByQuery(value);
+};
+
+const setIngredient = (ingredient: Ingredient) => {
+  form.value.ingredient.name = ingredient.name;
+  form.value.ingredient.isEdible = ingredient.isEdible;
+
+  emitter.emit("setInputContent", {
+    id: "name",
+    inputValue: ingredient.name,
+  });
+
+  searchIngredients.value = [];
 };
 </script>
 

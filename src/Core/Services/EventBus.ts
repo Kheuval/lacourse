@@ -7,6 +7,7 @@ import { defineStore } from "pinia";
 
 type Events = {
   validate: RegisterForm | IngredientForm | RecipeForm | GroceryListForm;
+  setInputContent: { id: string; inputValue: string };
 };
 
 export const useEventBus = defineStore("event", () => {
