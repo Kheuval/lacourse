@@ -46,10 +46,12 @@ import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/UnprocessableEntityError";
 import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
 import type { DataProvider } from "@/Core/Config/DataProvider";
+import { useRouter } from "vue-router";
 
 const { authProvider } = inject("dataProvider") as DataProvider;
 
 const { emitter } = useEventBus();
+const router = useRouter();
 
 const notNullRule = new NotNullRule();
 
@@ -60,7 +62,7 @@ const form: Ref<RegisterForm> = ref({
   password2: "",
 });
 
-const register = () => {
+const register = async () => {
   emitter.emit("validate", form.value);
 
   if (
@@ -73,13 +75,19 @@ const register = () => {
     return;
   }
 
-  checkPasswords()
-    ? authProvider.register(
-        form.value.username,
-        form.value.email,
-        form.value.password1
-      )
-    : new PasswordsNotMatchingError();
+  if (checkPasswords()) {
+    await authProvider.register(
+      form.value.username,
+      form.value.email,
+      form.value.password1
+    );
+
+    await authProvider.login(form.value.username, form.value.password1);
+
+    router.push("/");
+  } else {
+    new PasswordsNotMatchingError();
+  }
 };
 
 const checkPasswords = (): boolean => {
