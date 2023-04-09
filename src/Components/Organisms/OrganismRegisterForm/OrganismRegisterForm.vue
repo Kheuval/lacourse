@@ -84,7 +84,7 @@ const register = async () => {
 
     await authProvider.login(form.value.username, form.value.password1);
 
-    router.push("/");
+    router.push("/user/home");
   } else {
     new PasswordsNotMatchingError();
   }
