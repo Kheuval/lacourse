@@ -6,7 +6,7 @@ export const useCacheManager = () => {
   const writeInCache = (request: ApiRequest, data: any) => {
     if (request.method !== "GET") {
       invalidateCache(request);
-    } else if (request.resourceType !== "User") {
+    } else {
       if (data.content.type === request.resourceType) {
         const key = `${request.resourceType}:${data.content.id}`;
         storage.setItem(key, JSON.stringify(data));
@@ -33,7 +33,10 @@ export const useCacheManager = () => {
 
     Object.keys(storage)
       .filter(
-        (storageKey) => !storageKey.match(/\d+/) || storageKey.includes("?")
+        (storageKey) =>
+          !storageKey.match(/\d+/) ||
+          storageKey.includes("?") ||
+          storageKey.includes("favorites")
       )
       .forEach(
         (storageKey) =>
