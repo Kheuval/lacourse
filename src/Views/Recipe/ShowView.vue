@@ -49,10 +49,20 @@
     content="Ajouter à la liste"
   />
   <MoleculeIconButton
+    buttonClass="block bg-secondary mt-4 mx-auto px-8 py-4 rounded-full text-white text-xl focus:outline-none"
+    iconClass="text-white text-2xl"
+    icon="fa-solid fa-heart"
+    content="Retirer des favoris"
+    v-if="isFavorite"
+    @click="toggleFavoriteState"
+  />
+  <MoleculeIconButton
     buttonClass="block mt-4 mx-auto px-8 py-4 rounded-full border-2 border-secondary text-primary text-xl focus:outline-none"
     iconClass="text-secondary text-2xl"
     icon="fa-solid fa-heart"
     content="Ajouter aux favoris"
+    v-else
+    @click="toggleFavoriteState"
   />
   <MoleculeIngredientList
     class="mt-2"
@@ -78,7 +88,7 @@ import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { inject, ref } from "vue";
 import { useRoute } from "vue-router";
 
-const { mediaObjectProvider, recipeProvider } = inject(
+const { mediaObjectProvider, recipeProvider, userProvider } = inject(
   "dataProvider"
 ) as DataProvider;
 
@@ -88,6 +98,12 @@ const { currentUser } = useUserStore();
 
 const recipe = await recipeProvider.findOneByIri(
   "/api/recipes/" + route.params.id
+);
+
+const favorites = ref(await userProvider.getFavorites(currentUser!.id));
+
+const isFavorite = ref(
+  !!favorites.value.filter((favorite) => favorite.id === recipe.id).length
 );
 
 const isOwner = currentUser?.username === recipe.user.username;
@@ -108,6 +124,30 @@ const humanTime = (time: number): string => {
   const hours = Math.floor(time / 60);
   const minutes = time % 60;
   return `${hours > 0 ? `${hours}h` : ""}${minutes > 0 ? `${minutes}min` : ""}`;
+};
+
+const toggleFavoriteState = async () => {
+  let newFavorites: string[] = [];
+
+  favorites.value.forEach((favorite) => {
+    newFavorites.push(favorite.id);
+  });
+
+  if (isFavorite.value) {
+    newFavorites = newFavorites.filter((favorite) => favorite !== recipe.id);
+    favorites.value = favorites.value.filter(
+      (favorite) => favorite.id !== recipe.id
+    );
+  } else {
+    newFavorites.push(recipe.id);
+    favorites.value.push(recipe);
+  }
+
+  isFavorite.value = !isFavorite.value;
+
+  await userProvider.updateOneByIri(currentUser!.id, {
+    favorites: newFavorites,
+  });
 };
 </script>
 

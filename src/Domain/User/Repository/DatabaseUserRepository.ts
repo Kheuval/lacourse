@@ -1,6 +1,7 @@
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { UserRepository } from "./UserRepositoryInterface";
 import type { ApiRequest } from "@/Core/Services/Api/ApiInterface";
+import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 
 const RESOURCE_TYPE = "User";
 
@@ -46,5 +47,19 @@ export const databaseUserRepository: UserRepository = {
     };
 
     await useFetch(init);
+  },
+  getFavorites: async (userIri: string): Promise<Recipe[]> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: `/api/users/${userIri.match(/\d+/)![0]}/favorites`,
+      method: "GET",
+      accept: "application/ld+json",
+      contentType: "application/json",
+      body: null,
+      resourceType: RESOURCE_TYPE,
+    };
+
+    return (await useFetch(init)).content["hydra:member"];
   },
 };
