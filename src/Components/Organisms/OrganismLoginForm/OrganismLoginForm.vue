@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent class="flex flex-col items-center">
+  <form @submit.prevent novalidate class="flex flex-col items-center">
     <MoleculeInputLabel
       id="login"
       type="text"
