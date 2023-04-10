@@ -97,6 +97,7 @@
     @editIngredient="
       (index, recipeIngredient) => {
         key = index;
+        queryText = recipeIngredient.ingredient.name;
         form = formInitialState(recipeIngredient);
         showDialog = true;
       }
@@ -260,10 +261,7 @@ const query = (value: string) => {
       return;
     }
 
-    if (
-      !value ||
-      (queryText.value === value && searchIngredients.value.length > 0)
-    ) {
+    if (!value || queryText.value === value) {
       if (!value) {
         searchIngredients.value = [];
       }
