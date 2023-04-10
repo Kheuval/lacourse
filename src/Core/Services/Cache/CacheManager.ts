@@ -4,7 +4,7 @@ export const useCacheManager = () => {
   const storage = window.sessionStorage;
 
   const writeInCache = (request: ApiRequest, data: any) => {
-    if (request.method !== "GET") {
+    if (!request.cacheable) {
       invalidateCache(request);
     } else {
       if (data.content.type === request.resourceType) {

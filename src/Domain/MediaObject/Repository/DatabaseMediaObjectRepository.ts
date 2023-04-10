@@ -15,6 +15,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -29,6 +30,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       accept: "application/ld+json",
       contentType: "",
       body: mediaObject,
+      cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
 

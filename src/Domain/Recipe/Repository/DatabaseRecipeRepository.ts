@@ -15,6 +15,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -29,6 +30,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -43,6 +45,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -57,6 +60,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -71,6 +75,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -85,6 +90,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: JSON.stringify(recipe),
+      cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -99,6 +105,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/merge-patch+json",
       body: JSON.stringify(recipe),
+      cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -113,6 +120,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       accept: "application/ld+json",
       contentType: "application/json",
       body: null,
+      cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
 

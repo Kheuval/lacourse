@@ -4,6 +4,7 @@ export interface ApiRequest {
   accept: string;
   contentType: string;
   body: BodyInit | null;
+  cacheable: boolean;
   resourceType: string;
 }
 
