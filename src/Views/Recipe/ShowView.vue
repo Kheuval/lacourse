@@ -42,12 +42,7 @@
       </span>
     </AtomText>
   </div>
-  <MoleculeIconButton
-    buttonClass="block mt-4 mx-auto px-8 py-4 rounded-full border-2 border-secondary text-primary text-xl focus:outline-none"
-    iconClass="text-secondary text-2xl"
-    icon="fa-solid fa-cart-shopping"
-    content="Ajouter à la liste"
-  />
+  <OrganismAddToListWidget :recipeIngredients="recipe.recipeIngredients" />
   <MoleculeIconButton
     buttonClass="block bg-secondary mt-4 mx-auto px-8 py-4 rounded-full text-white text-xl focus:outline-none"
     iconClass="text-white text-2xl"
@@ -82,6 +77,7 @@ import MoleculeIngredientList from "@/Components/Molecules/MoleculeIngredientLis
 import MoleculeResourceAction from "@/Components/Molecules/MoleculeResourceAction.vue";
 import MoleculeStepList from "@/Components/Molecules/MoleculeStepList.vue";
 import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
+import OrganismAddToListWidget from "@/Components/Organisms/OrganismAddToListWidget.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import { useUserStore } from "@/Domain/User/Store/UserStore";

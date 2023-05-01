@@ -1,7 +1,7 @@
 <template>
-  <div class="relative">
+  <div class="relative w-full">
     <select
-      class="px-8 pb-3 pt-4 text-sm rounded-full border-2 border-primary text-primary focus:outline-none bg-white appearance-none cursor-pointer"
+      class="px-8 pb-3 pt-4 text-sm rounded-full border-2 border-primary text-primary focus:outline-none bg-white appearance-none cursor-pointer w-full"
       :name="name"
       :id="id"
       @change="$emit('change', ($event.target! as HTMLSelectElement).value)"
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { IngredientOption } from "./IngredientOptionInterface";
+import type { IngredientOption, ListOption } from "./OptionInterface";
 
 defineEmits(["change"]);
 
@@ -32,7 +32,7 @@ withDefaults(
   defineProps<{
     name: string;
     id: string;
-    options: IngredientOption[];
+    options: IngredientOption[] | ListOption[];
     defaultValue?: string;
   }>(),
   {

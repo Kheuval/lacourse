@@ -2,6 +2,7 @@ import type { ApiRequest } from "@/Core/Services/Api/ApiInterface";
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { GroceryList } from "../GroceryListInterface";
 import type { GroceryListRepository } from "./GroceryListRepositoryInterface";
+import type { GroceryListForm } from "@/Components/Organisms/OrganismGroceryListForm/GroceryListFormInterface";
 
 const RESOURCE_TYPE = "GroceryList";
 
@@ -51,7 +52,7 @@ export const databaseGroceryListRepository: GroceryListRepository = {
 
     return (await useFetch(init)).content["hydra:member"];
   },
-  create: async (groceryList: GroceryList): Promise<GroceryList> => {
+  create: async (groceryList: GroceryListForm): Promise<GroceryList> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {

@@ -12,7 +12,7 @@
           : toggleListDetailVisibility(index)
       "
     >
-      <div class="flex">
+      <div class="flex items-center">
         <AtomText
           :class="`flex-1 ${
             listDetail.ingredient.name.length > 15 && 'text-lg'

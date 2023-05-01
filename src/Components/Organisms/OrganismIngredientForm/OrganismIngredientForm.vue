@@ -123,7 +123,7 @@ import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
 import { inject, ref, type Ref, watch } from "vue";
-import type { IngredientOption } from "../../Atoms/AtomSelect/IngredientOptionInterface";
+import type { IngredientOption } from "../../Atoms/AtomSelect/OptionInterface";
 import MoleculeDialog from "../../Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "../../Molecules/MoleculeIconButton.vue";
 import MoleculeIngredientList from "../../Molecules/MoleculeIngredientList.vue";

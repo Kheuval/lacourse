@@ -14,7 +14,10 @@
 <script lang="ts" setup>
 import AtomLabel from "../Atoms/AtomLabel.vue";
 import AtomSelect from "../Atoms/AtomSelect/AtomSelect.vue";
-import type { IngredientOption } from "../Atoms/AtomSelect/IngredientOptionInterface";
+import type {
+  IngredientOption,
+  ListOption,
+} from "../Atoms/AtomSelect/OptionInterface";
 
 defineEmits(["change"]);
 
@@ -23,7 +26,7 @@ withDefaults(
     id: string;
     placeholder: string;
     name: string;
-    options: IngredientOption[];
+    options: IngredientOption[] | ListOption[];
     defaultValue?: string;
   }>(),
   {
