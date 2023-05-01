@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 import type { User } from "@/Domain/User/UserInterface";
 
 export const useUserStore = defineStore("user", () => {
-  const currentUser: Ref<User | null> = ref(null);
-  const isAuthenticated: Ref<boolean> = ref(false);
-  const isLoggedOut: Ref<boolean> = ref(false);
+  const currentUser = ref<User | null>(null);
+  const isAuthenticated = ref<boolean>(false);
+  const isLoggedOut = ref<boolean>(false);
 
   return { currentUser, isAuthenticated, isLoggedOut };
 });

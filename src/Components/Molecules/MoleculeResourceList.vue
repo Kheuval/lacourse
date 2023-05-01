@@ -35,7 +35,7 @@
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 
@@ -79,7 +79,7 @@ const getLinkClass = (resource: Recipe | GroceryList) => {
   }
 };
 
-const imagesSrc: Ref<string[]> = ref([]);
+const imagesSrc = ref<string[]>([]);
 
 if (props.withImage) {
   props.resourceList.forEach(async (resource) => {

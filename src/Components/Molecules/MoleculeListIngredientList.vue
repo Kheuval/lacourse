@@ -33,7 +33,7 @@ import AtomText from "@/Components/Atoms/AtomText.vue";
 import { useQuantity } from "@/Core/Composables/useQuantity";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import type { ListDetail } from "@/Domain/ListDetail/ListDetailInterface";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import type { IngredientForm } from "../Organisms/OrganismIngredientForm/IngredientFormInterface";
 
 const { groceryListProvider } = inject("dataProvider") as DataProvider;
@@ -59,7 +59,7 @@ const sortListDetails = (listDetails: ListDetail[] | IngredientForm[]) => {
   return listDetails;
 };
 
-const localListDetails: Ref<ListDetail[] | IngredientForm[]> = ref(
+const localListDetails = ref<ListDetail[] | IngredientForm[]>(
   sortListDetails(props.listDetails)
 );
 

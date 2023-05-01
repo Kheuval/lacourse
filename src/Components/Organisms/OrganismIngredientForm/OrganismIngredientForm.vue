@@ -122,7 +122,7 @@ import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
 import type { RecipeIngredient } from "@/Domain/RecipeIngredient/RecipeIngredientInterface";
-import { inject, ref, type Ref, watch } from "vue";
+import { inject, ref, watch } from "vue";
 import type { IngredientOption } from "../../Atoms/AtomSelect/OptionInterface";
 import MoleculeDialog from "../../Molecules/MoleculeDialog.vue";
 import MoleculeIconButton from "../../Molecules/MoleculeIconButton.vue";
@@ -166,12 +166,12 @@ const formInitialState = (ingredientForm?: IngredientForm) => {
 };
 
 const showDialog = ref(false);
-const ingredientsList: Ref<IngredientForm[]> = ref(props.ingredients || []);
-const key: Ref<number | undefined> = ref();
+const ingredientsList = ref<IngredientForm[]>(props.ingredients || []);
+const key = ref<number | undefined>();
 const queryText = ref("");
 const searchIngredients = ref<Ingredient[] | []>([]);
 
-const form: Ref<IngredientForm> = ref(formInitialState());
+const form = ref<IngredientForm>(formInitialState());
 
 const options: IngredientOption[] = [
   {

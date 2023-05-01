@@ -30,14 +30,14 @@ import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const { groceryListProvider } = inject("dataProvider") as DataProvider;
 
 const route = useRoute();
 
-const groceryList: Ref<GroceryList> = ref(
+const groceryList = ref<GroceryList>(
   await groceryListProvider.findOneByIri(
     "/api/grocery_lists/" + route.params.id
   )

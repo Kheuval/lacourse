@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
 import type { DataProvider } from "@/Core/Config/DataProvider";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import MoleculeIconButton from "./MoleculeIconButton.vue";
 
@@ -55,7 +55,7 @@ const props = defineProps<{
   imagePath?: string;
 }>();
 
-const imageInput: Ref<HTMLInputElement | null> = ref(null);
+const imageInput = ref<HTMLInputElement | null>(null);
 const isWrongImageFormat = ref(false);
 const isImageUploaded = ref(false);
 const imageSrc = ref("");

@@ -107,7 +107,7 @@ import { useEventBus } from "@/Core/Services/EventBus";
 import { LengthRule } from "@/Core/Services/Validation/Rules/LengthRule";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { NumberRule } from "@/Core/Services/Validation/Rules/NumberRule";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import OrganismIngredientForm from "../OrganismIngredientForm/OrganismIngredientForm.vue";
 import OrganismStepForm from "../OrganismStepForm/OrganismStepForm.vue";
 import type { RecipeForm } from "./RecipeFormInterface";
@@ -143,9 +143,9 @@ const formInitialState = (recipe?: Recipe): RecipeForm => {
   };
 };
 
-const form: Ref<RecipeForm> = ref(formInitialState(props.recipe));
+const form = ref<RecipeForm>(formInitialState(props.recipe));
 
-const image: Ref<File | undefined> = ref();
+const image = ref<File | undefined>();
 
 const createOrEditRecipe = async () => {
   emitter.emit("validate", form.value);

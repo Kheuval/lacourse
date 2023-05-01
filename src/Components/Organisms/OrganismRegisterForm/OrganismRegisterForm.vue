@@ -39,7 +39,7 @@
 <script lang="ts" setup>
 import AtomButtonVue from "../../Atoms/AtomButton.vue";
 import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
@@ -55,7 +55,7 @@ const router = useRouter();
 
 const notNullRule = new NotNullRule();
 
-const form: Ref<RegisterForm> = ref({
+const form = ref<RegisterForm>({
   username: "",
   email: "",
   password1: "",

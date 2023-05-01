@@ -36,7 +36,7 @@ import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import { useRouter } from "vue-router";
 import type { GroceryListForm } from "./GroceryListFormInterface";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import OrganismIngredientForm from "../OrganismIngredientForm/OrganismIngredientForm.vue";
 import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
 import MoleculeIconButton from "@/Components/Molecules/MoleculeIconButton.vue";
@@ -64,7 +64,7 @@ const formInitialState = (groceryList?: GroceryList): GroceryListForm => {
   };
 };
 
-const form: Ref<GroceryListForm> = ref(formInitialState(props.groceryList));
+const form = ref<GroceryListForm>(formInitialState(props.groceryList));
 
 const createOrEditGroceryList = async () => {
   emitter.emit("validate", form.value);

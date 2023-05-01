@@ -51,7 +51,7 @@ import MoleculeIconButton from "@/Components/Molecules/MoleculeIconButton.vue";
 import MoleculeStepList from "@/Components/Molecules/MoleculeStepList.vue";
 import MoleculeTextAreaLabel from "@/Components/Molecules/MoleculeTextAreaLabel.vue";
 import type { Step } from "@/Domain/Step/StepInterface";
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 import type { StepForm } from "./StepFormInterface";
 
 const emits = defineEmits(["addStep"]);
@@ -69,10 +69,10 @@ const formInitialState = (stepForm?: StepForm) => {
 };
 
 const showDialog = ref(false);
-const steps: Ref<StepForm[]> = ref(props.steps || []);
-const key: Ref<number | undefined> = ref();
+const steps = ref<StepForm[]>(props.steps || []);
+const key = ref<number | undefined>();
 
-const form: Ref<StepForm> = ref(formInitialState());
+const form = ref<StepForm>(formInitialState());
 
 const addOrEditStep = () => {
   if (!form.value.stepDescription) {

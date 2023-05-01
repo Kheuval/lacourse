@@ -28,7 +28,7 @@ import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
-import { inject, ref, type Ref } from "vue";
+import { inject, ref } from "vue";
 import { useRouter } from "vue-router";
 import type { LoginForm } from "./LoginFormInterface";
 
@@ -38,7 +38,7 @@ const router = useRouter();
 
 const notNullRule = new NotNullRule();
 
-const form: Ref<LoginForm> = ref({
+const form = ref<LoginForm>({
   login: "",
   password: "",
 });
