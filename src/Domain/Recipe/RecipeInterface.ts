@@ -1,6 +1,6 @@
 import type { RecipeIngredient } from "../RecipeIngredient/RecipeIngredientInterface";
 import type { Step } from "../Step/StepInterface";
-import type { AuthUser } from "../User/UserInterface";
+import type { User } from "../User/UserInterface";
 
 export interface Recipe {
   id: string;
@@ -14,5 +14,5 @@ export interface Recipe {
   recipeIngredients: RecipeIngredient[];
   steps: Step[];
   type: "Recipe";
-  user: AuthUser;
+  user: User;
 }

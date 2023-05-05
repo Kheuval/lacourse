@@ -26,6 +26,7 @@ export const databaseAuthService: AuthServiceInterface = {
         username,
         password,
       }),
+      cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -68,6 +69,7 @@ export const databaseAuthService: AuthServiceInterface = {
         username,
         password,
       }),
+      cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
 
