@@ -31,10 +31,14 @@ export const router = createRouter({
       component: () => import("@/Views/User/FavoriteView.vue"),
     },
     {
+      path: "/user/profile",
+      name: "UserProfile",
+      component: () => import("@/Views/User/ProfileView.vue"),
+    },
+    {
       path: "/user/grocery-lists",
       name: "UserGroceryLists",
       component: () => import("@/Views/GroceryList/IndexView.vue"),
-      meta: { forUser: true },
     },
     {
       path: "/recipes",

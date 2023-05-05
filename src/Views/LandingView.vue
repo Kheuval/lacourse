@@ -6,9 +6,9 @@
       Connectez-vous pour commencer à faire vos courses !</AtomTitle
     >
     <OrganismLoginForm class="mt-10" />
-    <AtomLink to="/" class="text-center text-secondary mt-8"
-      >Mot de passe oublié ?</AtomLink
-    >
+    <AtomLink to="/reset-password" class="text-center text-secondary mt-8">
+      Mot de passe oublié ?
+    </AtomLink>
     <AtomTitle tag="h2" class="text-center text-xl mt-6"
       >Pas encore de compte ? Inscrivez-vous pour simplifier la gestion de vos
       courses au quotidien</AtomTitle

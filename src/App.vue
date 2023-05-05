@@ -43,7 +43,7 @@ const router = useRouter();
 
 const doSomething = async () => {
   await authProvider.login();
-  router.push("/user/home");
+  router.push("/user/profile");
 };
 </script>
 <style lang="scss" scoped></style>
