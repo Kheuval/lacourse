@@ -1,44 +1,45 @@
 <template>
   <form @submit.prevent novalidate class="flex flex-col items-center">
-    <MoleculeInputLabelVue
+    <MoleculeInputLabel
       id="username"
       type="text"
       placeholder="Identifiant"
       :validationRules="[notNullRule]"
       @update="(content) => (form.username = content)"
     />
-    <MoleculeInputLabelVue
+    <MoleculeInputLabel
       id="email"
       type="email"
       placeholder="Adresse email"
       :validationRules="[notNullRule]"
       @update="(content) => (form.email = content)"
     />
-    <MoleculeInputLabelVue
+    <MoleculeInputLabel
       id="password1"
       type="password"
       placeholder="Mot de passe"
       :validationRules="[notNullRule]"
       @update="(content) => (form.password1 = content)"
     />
-    <MoleculeInputLabelVue
+    <MoleculeInputLabel
       id="password2"
       type="password"
       placeholder="Répétez le mot de passe"
       :validationRules="[notNullRule]"
       @update="(content) => (form.password2 = content)"
     />
-    <AtomButtonVue
+    <AtomButton
       class="uppercase bg-primary text-white rounded-xl px-6 py-2"
       @click="register"
-      >Créer un compte</AtomButtonVue
     >
+      Créer un compte
+    </AtomButton>
   </form>
 </template>
 
 <script lang="ts" setup>
-import AtomButtonVue from "../../Atoms/AtomButton.vue";
-import MoleculeInputLabelVue from "../../Molecules/MoleculeInputLabel.vue";
+import AtomButton from "../../Atoms/AtomButton.vue";
+import MoleculeInputLabel from "../../Molecules/MoleculeInputLabel.vue";
 import { inject, ref } from "vue";
 import type { RegisterForm } from "./RegisterFormInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
