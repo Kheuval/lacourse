@@ -88,5 +88,3 @@ const createOrEditGroceryList = async () => {
   router.push("/user/grocery-lists");
 };
 </script>
-
-<style lang="scss" scoped></style>

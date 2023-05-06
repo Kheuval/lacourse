@@ -92,5 +92,3 @@ const previewImage = () => {
   emits("imageUploaded", image);
 };
 </script>
-
-<style lang="scss" scoped></style>

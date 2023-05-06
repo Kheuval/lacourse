@@ -112,5 +112,3 @@ const toggleListVisibility = async () => {
   emits("toggleListVisibility", groceryList);
 };
 </script>
-
-<style lang="scss" scoped></style>

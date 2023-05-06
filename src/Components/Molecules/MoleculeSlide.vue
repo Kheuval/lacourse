@@ -35,5 +35,3 @@ const src =
 
 const route = "/recipes/show/" + props.resourceId.match(/\d+/)![0];
 </script>
-
-<style lang="scss" scoped></style>

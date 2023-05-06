@@ -13,5 +13,3 @@ defineProps<{
 
 defineEmits(["click"]);
 </script>
-
-<style lang="scss" scoped></style>

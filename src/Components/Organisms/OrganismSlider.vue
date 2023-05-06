@@ -56,5 +56,3 @@ onUnmounted(() => {
   stopSlider();
 });
 </script>
-
-<style lang="scss" scoped></style>

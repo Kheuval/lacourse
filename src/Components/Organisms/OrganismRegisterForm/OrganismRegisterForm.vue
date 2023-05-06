@@ -94,5 +94,3 @@ const checkPasswords = (): boolean => {
   return form.value.password1 === form.value.password2;
 };
 </script>
-
-<style lang="scss" scoped></style>

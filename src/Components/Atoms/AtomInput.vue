@@ -96,5 +96,3 @@ emitter.on("setInputContent", (input) => {
   }
 });
 </script>
-
-<style lang="scss" scoped></style>

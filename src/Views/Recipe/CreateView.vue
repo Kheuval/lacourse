@@ -9,5 +9,3 @@ import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import OrganismRecipeForm from "@/Components/Organisms/OrganismRecipeForm/OrganismRecipeForm.vue";
 </script>
-
-<style lang="scss" scoped></style>

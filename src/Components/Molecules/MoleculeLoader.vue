@@ -19,5 +19,3 @@ onMounted(() => {
   spinner.value!.style.top = window.scrollY + window.innerHeight / 2 + "px";
 });
 </script>
-
-<style lang="scss" scoped></style>

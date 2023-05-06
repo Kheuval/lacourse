@@ -46,4 +46,3 @@ const doSomething = async () => {
   router.push("/reset-password");
 };
 </script>
-<style lang="scss" scoped></style>

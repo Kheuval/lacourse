@@ -136,5 +136,3 @@ const checkPasswords = (): boolean => {
   return password1.value === password2.value;
 };
 </script>
-
-<style lang="scss" scoped></style>

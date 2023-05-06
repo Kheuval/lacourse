@@ -7,5 +7,3 @@
 <script lang="ts" setup>
 defineEmits(["click"]);
 </script>
-
-<style lang="scss" scoped></style>

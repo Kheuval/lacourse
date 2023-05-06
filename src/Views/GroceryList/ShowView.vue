@@ -48,5 +48,3 @@ const showResourceActions = ref(false);
 const toggleResourceActions = () =>
   (showResourceActions.value = !showResourceActions.value);
 </script>
-
-<style lang="scss" scoped></style>

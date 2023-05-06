@@ -13,5 +13,3 @@ defineProps<{
   placeholder: string;
 }>();
 </script>
-
-<style lang="scss" scoped></style>

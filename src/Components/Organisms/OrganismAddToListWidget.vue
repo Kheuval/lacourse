@@ -154,5 +154,3 @@ const addIngredientsToList = async (groceryListIri?: string) => {
   showDialog.value = showListInput.value = false;
 };
 </script>
-
-<style lang="scss" scoped></style>

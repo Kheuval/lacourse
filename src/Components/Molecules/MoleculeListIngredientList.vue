@@ -79,5 +79,3 @@ const toggleListDetailVisibility = async (index: number) => {
   emits("listUpdated", groceryList);
 };
 </script>
-
-<style lang="scss" scoped></style>

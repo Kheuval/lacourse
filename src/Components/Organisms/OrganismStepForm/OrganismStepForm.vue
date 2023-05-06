@@ -103,5 +103,3 @@ const removeStep = () => {
   emits("addStep", steps.value);
 };
 </script>
-
-<style lang="scss" scoped></style>

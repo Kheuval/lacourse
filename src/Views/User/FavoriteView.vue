@@ -23,5 +23,3 @@ const { currentUser } = useUserStore();
 
 const favorites = await userProvider.getFavorites(currentUser!.id);
 </script>
-
-<style lang="scss" scoped></style>

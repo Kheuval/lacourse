@@ -25,5 +25,3 @@ const props = withDefaults(
 
 const content = ref(props.defaultContent || "");
 </script>
-
-<style lang="scss" scoped></style>

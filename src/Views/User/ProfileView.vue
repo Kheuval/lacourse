@@ -48,5 +48,3 @@ import { useUserStore } from "@/Domain/User/Store/UserStore";
 
 const { currentUser } = useUserStore();
 </script>
-
-<style lang="scss" scoped></style>

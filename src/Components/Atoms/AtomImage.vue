@@ -8,5 +8,3 @@ defineProps<{
   alt: string;
 }>();
 </script>
-
-<style lang="scss" scoped></style>

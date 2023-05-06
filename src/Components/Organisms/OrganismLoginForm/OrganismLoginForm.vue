@@ -49,5 +49,3 @@ const login = () => {
     .then(() => router.push("/user/home"));
 };
 </script>
-
-<style lang="scss" scoped></style>

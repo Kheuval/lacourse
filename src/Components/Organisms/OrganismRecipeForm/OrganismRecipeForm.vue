@@ -190,5 +190,3 @@ const createOrEditRecipe = async () => {
   router.push("/user/recipes");
 };
 </script>
-
-<style lang="scss" scoped></style>

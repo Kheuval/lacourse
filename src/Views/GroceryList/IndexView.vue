@@ -36,5 +36,3 @@ const { groceryListProvider } = inject("dataProvider") as DataProvider;
 
 const groceryLists = await groceryListProvider.getAllForUser();
 </script>
-
-<style lang="scss" scoped></style>

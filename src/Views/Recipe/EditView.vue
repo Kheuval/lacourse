@@ -18,5 +18,3 @@ const { params } = useRoute();
 
 const recipe = await recipeProvider.findOneByIri(`/api/recipes/${params.id}`);
 </script>
-
-<style lang="scss" scoped></style>

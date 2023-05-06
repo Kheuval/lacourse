@@ -18,5 +18,3 @@ const groceryList = await groceryListProvider.findOneByIri(
   `/api/grocery_lists/${params.id}`
 );
 </script>
-
-<style lang="scss" scoped></style>

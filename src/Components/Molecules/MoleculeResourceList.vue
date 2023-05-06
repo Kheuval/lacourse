@@ -92,5 +92,3 @@ if (props.withImage) {
   });
 }
 </script>
-
-<style lang="scss" scoped></style>
