@@ -26,6 +26,7 @@ export const databaseAuthService: AuthServiceInterface = {
         username,
         password,
       }),
+      expectResponseData: true,
       cacheable: false,
       resourceType: RESOURCE_TYPE,
     };
@@ -70,6 +71,7 @@ export const databaseAuthService: AuthServiceInterface = {
         password,
       }),
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 

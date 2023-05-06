@@ -16,6 +16,7 @@ export const databaseIngredientRepository: IngredientRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 

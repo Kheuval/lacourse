@@ -5,6 +5,7 @@ export interface ApiRequest {
   contentType: string;
   body: BodyInit | null;
   cacheable: boolean;
+  expectResponseData: boolean;
   resourceType: string;
 }
 

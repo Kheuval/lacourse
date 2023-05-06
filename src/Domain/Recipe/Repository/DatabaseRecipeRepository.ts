@@ -16,6 +16,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -31,6 +32,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -46,6 +48,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -61,6 +64,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -76,6 +80,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -91,6 +96,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: JSON.stringify(recipe),
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -106,6 +112,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/merge-patch+json",
       body: JSON.stringify(recipe),
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -121,6 +128,7 @@ export const databaseRecipeRepository: RecipeRepository = {
       contentType: "application/json",
       body: null,
       cacheable: false,
+      expectResponseData: false,
       resourceType: RESOURCE_TYPE,
     };
 

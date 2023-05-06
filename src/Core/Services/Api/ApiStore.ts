@@ -66,8 +66,9 @@ export const useApiStore = defineStore("api", () => {
 
     isFetching.value = false;
 
-    const data =
-      init.method !== "DELETE" ? JSON.parse(await response.text()) : null;
+    const data = init.expectResponseData
+      ? JSON.parse(await response.text())
+      : null;
 
     if (response.status === 401) {
       if (isAuthenticated.value && !checkTokenExpiration()) {

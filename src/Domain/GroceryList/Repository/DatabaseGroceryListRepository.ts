@@ -17,6 +17,7 @@ export const databaseGroceryListRepository: GroceryListRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -32,6 +33,7 @@ export const databaseGroceryListRepository: GroceryListRepository = {
       contentType: "application/merge-patch+json",
       body: JSON.stringify(data),
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -47,6 +49,7 @@ export const databaseGroceryListRepository: GroceryListRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -62,6 +65,7 @@ export const databaseGroceryListRepository: GroceryListRepository = {
       contentType: "application/json",
       body: JSON.stringify(groceryList),
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -77,6 +81,7 @@ export const databaseGroceryListRepository: GroceryListRepository = {
       contentType: "application/json",
       body: null,
       cacheable: false,
+      expectResponseData: false,
       resourceType: RESOURCE_TYPE,
     };
 

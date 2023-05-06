@@ -16,6 +16,7 @@ export const databaseUserRepository: UserRepository = {
       contentType: "application/json",
       body: null,
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -31,6 +32,7 @@ export const databaseUserRepository: UserRepository = {
       contentType: "application/merge-patch+json",
       body: JSON.stringify(data),
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -46,6 +48,7 @@ export const databaseUserRepository: UserRepository = {
       contentType: "application/json",
       body: null,
       cacheable: false,
+      expectResponseData: false,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -61,9 +64,42 @@ export const databaseUserRepository: UserRepository = {
       contentType: "application/json",
       body: null,
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
     return (await useFetch(init)).content["hydra:member"];
+  },
+  requestNewPassword: async (email: string): Promise<void> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: "/forgot_password/",
+      method: "POST",
+      accept: "application/ld+json",
+      contentType: "application/json",
+      body: JSON.stringify({ email }),
+      cacheable: false,
+      expectResponseData: false,
+      resourceType: RESOURCE_TYPE,
+    };
+
+    await useFetch(init);
+  },
+  resetPassword: async (password: string, token: string): Promise<void> => {
+    const { useFetch } = useApiStore();
+
+    const init: ApiRequest = {
+      url: `/forgot_password/${token}`,
+      method: "POST",
+      accept: "application/ld+json",
+      contentType: "application/json",
+      body: JSON.stringify({ password }),
+      cacheable: false,
+      expectResponseData: false,
+      resourceType: RESOURCE_TYPE,
+    };
+
+    await useFetch(init);
   },
 };

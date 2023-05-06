@@ -6,7 +6,12 @@ import mitt from "mitt";
 import { defineStore } from "pinia";
 
 type Events = {
-  validate: RegisterForm | IngredientForm | RecipeForm | GroceryListForm;
+  validate:
+    | RegisterForm
+    | IngredientForm
+    | RecipeForm
+    | GroceryListForm
+    | string;
   setInputContent: { id: string; inputValue: string };
 };
 

@@ -15,6 +15,11 @@ export const router = createRouter({
       component: () => import("@/Views/LandingView.vue"),
     },
     {
+      path: "/reset-password/:token?",
+      name: "ResetPassword",
+      component: () => import("@/Views/ResetPasswordView.vue"),
+    },
+    {
       path: "/user/home",
       name: "UserHome",
       component: () => import("@/Views/HomeView.vue"),
@@ -84,6 +89,17 @@ router.beforeEach((to, from, next) => {
   const { checkTokenExpiration } = useApiStore();
   const { navigationStack } = storeToRefs(useRouterStore());
 
+  if (to.fullPath !== navigationStack.value.at(-1)?.fullPath) {
+    navigationStack.value.push(from);
+  } else {
+    navigationStack.value.pop();
+  }
+
+  if (to.path.startsWith("/reset-password")) {
+    next();
+    return;
+  }
+
   if (!isAuthenticated.value && to.path !== "/") {
     next({ path: "/" });
     new UnauthorizedError();
@@ -100,12 +116,6 @@ router.beforeEach((to, from, next) => {
   if (isAuthenticated.value && to.path === "/") {
     next({ path: "/user/home" });
     return;
-  }
-
-  if (to.fullPath !== navigationStack.value.at(-1)?.fullPath) {
-    navigationStack.value.push(from);
-  } else {
-    navigationStack.value.pop();
   }
 
   next();

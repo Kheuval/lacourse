@@ -16,6 +16,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       contentType: "application/json",
       body: null,
       cacheable: true,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 
@@ -31,6 +32,7 @@ export const databaseMediaObjectRepository: MediaObjectRepository = {
       contentType: "",
       body: mediaObject,
       cacheable: false,
+      expectResponseData: true,
       resourceType: RESOURCE_TYPE,
     };
 

@@ -43,7 +43,7 @@ const router = useRouter();
 
 const doSomething = async () => {
   await authProvider.login();
-  router.push("/user/profile");
+  router.push("/reset-password");
 };
 </script>
 <style lang="scss" scoped></style>
