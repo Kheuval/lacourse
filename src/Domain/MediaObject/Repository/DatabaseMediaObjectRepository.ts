@@ -6,7 +6,7 @@ import type { MediaObjectRepository } from "./MediaObjectRepositoryInterface";
 const RESOURCE_TYPE = "MediaObject";
 
 export const databaseMediaObjectRepository: MediaObjectRepository = {
-  findOneByIri: async (iri: string): Promise<MediaObject | null> => {
+  findOneByIri: async (iri: string): Promise<MediaObject> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {

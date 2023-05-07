@@ -3,7 +3,7 @@ import type { Recipe } from "../RecipeInterface";
 
 export interface RecipeRepository {
   getAll(): Promise<Recipe[]>;
-  getAllForUser(userIri: string): Promise<Recipe[]>;
+  getAllForUser(userIri: string): Promise<Recipe[] | []>;
   getSample(): Promise<Recipe[]>;
   findByQuery(query: string): Promise<Recipe[] | []>;
   findOneByIri(iri: string): Promise<Recipe>;

@@ -22,7 +22,7 @@ export const databaseRecipeRepository: RecipeRepository = {
 
     return (await useFetch(init)).content["hydra:member"];
   },
-  getAllForUser: async (userIri: string): Promise<Recipe[]> => {
+  getAllForUser: async (userIri: string): Promise<Recipe[] | []> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {
