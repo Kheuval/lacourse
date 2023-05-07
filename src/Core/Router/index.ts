@@ -89,7 +89,10 @@ router.beforeEach((to, from, next) => {
   const { checkTokenExpiration } = useApiStore();
   const { navigationStack } = storeToRefs(useRouterStore());
 
-  if (to.fullPath !== navigationStack.value.at(-1)?.fullPath) {
+  if (
+    to.fullPath !==
+    navigationStack.value[navigationStack.value.length - 1]?.fullPath
+  ) {
     navigationStack.value.push(from);
   } else {
     navigationStack.value.pop();

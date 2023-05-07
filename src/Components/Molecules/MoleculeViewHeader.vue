@@ -22,5 +22,5 @@ defineProps<{
   title: string;
 }>();
 
-const previousRoute = navigationStack.at(-1)?.fullPath;
+const previousRoute = navigationStack[navigationStack.length - 1]?.fullPath;
 </script>
