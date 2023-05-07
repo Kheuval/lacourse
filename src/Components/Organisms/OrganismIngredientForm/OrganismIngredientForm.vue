@@ -21,7 +21,7 @@
       <MoleculeInputLabel
         type="text"
         id="name"
-        placeholder="Entrez le nom d'un ingrédient"
+        placeholder="Ingrédient"
         :validationRules="[notNullRule]"
         :defaultContent="form.ingredient.name"
         @update="query"
@@ -45,7 +45,7 @@
       <MoleculeInputLabel
         type="text"
         id="quantity"
-        placeholder="Sa quantité"
+        placeholder="Quantité"
         :typeNumber="true"
         :validationRules="[notNullRule, numberRule]"
         :defaultContent="form.quantity"
