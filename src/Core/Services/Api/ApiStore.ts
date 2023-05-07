@@ -90,10 +90,9 @@ export const useApiStore = defineStore("api", () => {
     }
 
     const apiResponse = {
-      content:
-        init.method !== "DELETE"
-          ? deserializeRecursively((key: string) => key.replace("@", ""))(data)
-          : null,
+      content: init.expectResponseData
+        ? deserializeRecursively((key: string) => key.replace("@", ""))(data)
+        : null,
       status: response.status,
     };
 

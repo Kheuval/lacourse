@@ -8,9 +8,11 @@ export const useCacheManager = () => {
       invalidateCache(request);
     } else {
       if (data.content.type === request.resourceType) {
+        // If its an api resource
         const key = `${request.resourceType}:${data.content.id}`;
         storage.setItem(key, JSON.stringify(data));
       } else {
+        // If its a collection of resources
         const key = `${request.resourceType}:${request.url}`;
         storage.setItem(key, JSON.stringify(data));
         data.content["hydra:member"].forEach((item: any) => {

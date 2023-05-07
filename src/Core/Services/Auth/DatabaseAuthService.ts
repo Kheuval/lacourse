@@ -7,15 +7,14 @@ import { useJwtDecode } from "@/Core/Composables/useJwtDecode";
 import { LoginError } from "../Error/Errors/LoginError";
 import { EmailAlreadyInUseError } from "../Error/Errors/EmailAlreadyInUseError";
 import { UsernameAlreadyInUseError } from "../Error/Errors/UsernameAlreadyInUseError";
+import type { User } from "@/Domain/User/UserInterface";
 
 const RESOURCE_TYPE = "AuthUser";
 
 export const databaseAuthService: AuthServiceInterface = {
-  login: async (username, password) => {
+  login: async (username, password): Promise<void> => {
     const { useFetch } = useApiStore();
-    const { isAuthenticated, currentUser, isLoggedOut } = storeToRefs(
-      useUserStore()
-    );
+    const { isAuthenticated, currentUser } = storeToRefs(useUserStore());
 
     const init: ApiRequest = {
       url: "/login",
@@ -37,27 +36,23 @@ export const databaseAuthService: AuthServiceInterface = {
           return Promise.reject(new LoginError());
         }
         isAuthenticated.value = true;
-        isLoggedOut.value = false;
         currentUser.value = databaseAuthService.getUser(response.content.token);
       })
       .catch((error) => {
         return Promise.reject(error);
       });
   },
-  logout: () => {
-    const { isAuthenticated, currentUser, isLoggedOut } = storeToRefs(
-      useUserStore()
-    );
+  logout: (): void => {
+    const { isAuthenticated, currentUser } = storeToRefs(useUserStore());
 
     useApiStore().invalidateToken();
     isAuthenticated.value = false;
-    isLoggedOut.value = true;
     currentUser.value = null;
   },
-  getUser: (token) => {
+  getUser: (token): User => {
     return useJwtDecode(token).user;
   },
-  register: async (username, email, password) => {
+  register: async (username, email, password): Promise<void> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {

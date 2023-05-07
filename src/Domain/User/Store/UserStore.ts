@@ -5,7 +5,6 @@ import type { User } from "@/Domain/User/UserInterface";
 export const useUserStore = defineStore("user", () => {
   const currentUser = ref<User | null>(null);
   const isAuthenticated = ref<boolean>(false);
-  const isLoggedOut = ref<boolean>(false);
 
-  return { currentUser, isAuthenticated, isLoggedOut };
+  return { currentUser, isAuthenticated };
 });
