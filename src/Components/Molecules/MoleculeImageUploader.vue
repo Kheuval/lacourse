@@ -42,12 +42,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { DataProvider } from "@/Core/Config/DataProvider";
 import { inject, ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import MoleculeIconButton from "./MoleculeIconButton.vue";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 
-const { mediaObjectProvider } = inject("dataProvider") as DataProvider;
+const { mediaObjectProvider } = inject(DataProviderKey)!;
 
 const emits = defineEmits(["imageUploaded"]);
 

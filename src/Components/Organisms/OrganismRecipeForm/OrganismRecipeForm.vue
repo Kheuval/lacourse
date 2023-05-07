@@ -113,11 +113,9 @@ import OrganismStepForm from "../OrganismStepForm/OrganismStepForm.vue";
 import type { RecipeForm } from "./RecipeFormInterface";
 import { useRouter } from "vue-router";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 
-const { mediaObjectProvider, recipeProvider } = inject(
-  "dataProvider"
-) as DataProvider;
+const { mediaObjectProvider, recipeProvider } = inject(DataProviderKey)!;
 
 const notNullRule = new NotNullRule();
 const lengthRule = new LengthRule({ maxLength: 50 });

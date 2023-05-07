@@ -42,9 +42,9 @@ import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
 import MoleculeIconButton from "@/Components/Molecules/MoleculeIconButton.vue";
 import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/UnprocessableEntityError";
 import { IngredientsMissingError } from "@/Core/Services/Error/Errors/IngredientsMissingError";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 
-const { groceryListProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider } = inject(DataProviderKey)!;
 
 const notNullRule = new NotNullRule();
 const lengthRule = new LengthRule({ maxLength: 50 });

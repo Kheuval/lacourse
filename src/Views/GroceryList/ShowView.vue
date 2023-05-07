@@ -30,12 +30,12 @@ import MoleculeListIngredientList from "@/Components/Molecules/MoleculeListIngre
 import MoleculeResourceAction from "@/Components/Molecules/MoleculeResourceAction.vue";
 import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import { inject, ref } from "vue";
 import { useRoute } from "vue-router";
 
-const { groceryListProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider } = inject(DataProviderKey)!;
 
 const route = useRoute();
 

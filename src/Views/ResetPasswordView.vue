@@ -70,7 +70,7 @@ import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
 import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { EmailRule } from "@/Core/Services/Validation/Rules/EmailRule";
@@ -84,7 +84,7 @@ import { useRoute, useRouter } from "vue-router";
 import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/UnprocessableEntityError";
 import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
 
-const { userProvider } = inject("dataProvider") as DataProvider;
+const { userProvider } = inject(DataProviderKey)!;
 
 const notNullRule = new NotNullRule();
 const emailRule = new EmailRule();

@@ -134,10 +134,10 @@ import type { ListDetail } from "@/Domain/ListDetail/ListDetailInterface";
 import MoleculeListIngredientList from "@/Components/Molecules/MoleculeListIngredientList.vue";
 import AtomRadio from "@/Components/Atoms/AtomRadio.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import type { Ingredient } from "@/Domain/Ingredient/IngredientInterface";
 
-const { ingredientProvider } = inject("dataProvider") as DataProvider;
+const { ingredientProvider } = inject(DataProviderKey)!;
 
 const notNullRule = new NotNullRule();
 const numberRule = new NumberRule();

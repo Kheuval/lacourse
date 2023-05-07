@@ -57,14 +57,14 @@ import { inject, ref } from "vue";
 import MoleculeDialog from "../Molecules/MoleculeDialog.vue";
 import MoleculeSelectLabel from "../Molecules/MoleculeSelectLabel.vue";
 import type { ListOption } from "../Atoms/AtomSelect/OptionInterface";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import AtomButton from "../Atoms/AtomButton.vue";
 import MoleculeInputLabel from "../Molecules/MoleculeInputLabel.vue";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import { useEventBus } from "@/Core/Services/EventBus";
 
-const { groceryListProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider } = inject(DataProviderKey)!;
 
 const notNullRule = new NotNullRule();
 const { emitter } = useEventBus();

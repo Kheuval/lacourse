@@ -81,14 +81,13 @@ import MoleculeStepList from "@/Components/Molecules/MoleculeStepList.vue";
 import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismAddToListWidget from "@/Components/Organisms/OrganismAddToListWidget.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { inject, ref } from "vue";
 import { useRoute } from "vue-router";
 
-const { mediaObjectProvider, recipeProvider, userProvider } = inject(
-  "dataProvider"
-) as DataProvider;
+const { mediaObjectProvider, recipeProvider, userProvider } =
+  inject(DataProviderKey)!;
 
 const route = useRoute();
 

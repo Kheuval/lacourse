@@ -32,14 +32,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import { inject, ref } from "vue";
 import AtomImage from "../Atoms/AtomImage.vue";
 import AtomLink from "../Atoms/AtomLink.vue";
 
-const { mediaObjectProvider } = inject("dataProvider") as DataProvider;
+const { mediaObjectProvider } = inject(DataProviderKey)!;
 
 const props = withDefaults(
   defineProps<{

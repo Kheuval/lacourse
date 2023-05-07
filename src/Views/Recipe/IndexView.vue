@@ -29,12 +29,12 @@ import AtomLink from "@/Components/Atoms/AtomLink.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
 import MoleculeResourceList from "@/Components/Molecules/MoleculeResourceList.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 import { inject, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-const { recipeProvider } = inject("dataProvider") as DataProvider;
+const { recipeProvider } = inject(DataProviderKey)!;
 
 const { currentUser } = useUserStore();
 

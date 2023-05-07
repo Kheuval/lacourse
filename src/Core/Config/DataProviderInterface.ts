@@ -4,6 +4,7 @@ import type { RecipeRepository } from "@/Domain/Recipe/Repository/RecipeReposito
 import type { UserRepository } from "@/Domain/User/Repository/UserRepositoryInterface";
 import type { AuthServiceInterface } from "../Services/Auth/AuthServiceInterface";
 import type { IngredientRepository } from "@/Domain/Ingredient/Repository/IngredientRepositoryInterface";
+import type { InjectionKey } from "vue";
 
 export interface DataProvider {
   authProvider: AuthServiceInterface;
@@ -14,6 +15,5 @@ export interface DataProvider {
   ingredientProvider: IngredientRepository;
 }
 
-export const provide = (dataProvider: DataProvider) => {
-  return dataProvider;
-};
+export const DataProviderKey: InjectionKey<DataProvider> =
+  Symbol("dataProvider");

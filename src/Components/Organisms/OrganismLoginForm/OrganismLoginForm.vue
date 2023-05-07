@@ -26,13 +26,13 @@
 <script lang="ts" setup>
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { inject, ref } from "vue";
 import { useRouter } from "vue-router";
 import type { LoginForm } from "./LoginFormInterface";
 
-const { authProvider } = inject("dataProvider") as DataProvider;
+const { authProvider } = inject(DataProviderKey)!;
 
 const router = useRouter();
 

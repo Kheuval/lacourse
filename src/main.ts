@@ -25,8 +25,8 @@ import {
   faFloppyDisk,
 } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
-import { provide } from "./Core/Config/DataProvider";
 import { databaseDataProvider } from "./Core/Config/DatabaseDataProvider";
+import { DataProviderKey } from "./Core/Config/DataProviderInterface";
 
 library.add(
   faCheckCircle,
@@ -54,6 +54,6 @@ const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(createPinia());
 app.use(router);
-app.provide("dataProvider", provide(databaseDataProvider));
+app.provide(DataProviderKey, databaseDataProvider);
 
 app.mount("#app");

@@ -27,12 +27,12 @@ import OrganismSearchDialog from "@/Components/Organisms/OrganismSearchDialog.vu
 import OrganismSlider from "@/Components/Organisms/OrganismSlider.vue";
 import { inject } from "vue";
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import AtomLink from "@/Components/Atoms/AtomLink.vue";
 
 const { currentUser } = useUserStore();
 
-const { recipeProvider } = inject("dataProvider") as DataProvider;
+const { recipeProvider } = inject(DataProviderKey)!;
 
 const recipes = await recipeProvider.getSample();
 </script>

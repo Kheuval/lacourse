@@ -46,10 +46,10 @@ import { useEventBus } from "@/Core/Services/EventBus";
 import { NotNullRule } from "@/Core/Services/Validation/Rules/NotNullRule";
 import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/UnprocessableEntityError";
 import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useRouter } from "vue-router";
 
-const { authProvider } = inject("dataProvider") as DataProvider;
+const { authProvider } = inject(DataProviderKey)!;
 
 const { emitter } = useEventBus();
 const router = useRouter();

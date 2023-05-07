@@ -45,12 +45,10 @@ import AtomTitle from "../Atoms/AtomTitle.vue";
 import AtomText from "../Atoms/AtomText.vue";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import type { GroceryList } from "@/Domain/GroceryList/GroceryListInterface";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useRouter } from "vue-router";
 
-const { groceryListProvider, recipeProvider } = inject(
-  "dataProvider"
-) as DataProvider;
+const { groceryListProvider, recipeProvider } = inject(DataProviderKey)!;
 
 const router = useRouter();
 

@@ -55,7 +55,7 @@ export const databaseUserRepository: UserRepository = {
 
     await useFetch(init);
   },
-  getFavorites: async (userIri: string): Promise<Recipe[] | []> => {
+  getFavorites: async (userIri: string): Promise<Recipe[]> => {
     const { useFetch } = useApiStore();
 
     const init: ApiRequest = {

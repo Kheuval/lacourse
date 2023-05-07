@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useApiStore } from "@/Core/Services/Api/ApiStore";
 import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import { storeToRefs } from "pinia";
@@ -44,7 +44,7 @@ import MoleculeIconButton from "../Molecules/MoleculeIconButton.vue";
 import MoleculeInputLabel from "../Molecules/MoleculeInputLabel.vue";
 import MoleculeResourceList from "../Molecules/MoleculeResourceList.vue";
 
-const { recipeProvider } = inject("dataProvider") as DataProvider;
+const { recipeProvider } = inject(DataProviderKey)!;
 
 defineProps<{
   content: string;

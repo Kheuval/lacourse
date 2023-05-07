@@ -5,7 +5,7 @@ export interface UserRepository {
   findOneByIri(iri: string): Promise<User>;
   updateOneByIri(iri: string, data: object): Promise<User>;
   deleteOneByIri(iri: string): Promise<void>;
-  getFavorites(userIri: string): Promise<Recipe[] | []>;
+  getFavorites(userIri: string): Promise<Recipe[]>;
   requestNewPassword(email: string): Promise<void>;
   resetPassword(password: string, token: string): Promise<void>;
 }

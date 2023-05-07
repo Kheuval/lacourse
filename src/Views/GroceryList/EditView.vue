@@ -8,11 +8,11 @@
 <script lang="ts" setup>
 import OrganismGroceryListForm from "@/Components/Organisms/OrganismGroceryListForm/OrganismGroceryListForm.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { inject } from "vue";
 import { useRoute } from "vue-router";
 
-const { groceryListProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider } = inject(DataProviderKey)!;
 
 const { params } = useRoute();
 

@@ -31,10 +31,10 @@ import AtomLink from "@/Components/Atoms/AtomLink.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
 import MoleculeResourceList from "@/Components/Molecules/MoleculeResourceList.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { inject } from "vue";
 
-const { groceryListProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider } = inject(DataProviderKey)!;
 
 const groceryLists = await groceryListProvider.getAllForUser();
 </script>

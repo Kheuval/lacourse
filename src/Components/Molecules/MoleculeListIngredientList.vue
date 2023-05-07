@@ -31,12 +31,12 @@
 <script lang="ts" setup>
 import AtomText from "@/Components/Atoms/AtomText.vue";
 import { useQuantity } from "@/Core/Composables/useQuantity";
-import type { DataProvider } from "@/Core/Config/DataProvider";
 import type { ListDetail } from "@/Domain/ListDetail/ListDetailInterface";
 import { inject, ref } from "vue";
 import type { IngredientForm } from "../Organisms/OrganismIngredientForm/IngredientFormInterface";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 
-const { groceryListProvider } = inject("dataProvider") as DataProvider;
+const { groceryListProvider } = inject(DataProviderKey)!;
 
 const emits = defineEmits(["listUpdated", "editIngredient"]);
 

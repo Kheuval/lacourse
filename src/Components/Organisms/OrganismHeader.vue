@@ -31,10 +31,10 @@ import AtomTitle from "../Atoms/AtomTitle.vue";
 import MoleculeMenu from "../Molecules/MoleculeMenu/MoleculeMenu.vue";
 import logoUrl from "@/assets/images/logo.svg";
 import { inject } from "vue";
-import type { DataProvider } from "@/Core/Config/DataProvider";
+import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import MoleculeViewHeader from "../Molecules/MoleculeViewHeader.vue";
 
-const { authProvider } = inject("dataProvider") as DataProvider;
+const { authProvider } = inject(DataProviderKey)!;
 
 withDefaults(
   defineProps<{
