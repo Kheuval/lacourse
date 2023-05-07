@@ -5,7 +5,9 @@
     </AtomTitle>
     <div class="grid grid-cols-3 gap-2 rounded-xl p-4">
       <div
-        class="flex border-2 border-gray-400 rounded-md text-center after:pb-[100%]"
+        :class="`flex border-2 border-gray-400 rounded-md text-center after:pb-[100%] ${
+          editable && 'cursor-pointer'
+        }`"
         v-for="(recipeIngredient, index) in recipeIngredients"
         :key="recipeIngredient.ingredient.name"
         @click="editable && $emit('editIngredient', index, recipeIngredient)"

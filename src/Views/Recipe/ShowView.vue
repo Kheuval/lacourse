@@ -43,6 +43,9 @@
         </span>
       </AtomText>
     </div>
+    <AtomText class="text-center text-secondary mt-4">
+      Pour {{ recipe.servings }} personnes
+    </AtomText>
     <OrganismAddToListWidget :recipeIngredients="recipe.recipeIngredients" />
     <MoleculeIconButton
       buttonClass="block bg-secondary mt-4 mx-auto px-8 py-4 rounded-full text-white text-xl focus:outline-none"

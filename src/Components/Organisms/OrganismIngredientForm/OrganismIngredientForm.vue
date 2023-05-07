@@ -9,7 +9,7 @@
     />
     <MoleculeDialog
       v-if="showDialog"
-      :styles="`w-3/4 ${type === 'groceryList' ? 'h-4/5' : 'h-3/5'}`"
+      :styles="`w-4/5 ${type === 'groceryList' ? 'h-4/5' : 'h-3/5'}`"
       :buttons="{ ok: true, cancel: true }"
       :prevent="() => validateForm(form)"
       @ok="addOrEditIngredient"

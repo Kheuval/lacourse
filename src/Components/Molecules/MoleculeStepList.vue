@@ -2,7 +2,7 @@
   <div class="mb-10 w-full">
     <AtomTitle class="mt-6 text-2xl text-center" tag="h2">Étapes :</AtomTitle>
     <div
-      class="mt-4"
+      :class="`mt-4 ${editable && 'cursor-pointer'}`"
       v-for="(step, index) in steps"
       :key="index"
       @click="editable && $emit('editStep', index, step)"
