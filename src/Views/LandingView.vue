@@ -16,7 +16,12 @@
       icon="fa-solid fa-circle-down"
       class="block mx-auto mt-10 text-[4rem] text-secondary"
     />
-    <OrganismHeader :home="true" class="mt-10" id="registerForm" />
+    <OrganismHeader
+      :withMenu="false"
+      :withViewHeader="false"
+      class="mt-10"
+      id="registerForm"
+    />
     <OrganismRegisterForm class="mt-10" />
     <AtomTitle
       tag="h2"
@@ -25,7 +30,7 @@
     >
       Découvrez <strong class="text-secondary">La Course</strong> !</AtomTitle
     >
-    <OrganismHeader :home="true" class="mt-10" />
+    <OrganismHeader :withMenu="false" :withViewHeader="false" class="mt-10" />
     <AtomTitle tag="h3" class="text-2xl text-center mt-10">
       <strong class="text-secondary">La Course</strong> est faite pour vous
       simplifier la vie !
