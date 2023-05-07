@@ -1,6 +1,5 @@
 <template>
-  <OrganismHeader :home="true" />
-
+  <OrganismHeader :withMenu="false" :withViewHeader="false" />
   <main>
     <AtomTitle tag="h2" class="text-center text-xl mt-6">
       Connectez-vous pour commencer à faire vos courses !</AtomTitle

@@ -1,6 +1,5 @@
 <template>
-  <OrganismHeader />
-  <MoleculeViewHeader title="Mon profil" />
+  <OrganismHeader viewHeaderTitle="Mon profil" />
   <div class="flex flex-col gap-3 mt-4 items-center">
     <AtomTitle class="text-2xl" tag="h2">Identifiant :</AtomTitle>
     <AtomText class="text-secondary text-2xl">
@@ -42,7 +41,6 @@ import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import AtomLink from "@/Components/Atoms/AtomLink.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
 import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
-import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 

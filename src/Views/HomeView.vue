@@ -1,5 +1,5 @@
 <template>
-  <OrganismHeader />
+  <OrganismHeader :withViewHeader="false" />
   <AtomTitle tag="h1" class="text-center text-2xl mt-6">
     Bonjour
     <em class="text-secondary not-italic">{{ currentUser!.username }}</em
@@ -18,13 +18,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { Recipe } from "@/Domain/Recipe/RecipeInterface";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
 import { useUserStore } from "@/Domain/User/Store/UserStore";
 import OrganismSearchDialog from "@/Components/Organisms/OrganismSearchDialog.vue";
 import OrganismSlider from "@/Components/Organisms/OrganismSlider.vue";
-import { inject, ref } from "vue";
+import { inject } from "vue";
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import AtomLink from "@/Components/Atoms/AtomLink.vue";
@@ -33,7 +32,5 @@ const { currentUser } = useUserStore();
 
 const { recipeProvider } = inject("dataProvider") as DataProvider;
 
-const recipes = ref<Recipe[] | null>(null);
-
-recipeProvider.getSample().then((data) => (recipes.value = data));
+const recipes = await recipeProvider.getSample();
 </script>

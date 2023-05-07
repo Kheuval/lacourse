@@ -1,6 +1,5 @@
 <template>
-  <OrganismHeader />
-  <MoleculeViewHeader title="Mes listes de course" />
+  <OrganismHeader viewHeaderTitle="Mes listes de course" />
   <div class="text-center mt-4">
     <AtomText class="text-lg" v-if="!groceryLists.length">
       Vous n'avez pas encore de liste de course, vous pouvez en créer une grâce
@@ -27,7 +26,6 @@ import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import AtomLink from "@/Components/Atoms/AtomLink.vue";
 import AtomText from "@/Components/Atoms/AtomText.vue";
 import MoleculeResourceList from "@/Components/Molecules/MoleculeResourceList.vue";
-import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import { inject } from "vue";

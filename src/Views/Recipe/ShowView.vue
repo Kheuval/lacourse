@@ -1,5 +1,5 @@
 <template>
-  <OrganismHeader />
+  <OrganismHeader :withViewHeader="false" />
   <MoleculeViewHeader class="mt-2" :title="recipe.name">
     <template #resourceAction v-if="isOwner">
       <AtomButton @click="toggleResourceActions">

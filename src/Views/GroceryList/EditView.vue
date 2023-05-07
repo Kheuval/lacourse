@@ -1,5 +1,5 @@
 <template>
-  <OrganismHeader />
+  <OrganismHeader viewHeaderTitle="Édition de la liste" />
   <OrganismGroceryListForm :groceryList="groceryList" class="mt-12" />
 </template>
 

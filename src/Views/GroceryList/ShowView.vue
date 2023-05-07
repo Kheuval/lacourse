@@ -1,5 +1,5 @@
 <template>
-  <OrganismHeader />
+  <OrganismHeader :withViewHeader="false" />
   <MoleculeViewHeader class="mt-2" :title="groceryList.name">
     <template #resourceAction>
       <AtomButton @click="toggleResourceActions">

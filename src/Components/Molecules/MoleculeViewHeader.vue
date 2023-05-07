@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center">
-    <AtomLink :to="previousRoute" class="mr-auto">
+    <AtomLink :to="previousRoute || '/'" class="mr-auto">
       <AtomIcon icon="fa-solid fa-chevron-left" class="text-4xl" />
     </AtomLink>
     <AtomTitle tag="h2" class="text-2xl text-center mr-auto p-6">
@@ -22,5 +22,5 @@ defineProps<{
   title: string;
 }>();
 
-const previousRoute = navigationStack.at(-1)!.fullPath;
+const previousRoute = navigationStack.at(-1)?.fullPath;
 </script>

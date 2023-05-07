@@ -1,6 +1,8 @@
 <template>
-  <OrganismHeader home />
-  <MoleculeViewHeader title="Réinitialisation de mot de passe" />
+  <OrganismHeader
+    :withMenu="false"
+    viewHeaderTitle="Réinitialisation de mot de passe"
+  />
   <AtomTitle v-if="!updatePassword" class="text-center text-xl mt-4" tag="h1">
     Entrez votre adresse email pour recevoir un lien de réinitialisation
   </AtomTitle>
@@ -65,7 +67,6 @@
 import AtomButton from "@/Components/Atoms/AtomButton.vue";
 import AtomTitle from "@/Components/Atoms/AtomTitle.vue";
 import MoleculeInputLabel from "@/Components/Molecules/MoleculeInputLabel.vue";
-import MoleculeViewHeader from "@/Components/Molecules/MoleculeViewHeader.vue";
 import OrganismHeader from "@/Components/Organisms/OrganismHeader.vue";
 import type { DataProvider } from "@/Core/Config/DataProvider";
 import { useEventBus } from "@/Core/Services/EventBus";
