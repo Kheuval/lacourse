@@ -1,6 +1,8 @@
 <template>
   <OrganismHeader viewHeaderTitle="Édition de la liste" />
-  <OrganismGroceryListForm :groceryList="groceryList" class="mt-12" />
+  <main>
+    <OrganismGroceryListForm :groceryList="groceryList" class="mt-12" />
+  </main>
 </template>
 
 <script lang="ts" setup>

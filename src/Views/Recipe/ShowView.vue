@@ -8,62 +8,64 @@
       <MoleculeResourceAction v-if="showResourceActions" :resource="recipe" />
     </template>
   </MoleculeViewHeader>
-  <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
-  <AtomImage
-    :src="src"
-    :alt="recipe.name"
-    class="rounded-3xl w-full aspect-[3/2] object-cover mt-4"
-  />
-  <div
-    class="grid gap-2 grid-cols-2 grid-rows-2 items-center rounded-3xl border-2 border-primary text-sm text-center px-4 py-2 mt-4"
-  >
-    <AtomText>
-      Préparation :
-      <span class="text-secondary">
-        {{ humanTime(recipe.preparationTime) }}
-      </span>
-    </AtomText>
-    <AtomText>
-      Cuisson :
-      <span class="text-secondary">
-        {{ humanTime(recipe.cookingTime) }}
-      </span>
-    </AtomText>
-    <AtomText>
-      Repos :
-      <span class="text-secondary">
-        {{ humanTime(recipe.restTime) }}
-      </span>
-    </AtomText>
-    <AtomText>
-      Temps total :
-      <span class="text-secondary">
-        {{ humanTime(recipe.totalTime) }}
-      </span>
-    </AtomText>
-  </div>
-  <OrganismAddToListWidget :recipeIngredients="recipe.recipeIngredients" />
-  <MoleculeIconButton
-    buttonClass="block bg-secondary mt-4 mx-auto px-8 py-4 rounded-full text-white text-xl focus:outline-none"
-    iconClass="text-white text-2xl"
-    icon="fa-solid fa-heart"
-    content="Retirer des favoris"
-    v-if="isFavorite"
-    @click="toggleFavoriteState"
-  />
-  <MoleculeIconButton
-    buttonClass="block mt-4 mx-auto px-8 py-4 rounded-full border-2 border-secondary text-primary text-xl focus:outline-none"
-    iconClass="text-secondary text-2xl"
-    icon="fa-solid fa-heart"
-    content="Ajouter aux favoris"
-    v-else
-    @click="toggleFavoriteState"
-  />
-  <MoleculeIngredientList
-    class="mt-2"
-    :recipeIngredients="recipe.recipeIngredients"
-  />
-  <MoleculeStepList :steps="recipe.steps" />
+  <main>
+    <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
+    <AtomImage
+      :src="src"
+      :alt="recipe.name"
+      class="rounded-3xl w-full aspect-[3/2] object-cover mt-4"
+    />
+    <div
+      class="grid gap-2 grid-cols-2 grid-rows-2 items-center rounded-3xl border-2 border-primary text-sm text-center px-4 py-2 mt-4"
+    >
+      <AtomText>
+        Préparation :
+        <span class="text-secondary">
+          {{ humanTime(recipe.preparationTime) }}
+        </span>
+      </AtomText>
+      <AtomText>
+        Cuisson :
+        <span class="text-secondary">
+          {{ humanTime(recipe.cookingTime) }}
+        </span>
+      </AtomText>
+      <AtomText>
+        Repos :
+        <span class="text-secondary">
+          {{ humanTime(recipe.restTime) }}
+        </span>
+      </AtomText>
+      <AtomText>
+        Temps total :
+        <span class="text-secondary">
+          {{ humanTime(recipe.totalTime) }}
+        </span>
+      </AtomText>
+    </div>
+    <OrganismAddToListWidget :recipeIngredients="recipe.recipeIngredients" />
+    <MoleculeIconButton
+      buttonClass="block bg-secondary mt-4 mx-auto px-8 py-4 rounded-full text-white text-xl focus:outline-none"
+      iconClass="text-white text-2xl"
+      icon="fa-solid fa-heart"
+      content="Retirer des favoris"
+      v-if="isFavorite"
+      @click="toggleFavoriteState"
+    />
+    <MoleculeIconButton
+      buttonClass="block mt-4 mx-auto px-8 py-4 rounded-full border-2 border-secondary text-primary text-xl focus:outline-none"
+      iconClass="text-secondary text-2xl"
+      icon="fa-solid fa-heart"
+      content="Ajouter aux favoris"
+      v-else
+      @click="toggleFavoriteState"
+    />
+    <MoleculeIngredientList
+      class="mt-2"
+      :recipeIngredients="recipe.recipeIngredients"
+    />
+    <MoleculeStepList :steps="recipe.steps" />
+  </main>
 </template>
 
 <script lang="ts" setup>

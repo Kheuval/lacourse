@@ -3,64 +3,66 @@
     :withMenu="false"
     viewHeaderTitle="Réinitialisation de mot de passe"
   />
-  <AtomTitle v-if="!updatePassword" class="text-center text-xl mt-4" tag="h1">
-    Entrez votre adresse email pour recevoir un lien de réinitialisation
-  </AtomTitle>
-  <AtomTitle v-else class="text-center text-xl mt-4" tag="h1">
-    Entrez votre nouveau mot de passe
-  </AtomTitle>
-  <MoleculeInputLabel
-    id="email"
-    class="w-full mt-8"
-    type="text"
-    placeholder="Email"
-    :defaultContent="email"
-    :validationRules="[notNullRule, emailRule]"
-    @update="(content) => (email = content)"
-    v-if="!updatePassword"
-  />
-  <MoleculeInputLabel
-    id="password1"
-    class="w-full mt-8"
-    type="password"
-    placeholder="Mot de passe"
-    :validationRules="[notNullRule]"
-    @update="(content) => (password1 = content)"
-    v-if="updatePassword"
-  />
-  <MoleculeInputLabel
-    id="password2"
-    class="w-full"
-    type="password"
-    placeholder="Répétez le mot de passe"
-    :validationRules="[notNullRule]"
-    @update="(content) => (password2 = content)"
-    v-if="updatePassword"
-  />
-  <AtomButton
-    class="uppercase bg-primary text-white rounded-xl px-6 py-2 mx-auto block"
-    @click="updatePassword ? resetPassword() : requestNewPassword()"
-  >
-    Réinitialiser
-  </AtomButton>
-  <MoleculeDialog
-    v-if="showDialog"
-    @ok="showDialog = false"
-    :dismissible="false"
-    :buttons="{ ok: true, cancel: false }"
-    styles="h-1/2 w-2/3"
-  >
-    <template #header>
-      <AtomIcon icon="fa-solid fa-circle-exclamation" class="text-[3rem]" />
-    </template>
-    <AtomText class="text-center my-4" v-if="!updatePassword">
-      Un email a été envoyé à {{ email }}, vous pourrez y trouver les
-      instructions pour réinitialiser votre mot de passe
-    </AtomText>
-    <AtomText class="text-center my-4" v-else>
-      Votre mot de passe a bien été réinitialisé
-    </AtomText>
-  </MoleculeDialog>
+  <main>
+    <AtomTitle v-if="!updatePassword" class="text-center text-xl mt-4" tag="h1">
+      Entrez votre adresse email pour recevoir un lien de réinitialisation
+    </AtomTitle>
+    <AtomTitle v-else class="text-center text-xl mt-4" tag="h1">
+      Entrez votre nouveau mot de passe
+    </AtomTitle>
+    <MoleculeInputLabel
+      id="email"
+      class="w-full mt-8"
+      type="text"
+      placeholder="Email"
+      :defaultContent="email"
+      :validationRules="[notNullRule, emailRule]"
+      @update="(content) => (email = content)"
+      v-if="!updatePassword"
+    />
+    <MoleculeInputLabel
+      id="password1"
+      class="w-full mt-8"
+      type="password"
+      placeholder="Mot de passe"
+      :validationRules="[notNullRule]"
+      @update="(content) => (password1 = content)"
+      v-if="updatePassword"
+    />
+    <MoleculeInputLabel
+      id="password2"
+      class="w-full"
+      type="password"
+      placeholder="Répétez le mot de passe"
+      :validationRules="[notNullRule]"
+      @update="(content) => (password2 = content)"
+      v-if="updatePassword"
+    />
+    <AtomButton
+      class="uppercase bg-primary text-white rounded-xl px-6 py-2 mx-auto block"
+      @click="updatePassword ? resetPassword() : requestNewPassword()"
+    >
+      Réinitialiser
+    </AtomButton>
+    <MoleculeDialog
+      v-if="showDialog"
+      @ok="showDialog = false"
+      :dismissible="false"
+      :buttons="{ ok: true, cancel: false }"
+      styles="h-1/2 w-4/5"
+    >
+      <template #header>
+        <AtomIcon icon="fa-solid fa-circle-exclamation" class="text-[3rem]" />
+      </template>
+      <AtomText class="text-center my-4" v-if="!updatePassword">
+        Un email a été envoyé à {{ email }}, vous pourrez y trouver les
+        instructions pour réinitialiser votre mot de passe
+      </AtomText>
+      <AtomText class="text-center my-4" v-else>
+        Votre mot de passe a bien été réinitialisé
+      </AtomText>
+    </MoleculeDialog>
+  </main>
 </template>
 
 <script lang="ts" setup>

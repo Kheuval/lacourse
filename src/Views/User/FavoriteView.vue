@@ -1,11 +1,13 @@
 <template>
   <OrganismHeader viewHeaderTitle="Recettes favorites" />
-  <MoleculeResourceList
-    class="mt-4"
-    :resourceList="favorites"
-    :withImage="true"
-    liClass="relative"
-  />
+  <main>
+    <MoleculeResourceList
+      class="mt-4"
+      :resourceList="favorites"
+      :withImage="true"
+      liClass="relative"
+    />
+  </main>
 </template>
 
 <script lang="ts" setup>

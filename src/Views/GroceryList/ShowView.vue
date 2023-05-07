@@ -12,12 +12,14 @@
       />
     </template>
   </MoleculeViewHeader>
-  <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
-  <MoleculeListIngredientList
-    :groceryListId="groceryList.id"
-    :listDetails="groceryList.listDetails"
-    @listUpdated="(content) => (groceryList = content)"
-  />
+  <main>
+    <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
+    <MoleculeListIngredientList
+      :groceryListId="groceryList.id"
+      :listDetails="groceryList.listDetails"
+      @listUpdated="(content) => (groceryList = content)"
+    />
+  </main>
 </template>
 
 <script lang="ts" setup>

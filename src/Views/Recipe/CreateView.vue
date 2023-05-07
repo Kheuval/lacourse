@@ -1,6 +1,8 @@
 <template>
   <OrganismHeader viewHeaderTitle="Création de recette" />
-  <OrganismRecipeForm class="mt-6" />
+  <main>
+    <OrganismRecipeForm class="mt-6" />
+  </main>
 </template>
 
 <script lang="ts" setup>

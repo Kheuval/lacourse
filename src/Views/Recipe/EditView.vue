@@ -1,6 +1,8 @@
 <template>
   <OrganismHeader viewHeaderTitle="Édition de recette" />
-  <OrganismRecipeForm :recipe="recipe" class="mt-6" />
+  <main>
+    <OrganismRecipeForm :recipe="recipe" class="mt-6" />
+  </main>
 </template>
 
 <script lang="ts" setup>

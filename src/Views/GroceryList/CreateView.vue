@@ -1,6 +1,8 @@
 <template>
   <OrganismHeader viewHeaderTitle="Création de liste de course" />
-  <OrganismGroceryListForm class="mt-8" />
+  <main>
+    <OrganismGroceryListForm class="mt-8" />
+  </main>
 </template>
 
 <script lang="ts" setup>
