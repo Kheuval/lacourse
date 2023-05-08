@@ -1,5 +1,5 @@
 <template>
-  <font-awesome-icon :icon="icon" />
+  <FontAwesomeIcon :icon="icon" />
 </template>
 
 <script lang="ts" setup>

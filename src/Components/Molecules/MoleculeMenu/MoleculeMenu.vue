@@ -4,7 +4,7 @@
       class="text-[3.438rem] left-0 z-[1] m-0 cursor-pointer"
       @click="toggleMenu()"
     >
-      <font-awesome-icon icon="fa-solid fa-bars" />
+      <AtomIcon icon="fa-solid fa-bars" />
     </AtomButton>
     <Transition name="menuToggle">
       <ul
@@ -38,6 +38,7 @@ import AtomButton from "../../Atoms/AtomButton.vue";
 import AtomLink from "../../Atoms/AtomLink.vue";
 import AtomOverlay from "../../Atoms/AtomOverlay.vue";
 import type { Link } from "./LinkInterface";
+import AtomIcon from "@/Components/Atoms/AtomIcon.vue";
 
 defineProps<{
   links: Link[];

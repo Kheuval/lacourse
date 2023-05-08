@@ -51,7 +51,7 @@ library.add(
 
 const app = createApp(App);
 
-app.component("font-awesome-icon", FontAwesomeIcon);
+app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.use(createPinia());
 app.use(router);
 app.provide(DataProviderKey, databaseDataProvider);
