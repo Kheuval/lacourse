@@ -60,7 +60,7 @@
         @change="(content) => (form.unit = content)"
       />
       <div class="text-center" v-if="type === 'groceryList'">
-        <AtomText class="text-xl mb-2">Commestible ?</AtomText>
+        <AtomText class="text-xl mb-2">Comestible ?</AtomText>
         <div class="flex gap-4 justify-center">
           <AtomRadio
             class="flex gap-2 text-2xl"

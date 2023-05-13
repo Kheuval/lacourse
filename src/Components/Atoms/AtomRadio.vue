@@ -19,7 +19,7 @@ defineProps<{
   id: string;
   name: string;
   value: any;
-  checked?: boolean;
   label: string;
+  checked?: boolean;
 }>();
 </script>
