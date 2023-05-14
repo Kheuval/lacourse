@@ -9,6 +9,7 @@ lerna-debug.log*
 
 android
 node_modules
+my-release-key.keystore
 .DS_Store
 dist
 dist-ssr

@@ -7,6 +7,12 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: "https",
   },
+  android: {
+    buildOptions: {
+      keystorePath: "/home/kheuval/projects/lacourse/my-release-key.keystore",
+      keystoreAlias: "alias_name",
+    },
+  },
 };
 
 export default config;
