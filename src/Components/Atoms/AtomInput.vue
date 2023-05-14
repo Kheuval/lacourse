@@ -3,7 +3,7 @@
     :type="type"
     :inputmode="typeNumber ? 'numeric' : 'text'"
     :pattern="typeNumber ? '[0-9]*' : '[a-zA-Z]'"
-    class="px-8 pb-3 pt-4 w-full text-sm rounded-full border-2 text-primary focus:outline-none bg-white peer"
+    class="px-8 pb-3 pt-4 w-full text-xl rounded-full border-2 text-primary focus:outline-none bg-white peer"
     :class="
       validationMessage
         ? 'border-red-500'

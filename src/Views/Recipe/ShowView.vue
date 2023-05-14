@@ -8,7 +8,7 @@
       <MoleculeResourceAction v-if="showResourceActions" :resource="recipe" />
     </template>
   </MoleculeViewHeader>
-  <main>
+  <main class="pb-10">
     <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
     <AtomImage
       :src="src"
@@ -44,7 +44,7 @@
       </AtomText>
     </div>
     <AtomText class="text-center text-secondary mt-4">
-      Pour {{ recipe.servings }} personnes
+      Pour {{ recipe.servings }} parts
     </AtomText>
     <OrganismAddToListWidget :recipeIngredients="recipe.recipeIngredients" />
     <MoleculeIconButton

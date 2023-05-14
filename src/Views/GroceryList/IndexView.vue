@@ -1,6 +1,6 @@
 <template>
   <OrganismHeader viewHeaderTitle="Mes listes de course" />
-  <main>
+  <main class="pb-10">
     <div class="text-center mt-4">
       <AtomText class="text-lg" v-if="!groceryLists.length">
         Vous n'avez pas encore de liste de course, vous pouvez en créer une

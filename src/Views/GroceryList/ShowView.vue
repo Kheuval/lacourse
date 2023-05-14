@@ -12,7 +12,7 @@
       />
     </template>
   </MoleculeViewHeader>
-  <main>
+  <main class="pb-10">
     <AtomOverlay :show="showResourceActions" @click="toggleResourceActions" />
     <MoleculeListIngredientList
       :groceryListId="groceryList.id"

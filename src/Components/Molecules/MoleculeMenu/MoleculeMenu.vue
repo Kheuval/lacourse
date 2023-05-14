@@ -1,7 +1,7 @@
 <template>
   <nav class="inline-block">
     <AtomButton
-      class="text-[3.438rem] left-0 z-[1] m-0 cursor-pointer"
+      class="text-3xl left-0 z-[1] m-0 cursor-pointer"
       @click="toggleMenu()"
     >
       <AtomIcon icon="fa-solid fa-bars" />
