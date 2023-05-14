@@ -26,3 +26,5 @@ coverage
 *.sw?
 
 todo.txt
+
+resources/android/**/*
