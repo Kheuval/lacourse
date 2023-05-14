@@ -28,6 +28,14 @@
       :validationRules="[notNullRule]"
       @update="(content) => (form.password2 = content)"
     />
+    <AtomText class="text-sm text-center mb-6">
+      En créant un compte, vous acceptez notre<AtomLink
+        class="inline text-secondary"
+        to="/privacy-policy"
+      >
+        politique de confidentialité</AtomLink
+      >
+    </AtomText>
     <AtomButton
       class="uppercase bg-primary text-white rounded-xl px-6 py-2"
       @click="register"
@@ -48,6 +56,8 @@ import { UnprocessableEntityError } from "@/Core/Services/Error/Errors/Unprocess
 import { PasswordsNotMatchingError } from "@/Core/Services/Error/Errors/PasswordsNotMatchingError";
 import { DataProviderKey } from "@/Core/Config/DataProviderInterface";
 import { useRouter } from "vue-router";
+import AtomText from "@/Components/Atoms/AtomText.vue";
+import AtomLink from "@/Components/Atoms/AtomLink.vue";
 
 const { authProvider } = inject(DataProviderKey)!;
 

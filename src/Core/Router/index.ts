@@ -15,6 +15,11 @@ export const router = createRouter({
       component: () => import("@/Views/LandingView.vue"),
     },
     {
+      path: "/privacy-policy",
+      name: "PrivacyPolicy",
+      component: () => import("@/Views/PrivacyPolicy.vue"),
+    },
+    {
       path: "/reset-password/:token?",
       name: "ResetPassword",
       component: () => import("@/Views/ResetPasswordView.vue"),
@@ -98,7 +103,7 @@ router.beforeEach((to, from, next) => {
     navigationStack.value.pop();
   }
 
-  if (to.path.startsWith("/reset-password")) {
+  if (to.path.startsWith("/reset-password") || to.path === "/privacy-policy") {
     next();
     return;
   }
