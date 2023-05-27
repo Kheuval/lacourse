@@ -24,7 +24,12 @@
         placeholder="Ingrédient"
         :validationRules="[notNullRule]"
         :defaultContent="form.ingredient.name"
-        @update="query"
+        @update="
+          (content) => {
+            query(content);
+            form.ingredient.name = content;
+          }
+        "
       >
         <Transition name="searchResults">
           <div
