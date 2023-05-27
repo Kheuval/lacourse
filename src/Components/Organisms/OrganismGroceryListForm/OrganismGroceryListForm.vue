@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent novalidate class="flex flex-col items-center">
     <MoleculeInputLabel
-      id="name"
+      id="groceryListName"
       type="text"
       placeholder="Donnez lui un titre... *"
       :defaultContent="form.name"
