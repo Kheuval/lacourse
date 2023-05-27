@@ -1,52 +1,35 @@
-# lacourse
+# La Course
 
-This template should help get you started developing with Vue 3 in Vite.
+A mobile app built with Vue.js 3, Typescript, TailwindCSS and Capacitor available [on the play store](https://play.google.com/store/apps/details?id=shop.lacourse.twa) (android only).
 
-## Recommended IDE Setup
+## To set up the project locally
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+### Install dependencies :
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### In the `.env` file set the `APP_API_URL` as follows :
+
+```sh
+APP_API_URL="https://lacourse.alwaysdata.net"
+```
+
+### Start the dev server
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+You can now create an account and browse the app.
+
+You can run tests with :
 
 ```sh
-npm run build
+npm run test
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## The API
 
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+The API documentation is available [here](https://lacourse.alwaysdata.net/api)
