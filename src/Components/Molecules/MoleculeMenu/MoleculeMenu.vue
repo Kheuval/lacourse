@@ -1,10 +1,7 @@
 <template>
   <nav class="inline-block">
-    <AtomButton
-      class="text-3xl left-0 z-[1] m-0 cursor-pointer"
-      @click="toggleMenu()"
-    >
-      <AtomIcon icon="fa-solid fa-bars" />
+    <AtomButton class="left-0 z-[1] m-0 cursor-pointer" @click="toggleMenu()">
+      <AtomIcon class="text-3xl" icon="fa-solid fa-bars" />
     </AtomButton>
     <Transition name="menuToggle">
       <ul
