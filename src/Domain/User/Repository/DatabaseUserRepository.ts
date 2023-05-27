@@ -7,22 +7,6 @@ import type { User } from "../UserInterface";
 const RESOURCE_TYPE = "User";
 
 export const databaseUserRepository: UserRepository = {
-  findOneByIri: async (iri: string): Promise<User> => {
-    const { useFetch } = useApiStore();
-
-    const init: ApiRequest = {
-      url: iri,
-      method: "GET",
-      accept: "application/ld+json",
-      contentType: "application/json",
-      body: null,
-      cacheable: false,
-      expectResponseData: true,
-      resourceType: RESOURCE_TYPE,
-    };
-
-    return (await useFetch(init)).content;
-  },
   updateOneByIri: async (iri: string, data: object): Promise<User> => {
     const { useFetch } = useApiStore();
 
@@ -38,22 +22,6 @@ export const databaseUserRepository: UserRepository = {
     };
 
     return (await useFetch(init)).content;
-  },
-  deleteOneByIri: async (iri: string): Promise<void> => {
-    const { useFetch } = useApiStore();
-
-    const init: ApiRequest = {
-      url: iri,
-      method: "DELETE",
-      accept: "application/ld+json",
-      contentType: "application/json",
-      body: null,
-      cacheable: false,
-      expectResponseData: false,
-      resourceType: RESOURCE_TYPE,
-    };
-
-    await useFetch(init);
   },
   getFavorites: async (userIri: string): Promise<Recipe[]> => {
     const { useFetch } = useApiStore();
