@@ -1,6 +1,6 @@
 <template>
   <OrganismHeader :viewHeaderTitle="title" />
-  <main>
+  <main class="pb-10">
     <div class="text-center mt-4" v-if="forUser">
       <AtomText class="text-lg" v-if="!recipes.length">
         Vous n'avez pas encore de recette, vous pouvez en créer une grâce au
