@@ -2,6 +2,10 @@
 
 A mobile app built with Vue.js 3, Typescript, TailwindCSS and Capacitor available [on the play store](https://play.google.com/store/apps/details?id=shop.lacourse.twa) (android only).
 
+Since the app is not well referenced on the play store, you may have a hard time finding it using regular search on your mobile device.
+
+You can, however find it directly by typing `pname:shop.lacourse.twa` in the play store search bar.
+
 ## To set up the project locally
 
 ### Install dependencies :
