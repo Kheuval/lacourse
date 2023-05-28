@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import AtomButton from "../../Atoms/AtomButton.vue";
 import AtomLink from "../../Atoms/AtomLink.vue";
 import AtomOverlay from "../../Atoms/AtomOverlay.vue";
@@ -43,6 +43,15 @@ defineProps<{
 
 const showMenu = ref(false);
 const toggleMenu = () => (showMenu.value = !showMenu.value);
+
+watch(showMenu, (newValue) => {
+  const body = document.querySelector("body")!;
+  if (newValue) {
+    body.classList.add("overflow-hidden");
+  } else {
+    body.classList.remove("overflow-hidden");
+  }
+});
 </script>
 
 <style lang="scss" scoped>
