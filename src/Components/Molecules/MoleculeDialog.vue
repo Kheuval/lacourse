@@ -53,6 +53,7 @@ const emits = defineEmits(["ok", "cancel"]);
 
 const dismissDialog = () => {
   dialog.value!.classList.add("hide");
+  document.querySelector("body")!.classList.remove("overflow-hidden");
   dialog.value!.addEventListener("animationend", () => {
     dialog.value!.close();
   });
@@ -98,6 +99,7 @@ const dialogRect = ref<DOMRect | undefined>();
 
 onMounted(() => {
   dialog.value!.showModal();
+  document.querySelector("body")!.classList.add("overflow-hidden");
   dialogRect.value = dialog.value!.getBoundingClientRect();
 });
 </script>
