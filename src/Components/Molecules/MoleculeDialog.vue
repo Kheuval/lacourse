@@ -5,6 +5,8 @@
     ref="dialog"
     @click="onCancel"
   >
+    <!-- Hack to catch focus on dialog open as it screws the layout on mobile -->
+    <input class="h-0 opacity-0" type="checkbox" />
     <slot name="header"></slot>
     <slot></slot>
 
