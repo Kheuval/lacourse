@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import AtomButton from "../Atoms/AtomButton.vue";
 
 const props = withDefaults(
@@ -101,6 +101,10 @@ onMounted(() => {
   dialog.value!.showModal();
   document.querySelector("body")!.classList.add("overflow-hidden");
   dialogRect.value = dialog.value!.getBoundingClientRect();
+});
+
+onUnmounted(() => {
+  document.querySelector("body")!.classList.remove("overflow-hidden");
 });
 </script>
 
